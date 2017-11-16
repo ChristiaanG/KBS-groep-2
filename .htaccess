@@ -1,0 +1,12 @@
+RewriteEngine On
+#RewriteRule ^$ /views/dashboard/ [L]
+# remove www
+#RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+#RewriteRule ^ http://%1%{REQUEST_URI} [NE,R=301,L]
+#
+##RewriteCond %{HTTP_HOST} ^(www\.)?domain\.com$
+#RewriteRule !^views/ ^$ /%{REQUEST_URI}/views/dashboard/index.html  [L]
+
+#RewriteBase /windesheim/KBS-groep-2/
+#
+#RewriteRule ^Views/(.*)$ /$1 [L,NC,R]
