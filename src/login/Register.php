@@ -10,13 +10,13 @@ include_once "../config/Database.php";
 
 function registerAction()
 {
-    $email = $_POST["email"];
+    $username = $_POST["username"];
     $password = $_POST["password"];
     $name = $_POST["name"];
 
     $con = getDbConnection();
 
-    $sql = "INSERT INTO user (username, password, name) VALUES ('" . $email . "', '" . $password . "', '" . $name . "')";
+    $sql = "INSERT INTO user (username, password, name) VALUES ('" . $username . "', '" . $password . "', '" . $name . "')";
 
     if (mysqli_query($con, $sql)) {
         echo "New record created successfully";
@@ -27,4 +27,7 @@ function registerAction()
     mysqli_close($con);
 }
 
-registerAction();
+if(isset($_POST['submit']))
+{
+    registerAction();
+}
