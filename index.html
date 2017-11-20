@@ -1,13 +1,38 @@
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!--<head>-->
+<!DOCTYPE html>
+<html>
+<head>
 <!--<meta http-equiv="refresh" content="0;url=dashboard/index.html">-->
-<!--<title>Startmin</title>-->
-<script language="javascript">
-window.location.href = "views/dashboard/index.html"
-</script>
-<!--</head>-->
-<!--<body>-->
 
-<!--</body>-->
-<!--</html>-->
+<!--<script language="javascript">-->
+<!--window.location.href = "views/dashboard/index.html"-->
+<!--</script>-->
+<title>home</title>
+
+</head>
+<?php
+
+$db ="mysql:host=localhost;dbname=cursus;port=3306";
+$user = "root";
+$pass = "";
+$pdo = new PDO($db, $user, $pass);
+?>
+<ul>
+    <li> <a href="">klant</a></li>
+    <li> <a href="">reparaties</a></li>
+    <li> <a href="">nieuwe reparatie</a></li>
+    <li> <a href=""></a></li>
+</ul>
+
+<p>
+    <h1>nog te doen</h1>
+</p>
+<p>
+    <h1>word aan gewerkt</h1>
+</p>
+<p>
+    <h1>nog te controleren</h1>
+</p>
+<body>
+
+</body>
+</html>
