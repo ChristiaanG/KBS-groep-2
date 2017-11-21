@@ -6,20 +6,21 @@
  * Time: 10:40
  */
 
+include_once "Config.php";
+
 function getDbConnection()
 {
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "kbs";
+    $config = config();
+    $conn = null;
 
-    // Create connection
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    $servername = $config["host"];
+    $username = $config["username"];
+    $password = $config["password"];
+    $dbname = $config["dbname"];
+    $port = $config["port"];
 
-    // Check connection
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname;port=$port", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     return $conn;
 }

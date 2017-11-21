@@ -1,3 +1,16 @@
+<?php
+include_once "../../config/GlobalVariables.php";
+
+session_start();
+
+$vars = globalVariables();
+
+if(isset($_SESSION["loggedin"])) {
+    header("Location: " . $vars["home"]);
+    die();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +37,6 @@
         <input type="hidden" name="redirect" value="<? echo $_SERVER['HTTP_REFERER']; ?>" />
         <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="submit">Registreer</button>
     </form>
-<?php echo __DIR__; ?>
 </div>
 </body>
 </html>

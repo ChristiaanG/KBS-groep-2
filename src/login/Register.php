@@ -6,7 +6,10 @@
  * Time: 15:47
  */
 
-include_once "../config/Database.php";
+include_once "../../config/Config.php";
+include_once "../../config/Database.php";
+include_once "../../config/GlobalVariables.php";
+
 
 function registerAction()
 {
@@ -14,17 +17,18 @@ function registerAction()
     $password = $_POST["password"];
     $name = $_POST["name"];
 
-    $con = getDbConnection();
+    try {
+        $conn = getDbConnection();
+        $stmt = $conn->prepare("INSERT INTO user (username, password, name) VALUES (?, ?, ?)");
+        $stmt->execute(array($username, $password, $name));
 
-    $sql = "INSERT INTO user (username, password, name) VALUES ('" . $username . "', '" . $password . "', '" . $name . "')";
-
-    if (mysqli_query($con, $sql)) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($con);
+        header("Location: " . $_SESSION["home"]);
+        die();
+    } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
     }
 
-    mysqli_close($con);
+    $conn = null;
 }
 
 if(isset($_POST['submit']))

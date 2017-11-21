@@ -15,23 +15,31 @@ function loginAction()
         header('Location: ' . $_POST["redirect"]);
         die();
     } else {
-        $config = config();
+        try {
+            $username = $_POST["username"];
+            $password = $_POST["password"];
+            $conn = getDbConnection();
 
-        $username = $_POST["username"];
-        $password = $_POST["password"];
+            $stmt = $conn->prepare("SELECT username FROM user WHERE username = ? AND password = ?");
+            $stmt->execute(array($username, $password));
+            $result = $stmt->fetch();
 
-        $con = getDbConnection();
+            session_start();
 
-        $sql = "SELECT username FROM user WHERE username = '" . $username . "' AND password = '" . $password . "'";
-
-        if (mysqli_query($con, $sql)) {
-            $_SESSION["loggedin"] = true;
-            $_SESSION["username"] = $username;
-            header("Location: " . $config["home"]);
-            die();
-        } else {
-            $_SESSION["loginfailed"] = "U heeft uw gebruikersnaam en/of wachtwoord fout ingevoerd";
-            header("Location: " . $_POST["redirect"]);
+            if (!empty($result)) {
+                $conn = null;
+                $_SESSION["loggedin"] = true;
+                $_SESSION["username"] = $username;
+                header("Location: " . $_SESSION["home"]);
+                die();
+            } else {
+                $conn = null;
+                $_SESSION["loginfailed"] = "U heeft uw gebruikersnaam en/of wachtwoord fout ingevoerd";
+                header("Location: " . $_SERVER['HTTP_REFERER']);
+                die();
+            }
+        } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
             die();
         }
     }

@@ -8,13 +8,16 @@
 
 function config()
 {
+    session_start();
+
+    $_SESSION["home"] = "http://localhost/windesheim/KBS-groep-2/views/dashboard/index.php";
+    $_SESSION["login"] = "http://localhost/windesheim/KBS-groep-2/views/login/index.php";
+
     return array(
         "host" => "localhost",
         "username" => "root",
         "password" => "",
         "dbname" => "kbs",
-        "home" => __DIR__ . "../views/dashboard/index.php",
-        "login" => __DIR__ . "../views/login/index.php",
-
+        "port" => 3306,
     );
 }
