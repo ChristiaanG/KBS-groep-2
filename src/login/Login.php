@@ -20,17 +20,30 @@ function loginAction()
             $password = $_POST["password"];
             $conn = getDbConnection();
 
-            $stmt = $conn->prepare("SELECT username FROM user WHERE username = ? AND password = ?");
+            $stmt = $conn->prepare("SELECT * FROM user WHERE username = ? AND password = ?");
             $stmt->execute(array($username, $password));
             $result = $stmt->fetch();
 
             session_start();
 
-            if (!empty($result)) {
+            $config = config();
+
+            if ($result["username"] == $username && $result["approved"] == true) {
                 $conn = null;
+
+                if($result["function"] == "admin" || $result["function"] == "medewerker" && $result["2fa_enabled"] == false) {
+                    header("Location: " . $config["2fa"]);
+                    die();
+                }
+
                 $_SESSION["loggedin"] = true;
                 $_SESSION["username"] = $username;
-                header("Location: " . $_SESSION["home"]);
+                header("Location: " . $config["home"]);
+                die();
+            } elseif($result["approved"] == false) {
+                $conn = null;
+                $_SESSION["loginfailed"] = "Uw account is nog niet geactiveerd door de administrator";
+                header("Location: " . $_SERVER['HTTP_REFERER']);
                 die();
             } else {
                 $conn = null;
@@ -45,7 +58,20 @@ function loginAction()
     }
 }
 
-if(isset($_POST['submit']))
+function logoutAction()
 {
+    session_start();
+    session_unset();
+    session_destroy();
+
+    $config = config();
+
+    header("Location: " . $config["login"]);
+    die();
+}
+
+if(isset($_POST['submit'])) {
     loginAction();
+} elseif($_GET["logout"] = true) {
+    logoutAction();
 }

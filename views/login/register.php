@@ -1,12 +1,12 @@
 <?php
-include_once "../../config/GlobalVariables.php";
-
 session_start();
 
-$vars = globalVariables();
-
 if(isset($_SESSION["loggedin"])) {
-    header("Location: " . $vars["home"]);
+    include_once "../../config/Config.php";
+
+    $config = config();
+
+    header("Location: " . $config["home"]);
     die();
 }
 ?>
@@ -33,8 +33,7 @@ if(isset($_SESSION["loggedin"])) {
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
         <label for="inputName" class="sr-only">Name</label>
-        <input type="text" name="name" id="inputName" class="form-control" placeholder="Name" required="">
-        <input type="hidden" name="redirect" value="<? echo $_SERVER['HTTP_REFERER']; ?>" />
+        <input type="text" name="name" id="inputName" class="form-control" placeholder="Name" required" />
         <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="submit">Registreer</button>
     </form>
 </div>

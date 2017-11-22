@@ -1,10 +1,12 @@
 <?php
-include_once "../../config/GlobalVariables.php";
-
 session_start();
 
 if(isset($_SESSION["loggedin"])) {
-    header("Location: " . $_SESSION["home"]);
+    include_once "../../config/Config.php";
+
+    $config = config();
+
+    header("Location: " . $config["home"]);
     die();
 }
 ?>

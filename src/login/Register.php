@@ -8,7 +8,6 @@
 
 include_once "../../config/Config.php";
 include_once "../../config/Database.php";
-include_once "../../config/GlobalVariables.php";
 
 
 function registerAction()
@@ -17,18 +16,26 @@ function registerAction()
     $password = $_POST["password"];
     $name = $_POST["name"];
 
+    $config = config();
+
     try {
         $conn = getDbConnection();
         $stmt = $conn->prepare("INSERT INTO user (username, password, name) VALUES (?, ?, ?)");
-        $stmt->execute(array($username, $password, $name));
+        $result = $stmt->execute(array($username, $password, $name));
 
-        header("Location: " . $_SESSION["home"]);
-        die();
+        if($result == true) {
+            $conn = null;
+            header("Location: " . $config["home"]);
+            die();
+        } else {
+            $conn = null;
+            $_SESSION["registerfailed"] = "Uw wachtwoord en of gebruikersnaam voldoen niet aan de eisen";
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+            die();
+        }
     } catch(PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
-
-    $conn = null;
 }
 
 if(isset($_POST['submit']))

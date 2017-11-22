@@ -8,16 +8,9 @@
 
 function config()
 {
-    session_start();
-
-    $_SESSION["home"] = "http://localhost/windesheim/KBS-groep-2/views/dashboard/index.php";
-    $_SESSION["login"] = "http://localhost/windesheim/KBS-groep-2/views/login/index.php";
-
     return array(
-        "host" => "localhost",
-        "username" => "root",
-        "password" => "",
-        "dbname" => "kbs",
-        "port" => 3306,
+        "home" => "http://localhost/windesheim/KBS-groep-2/views/dashboard/index.php",
+        "login" => "http://localhost/windesheim/KBS-groep-2/views/login/index.php",
+        "2fa" => "http://localhost/windesheim/KBS-groep-2/views/login/register-two-step-authentication.php",
     );
 }

@@ -6,7 +6,7 @@
  * Time: 10:40
  */
 
-include_once "Config.php";
+include_once "DatabaseConfig.php";
 
 function getDbConnection()
 {
