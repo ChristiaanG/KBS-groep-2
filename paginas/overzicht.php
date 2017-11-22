@@ -12,6 +12,8 @@ if (isset($_GET["toevoegen"])) {
 $stmt = $pdo->prepare("SELECT * FROM customer");
 $stmt->execute();
 $klanten = $stmt->fetchAll();
+
+
 $pdo = NULL;
 ?>
 <html>
@@ -76,51 +78,67 @@ $pdo = NULL;
                                 <td>email</td>
                                 <td>telefoon nummer</td>
                                 <td>mobiel nummer</td>
-                                <td></td>
-                                <td></td>
-                                <td> </td>
+                                <td>profiel</td>
+                                <td>bewerkern</td>
+                                <td>verwijderen</td>
                             </tr>
-                            <tr>
-                                <td><input type="hidden" name="test"></td>
-                                <td> <input type="text" name="voornaam"></td>
-                                <td> <input type="text" name="achternaam"></td>
-                                <td> <input type="text" name="adres"></td>
-                                <td> <input type="text" name="email"></td>
-                                <td><input type="text" name="phonenr"></td>
-                                <td> <input type="text" name="cellphoneNr"></td>
-                                <td> <input type="submit" name="toevoegen" class="btn btn-primary" value="Toevoegen"></td>
-                                <td><input type="hidden"></td>
-                                <td><input type="hidden"></td>
-                            </tr>
+
                         </tfoot>
                     </form>
                 </table>
 
             </div>
             <div class="panel-footer">
+                <br>
 
             </div>
         </div>
+        <table class="table table-striped table-bordered table-hover">
+            <tr>
+                <td>ID</td>
+                <td>Naam</td>
+                <td>achternaam</td>
+                <td>adres</td>
+                <td>email</td>
+                <td>telefoon nummer</td>
+                <td>mobiel nummer</td>
+                <td>profiel</td>
+                <td>bewerkern</td>
+                <td>verwijderen</td>
+            </tr>
+            <tr>
+            <form method="get" action="overzicht.php">
+                <td><input type="hidden" name="test"></td>
+                <td> <input type="text" name="voornaam"></td>
+                <td> <input type="text" name="achternaam"></td>
+                <td> <input type="text" name="adres"></td>
+                <td> <input type="text" name="email"></td>
+                <td><input type="text" name="phonenr"></td>
+                <td> <input type="text" name="cellphoneNr"></td>
+                <td> <input type="submit" name="toevoegen" class="btn btn-primary" value="Toevoegen"></td>
+                <td><input type="hidden"></td>
+                <td><input type="hidden"></td>
+            </form>
+        </tr>
+    </table>
 
 
 
 
 
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/metisMenu.min.js"></script>
+    <script src="../js/dataTables/jquery.dataTables.min.js"></script>
+    <script src="../js/dataTables/dataTables.bootstrap.min.js"></script>
+    <script src="../js/startmin.js"></script>
 
-
-        <script src="../js/jquery.min.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
-        <script src="../js/metisMenu.min.js"></script>
-        <script src="../js/dataTables/jquery.dataTables.min.js"></script>
-        <script src="../js/dataTables/dataTables.bootstrap.min.js"></script>
-        <script src="../js/startmin.js"></script>
-
-        <script>
-            $(document).ready(function () {
-                $('#dataTables-example').DataTable({
-                    responsive: true
-                });
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true
             });
-        </script>
-    </body>
+        });
+    </script>
+</body>
 </html>
