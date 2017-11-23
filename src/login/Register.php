@@ -6,7 +6,9 @@
  * Time: 15:47
  */
 
-include_once "../config/Database.php";
+include_once "../../config/Config.php";
+include_once "../../config/Database.php";
+
 
 function registerAction()
 {
@@ -14,17 +16,26 @@ function registerAction()
     $password = $_POST["password"];
     $name = $_POST["name"];
 
-    $con = getDbConnection();
+    $config = config();
 
-    $sql = "INSERT INTO user (username, password, name) VALUES ('" . $username . "', '" . $password . "', '" . $name . "')";
+    try {
+        $conn = getDbConnection();
+        $stmt = $conn->prepare("INSERT INTO user (username, password, name) VALUES (?, ?, ?)");
+        $result = $stmt->execute(array($username, $password, $name));
 
-    if (mysqli_query($con, $sql)) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($con);
+        if($result == true) {
+            $conn = null;
+            header("Location: " . $config["home"]);
+            die();
+        } else {
+            $conn = null;
+            $_SESSION["registerfailed"] = "Uw wachtwoord en of gebruikersnaam voldoen niet aan de eisen";
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+            die();
+        }
+    } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
     }
-
-    mysqli_close($con);
 }
 
 if(isset($_POST['submit']))

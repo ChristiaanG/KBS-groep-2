@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+if(isset($_SESSION["loggedin"])) {
+    include_once "../../config/Config.php";
+
+    $config = config();
+
+    header("Location: " . $config["home"]);
+    die();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,11 +33,9 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
         <label for="inputName" class="sr-only">Name</label>
-        <input type="text" name="name" id="inputName" class="form-control" placeholder="Name" required="">
-        <input type="hidden" name="redirect" value="<? echo $_SERVER['HTTP_REFERER']; ?>" />
+        <input type="text" name="name" id="inputName" class="form-control" placeholder="Name" required" />
         <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="submit">Registreer</button>
     </form>
-<?php echo __DIR__; ?>
 </div>
 </body>
 </html>
