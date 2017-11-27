@@ -11,10 +11,21 @@ include_once "../../config/Database.php";
 
 function loginAction()
 {
-    if(!isset($_POST["email"]) && !isset($_POST["password"])) {
-        header('Location: ' . $_POST["redirect"]);
+    session_start();
+
+    $config = config();
+
+    if(!isset($_POST["username"])) {
+        $_SESSION["loginfailed"] = "U heeft geen gebruikersnaam ingevuld";
+        header('Location: ' . $config["login"]);
         die();
-    } else {
+    } elseif(!isset($_POST["password"])) {
+        $_SESSION["loginfailed"] = "U heeft geen wachtwoord ingevuld";
+        header('Location: ' . $config["login"]);
+        die();
+    }
+    else
+    {
         try {
             $username = $_POST["username"];
             $password = $_POST["password"];
@@ -24,24 +35,32 @@ function loginAction()
             $stmt->execute(array($username, $password));
             $result = $stmt->fetch();
 
-            session_start();
-
-            $config = config();
-
             if ($result["username"] == $username && $result["approved"] == true) {
                 $conn = null;
 
-                if($result["function"] == "admin" || $result["function"] == "medewerker" && $result["2fa_enabled"] == false) {
-                    header("Location: " . $config["2fa"]);
+                if(!isset($_COOKIE["2fa_set"])) {
+                    if(($result["function"] == "admin" || $result["function"] == "medewerker") && $result["2fa_enabled"] == false) {
+                        $_SESSION["username"] = $username;
+                        $_SESSION["function"] = $result["function"];
+                        $_SESSION["2fa_redirect"] = true;
+                        header("Location: " . $config["2fa_re"]);
+                        die();
+                    } elseif($result["function"] == "admin" || $result["function"] == "medewerker" && $result["2fa_enabled"] == true && !isset($_SESSION["2fa_true"])) {
+                        $_SESSION["username"] = $username;
+                        $_SESSION["function"] = $result["function"];
+                        $_SESSION["2fa_secret"] = $result["2fa_secret"];
+                        $_SESSION["2fa_redirect"] = true;
+                        header("Location: " . $config["2fa"]);
+                        die();
+                    }
+                } else {
+                    $_SESSION["loggedin"] = true;
+                    $_SESSION["function"] = $result["function"];
+                    $_SESSION["username"] = $username;
+                    header("Location: " . $config["home"]);
                     die();
                 }
-
-                $_SESSION["loggedin"] = true;
-                $_SESSION["username"] = $username;
-                header("Location: " . $config["home"]);
-                die();
             } elseif($result["approved"] == false) {
-                $conn = null;
                 $_SESSION["loginfailed"] = "Uw account is nog niet geactiveerd door de administrator";
                 header("Location: " . $_SERVER['HTTP_REFERER']);
                 die();
