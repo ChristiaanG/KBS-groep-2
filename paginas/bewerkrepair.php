@@ -26,9 +26,11 @@ $pdo = NULL;
 
         <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <title>repaireditor v0.1</title>
+        <?php include 'nav.php'; ?>
     </head>
     <body>
-        <div class="container">
+        <?php include 'siderepair.php'; ?>
+        <div id="page-wrapper">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3>klantreparatie gegevens v0.1</h3>

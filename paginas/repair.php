@@ -20,9 +20,12 @@ $pdo = NULL;
         <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <?php include 'nav.php'; ?>
+
     </head>
     <body>
-        <div class="col-lg-4">
+        <?php include 'sideklant.php'; ?>
+        <div  id="page-wrapper">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 align="center">reparatie overzicht v0.1</h3>

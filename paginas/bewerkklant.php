@@ -23,6 +23,7 @@ $pdo = NULL;
 
         <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <title>klanteditor v0.1</title>
+        <?php include 'nav.php'; ?>
 
     </head>
     <body>
@@ -37,6 +38,7 @@ $pdo = NULL;
                         voornaam        :<input type="text" name="voornaam" value="<?php print($klant["first_name"]); ?>"><br>
                         achternaam      :<input type="text" name="achternaam" value="<?php print($klant["last_name"]); ?>"><br>
                         adres           :<input type="text" name="adres" value="<?php print($klant["address"]); ?>"><br>
+                        woonplaats      :<input type="text" name="city" value="<?php print($klant["city"]); ?>"><br>
                         email           :<input type="text" name="email" value="<?php print($klant["email"]); ?>"><br>
                         telefoon nummer :<input type="text" name="phonenr" value="<?php print($klant["phoneNr"]); ?>"><br>
                         mobiel nummer   :<input type="text" name="cellphoneNr" value="<?php print($klant["cellphoneNr"]); ?>"><br>
