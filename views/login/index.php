@@ -23,7 +23,6 @@ if(isset($_SESSION["loggedin"])) {
 </head>
 <body>
     <div class="container">
-
         <?php
             if(isset($_SESSION["loginfailed"])) {
         ?>

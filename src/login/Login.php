@@ -15,13 +15,13 @@ function loginAction()
 
     $config = config();
 
-    if(!isset($_POST["username"])) {
+    if(!isset($_POST["username"]) || empty($_POST["username"])) {
         $_SESSION["loginfailed"] = "U heeft geen gebruikersnaam ingevuld";
-        header('Location: ' . $config["login"]);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
         die();
-    } elseif(!isset($_POST["password"])) {
+    } elseif(!isset($_POST["password"]) || empty($_POST["password"])) {
         $_SESSION["loginfailed"] = "U heeft geen wachtwoord ingevuld";
-        header('Location: ' . $config["login"]);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
         die();
     }
     else

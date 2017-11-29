@@ -1029,7 +1029,7 @@ class Securimage
         }
 
         if (is_null($this->audio_path)) {
-            $this->audio_path = $this->securimage_path . '/audio/en/';
+            $this->audio_path = $this->securimage_path . '/audio/nl/';
         }
 
         if (is_null($this->audio_noise_path)) {
