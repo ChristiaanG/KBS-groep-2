@@ -22,7 +22,7 @@ function twoStepAuthenticationAction()
                 $_SESSION["2fa_true"] = true;
                 $_SESSION["loggedin"] = true;
 
-                setcookie("2fa_set", "true", time() + (86400 * 30), "/");
+                setcookie("2fa_set", $_SESSION["username"], time() + (86400 * 30), "/");
 
                 header("Location: " . $config["home"]);
                 die();
@@ -61,7 +61,7 @@ function registerTwoStepAuthenticationAction()
                 $_SESSION["2fa_true"] = true;
                 $_SESSION["loggedin"] = true;
 
-                setcookie("2fa_set", "true", time() + (86400 * 30), "/");
+                setcookie("2fa_set", $_SESSION["username"], time() + (86400 * 30), "/");
 
                 header("Location: " . $config["home"]);
                 die();

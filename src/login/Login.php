@@ -38,7 +38,7 @@ function loginAction()
             if ($result["username"] == $username && $result["approved"] == true) {
                 $conn = null;
 
-                if(!isset($_COOKIE["2fa_set"])) {
+                if(!isset($_COOKIE["2fa_set"]) || $_COOKIE["2fa_set"] != $username || $result["2fa_enabled"] == false) {
                     if(($result["function"] == "admin" || $result["function"] == "medewerker") && $result["2fa_enabled"] == false) {
                         $_SESSION["username"] = $username;
                         $_SESSION["function"] = $result["function"];

@@ -33,15 +33,23 @@ if(isset($_SESSION["loggedin"])) {
         <?php
             }
         ?>
-        <form class="form-signin" method="post" action="../../src/login/Login.php">
-        <h2 class="form-signin-heading">Login</h2>
-            <label for="inputUsername" class="sr-only">Gberuikersnaam</label>
-            <input type="email" name="username" id="inputUsername" class="form-control" placeholder="Gebruikersnaam" autofocus="autofocus">
-            <label for="inputPassword" class="sr-only">Wachtwoord</label>
-            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Wachtwoord">
-            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="submit">Login</button>
-        </form>
-
+        <div class="loginForm">
+            <form class="form-signin" method="post" action="../../src/login/Login.php">
+                <div class="loginFormHeader">
+                    Login
+                </div>
+                <div class="loginFormBody">
+                    <label for="inputUsername">Gebruikersnaam</label>
+                    <input type="email" name="username" id="inputUsername" class="form-control" placeholder="Gebruikersnaam" autofocus="autofocus">
+                    <label for="inputPassword">Wachtwoord</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Wachtwoord">
+                </div>
+                <div class="loginFormFooter">
+                    <a href="">Bent u uw wachtwoord vergeten?</a>
+                    <button class="btn btn-lg btn-primary btn-signin" type="submit" name="submit">Login</button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>

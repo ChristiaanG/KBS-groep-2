@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-echo $_SESSION["username"];
-
 if(!isset($_SESSION["loggedin"])) {
     include_once "../../config/Config.php";
 
@@ -47,10 +45,6 @@ if(!isset($_SESSION["loggedin"])) {
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        <?php
-
-        ?>
-        ?>
     </head>
     <body>
 
@@ -130,7 +124,7 @@ if(!isset($_SESSION["loggedin"])) {
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i> secondtruth <b class="caret"></b>
+                            <i class="fa fa-user fa-fw"></i> <?php echo $_SESSION["username"] ?> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -245,6 +239,14 @@ if(!isset($_SESSION["loggedin"])) {
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->
+                            </li>
+                            <?php if($_SESSION["function"] == "admin") { ?>
+                            <li>
+                                <a href="medewerkers/index.php"><i class="fa fa-user-plus fa-fw"></i> Medewerkers</a>
+                            </li>
+                            <?php } ?>
+                            <li>
+                                <a href="customers.php"><i class="fa fa-users fa-fw"></i> Klanten</a>
                             </li>
                         </ul>
                     </div>
