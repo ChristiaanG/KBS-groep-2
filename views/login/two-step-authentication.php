@@ -34,10 +34,13 @@ if(!isset($_SESSION["2fa_redirect"])) {
 <div class="container">
     <h1>2 - Use Google Authenticator for signin</h1>
     <?php
-    if(isset($_SESSION["loginfailed"])) {
+    if(isset($_SESSION["twofafailed"])) {
         ?>
         <div class="alert alert-danger">
-            <?php echo $_SESSION["loginfailed"]; ?>
+            <?php
+                echo $_SESSION["twofafailed"];
+                $_SESSION['twofafailed'] = NULL;
+            ?>
         </div>
         <?php
     }

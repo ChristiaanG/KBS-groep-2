@@ -30,13 +30,16 @@ $secureimage = new Securimage();
 <body>
 <div class="container">
     <?php
-    if(isset($_SESSION["registerfailed"])) {
-        ?>
+        if(isset($_SESSION["registerfailed"])) {
+    ?>
         <div class="alert alert-danger">
-            <?php echo $_SESSION["registerfailed"]; ?>
+            <?php
+                echo $_SESSION["registerfailed"];
+                $_SESSION['registerfailed'] = NULL;
+            ?>
         </div>
         <?php
-    }
+        }
     ?>
     <form class="form-signin" method="post" action="../../src/login/Register.php">
         <h2 class="form-signin-heading">Registreer</h2>

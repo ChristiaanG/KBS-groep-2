@@ -44,7 +44,7 @@ function registerAction()
 
             if($result == true) {
                 $conn = null;
-                header("Location: " . $config["home"]);
+                header("Location: " . $config["login"]);
                 die();
             } else {
                 $conn = null;
@@ -68,3 +68,4 @@ if(isset($_POST['submit']))
 {
     registerAction();
 }
+die();

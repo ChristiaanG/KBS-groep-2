@@ -94,3 +94,4 @@ if(isset($_POST['submit'])) {
 } elseif($_GET["logout"] = true) {
     logoutAction();
 }
+die();

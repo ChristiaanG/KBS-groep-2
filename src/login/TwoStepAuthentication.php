@@ -31,12 +31,12 @@ function twoStepAuthenticationAction()
                 die();
             }
         } else {
-            $_SESSION["loginfailed"] = "De ingevoerde code is onjuist";
+            $_SESSION["twofafailed"] = "De ingevoerde code is onjuist";
             header("Location: " . $_SERVER['HTTP_REFERER']);
             die();
         }
     } else {
-        $_SESSION["loginfailed"] = "U heeft geen code ingevuld";
+        $_SESSION["twofafailed"] = "U heeft geen code ingevuld";
         header("Location: " . $_SERVER['HTTP_REFERER']);
         die();
     }
@@ -70,12 +70,12 @@ function registerTwoStepAuthenticationAction()
                 die();
             }
         } else {
-            $_SESSION["loginfailed"] = "De ingevoerde code is onjuist";
+            $_SESSION["twofaregisterfailed"] = "De ingevoerde code is onjuist";
             header("Location: " . $_SERVER['HTTP_REFERER']);
             die();
         }
     } else {
-        $_SESSION["loginfailed"] = "U heeft geen code ingevuld";
+        $_SESSION["twofaregisterfailed"] = "U heeft geen code ingevuld";
         header("Location: " . $_SERVER['HTTP_REFERER']);
         die();
     }
@@ -86,5 +86,4 @@ if(isset($_POST['submit'])) {
 } elseif(isset($_POST['register'])) {
     registerTwoStepAuthenticationAction();
 }
-print_r("test");
-print_r(isset($_POST['submit'])); die();
+die();

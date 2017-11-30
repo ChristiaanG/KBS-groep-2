@@ -27,7 +27,10 @@ if(isset($_SESSION["loggedin"])) {
             if(isset($_SESSION["loginfailed"])) {
         ?>
             <div class="alert alert-danger">
-                <?php echo $_SESSION["loginfailed"]; ?>
+                <?php
+                    echo $_SESSION["loginfailed"];
+                    $_SESSION['loginfailed'] = NULL;
+                ?>
             </div>
         <?php
             }
@@ -44,8 +47,13 @@ if(isset($_SESSION["loggedin"])) {
                     <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Wachtwoord">
                 </div>
                 <div class="loginFormFooter">
-                    <a href="">Bent u uw wachtwoord vergeten?</a>
-                    <button class="btn btn-lg btn-primary btn-signin" type="submit" name="submit">Login</button>
+                    <div class="passwordForgot">
+                        <a href="forgot-password.php">Bent u uw wachtwoord vergeten?</a>
+                    </div>
+                    <div class="loginButton">
+                        <button class="btn btn-lg btn-primary btn-signin" type="submit" name="submit">Login</button>
+                    </div>
+                    <div style="clear: both;"></div>
                 </div>
             </form>
         </div>

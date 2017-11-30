@@ -46,6 +46,17 @@ body {
   background-color: #337ab7;
   border-color: #2e6da4;
   text-align: right;
+  /*float: right;*/
+}
+
+.passwordForgot {
+  /*float: left;*/
+}
+
+.loginButton {
+  /*float: right;*/
+  position: absolute;
+  right: 0;
 }
 
 .loginForm {
@@ -55,6 +66,7 @@ body {
   margin: auto;
   /*border-radius: 10%;*/
   /*overflow: hidden;*/
+  box-shadow: 0 0 10px 10px;
 }
 
 .loginFormHeader {

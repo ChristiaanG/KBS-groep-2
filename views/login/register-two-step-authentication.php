@@ -87,10 +87,13 @@ if (!isset($_SESSION['2fa_qr']) && !isset($_SESSION['2fa_secret'])) {
         <div class="qrcode"><img src="<?php echo $_SESSION["2fa_qr"]; ?>" alt=""/></div>
         <h2>b. Copy/paste vérification code</h2>
         <?php
-        if(isset($_SESSION["loginfailed"])) {
+        if(isset($_SESSION["twofaregisterfailed"])) {
             ?>
             <div class="alert alert-danger">
-                <?php echo $_SESSION["loginfailed"]; ?>
+                <?php
+                    echo $_SESSION["twofaregisterfailed"];
+                    $_SESSION['twofaregisterfailed'] = NULL;
+                ?>
             </div>
             <?php
         }
