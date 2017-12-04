@@ -1,14 +1,7 @@
 <?php
 session_start();
 
-if(!isset($_SESSION["loggedin"])) {
-    include_once "../../config/Config.php";
-
-    $config = config();
-
-    header("Location: " . $config["login"]);
-    die();
-}
+include_once "../../src/login/CheckLogin.php"
 ?>
 <!DOCTYPE html>
 <html lang="en">

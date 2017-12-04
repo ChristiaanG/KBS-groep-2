@@ -31,11 +31,13 @@ function loginAction()
             $password = $_POST["password"];
             $conn = getDbConnection();
 
-            $stmt = $conn->prepare("SELECT * FROM user WHERE username = ? AND password = ?");
-            $stmt->execute(array($username, $password));
+            $stmt = $conn->prepare("SELECT * FROM user WHERE username = ?");
+            $stmt->execute(array($username));
             $result = $stmt->fetch();
 
-            if ($result["username"] == $username && $result["approved"] == true) {
+            $passwordTrue = password_verify($password, $result["password"]);
+
+            if ($passwordTrue && $result["approved"] == true) {
                 $conn = null;
 
                 if(!isset($_COOKIE["2fa_set"]) || $_COOKIE["2fa_set"] != $username || $result["2fa_enabled"] == false) {

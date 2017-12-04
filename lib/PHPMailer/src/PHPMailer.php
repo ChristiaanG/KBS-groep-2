@@ -2001,6 +2001,7 @@ class PHPMailer
             $langcode = 'en';
         }
         $foundlang = true;
+
         $lang_file = $lang_path . 'phpmailer.lang-' . $langcode . '.php';
         // There is no English translation file
         if ('en' != $langcode) {

@@ -22,18 +22,17 @@ session_start();
 </head>
 <body>
 <div class="container">
+    <div class="alert <?= isset($_SESSION["mailsend"]) ? "alert-success" : (isset($_SESSION["mailerror"]) ? "alert-danger" : "")  ?>" >
     <?php
         if(isset($_SESSION["mailsend"])) {
-    ?>
-        <div class="alert alert-success">
-            <?php
-                echo $_SESSION["mailsend"];
-                $_SESSION['mailsend'] = NULL;
-            ?>
-        </div>
-    <?php
+            echo $_SESSION["mailsend"];
+            $_SESSION['mailsend'] = NULL;
+        } elseif(isset($_SESSION["mailerror"])) {
+            echo $_SESSION["mailerror"];
+            $_SESSION['mailerror'] = NULL;
         }
     ?>
+    </div>
     <div class="loginForm">
         <form class="form-signin" method="post" action="../../src/login/ForgotPassword.php">
             <div class="loginFormHeader">

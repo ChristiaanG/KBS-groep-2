@@ -30,7 +30,7 @@ function registerAction()
     }
 
     $username = $_POST["username"];
-    $password = $_POST["password"];
+    $password = password_hash($_POST["password"], PASSWORD_BCRYPT);
     $name = $_POST["name"];
 
     $config = config();
