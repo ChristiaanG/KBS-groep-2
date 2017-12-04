@@ -53,21 +53,49 @@ $pdo = NULL;
                         <div class="panel-heading">
                             <h3>de klantgegevens van <?php print ($klant["first_name"] . " " . $klant["last_name"]); ?></h3>
                         </div>
-                        <?php include 'uploadtest.php'; ?>
-                        <div class="panel-body">
-                            <img src="../klant/<?php print ($klant["customerID"]); ?>.jpg" height="160px" with="100px">
-                            <br>
-                            voornaam:<?php print($klant["first_name"]); ?><br>
-                            achternaam:<?php print($klant["last_name"]); ?><br>
-                            adres: <?php print($klant["address"]); ?><br>
-                            woonplaats: <?php print($klant["city"]); ?><br>
-                            email:  <?php print($klant["email"]); ?><br>
-                            telefoonnummer:  <?php print($klant["phoneNr"]); ?><br>
-                            mobielnummer:  <?php print($klant["cellphoneNr"]); ?><br>
-                            opmerking:  <?php print($klant["description"]); ?><br>
+                        <?php
+                        if (isset($_POST["foto"])) {
 
-                            <input type="hidden" name="nummer" value="<?php print($klant["customerID"]); ?>">
-                            <div id="center">
+                            include 'uploadtest.php';
+                        }
+                        ?>
+                        <div class="panel-body">
+                            <div class="form-group col-xs-4 row">
+                                <label for="voornaam" class="col-2 col-form-label">voornaam</label>
+                                <div id="voornaam" class="form-control" ><?php print($klant["first_name"]); ?></div><br>
+                                <label for="achternaam" class="col-2 col-form-label">achternaam</label>
+                                <div  id="achternaam" class="form-control">
+                                    <?php print($klant["last_name"]); ?></div><br>
+                                <label for="adres" class="col-2 col-form-label">adres</label>
+                                <div  id="achternaam" class="form-control">
+                                    <?php print($klant["address"]); ?></div><br>
+                                <label for="woonplaats" class="col-2 col-form-label">woonplaats</label>
+                                <div  id="woonplaats" class="form-control">
+                                    <?php print($klant["city"]); ?></div><br>
+                            </div>
+                            <div class="form-group col-xs-4 row center-block">
+                                <input type="hidden" name="nummer" value="<?php print($klant["customerID"]); ?>">
+
+                                <label for="telnr" class="col-2 col-form-label">telefoonnummer</label>
+                                <div  id="telnr" class="form-control">
+
+                                    <?php print($klant["phoneNr"]); ?></div><br>
+                                <label for="telnr2" class="col-2 col-form-label">telefoonnummer 2</label>
+                                <div  id="telnr2" class="form-control">
+                                    <?php print($klant["cellphoneNr"]); ?></div><br>
+                                <label for="email" class="col-2 col-form-label">email</label>
+                                <div  id="email" class="form-control">
+                                    <?php print($klant["email"]); ?></div><br>
+                                <label for="opmerking" class="col-2 col-form-label">opmerking</label>
+                                <div>
+                                    <textarea rows="3" class="form-control" id="opmerking" name="opmerking" ><?php print($klant["description"]); ?></textarea></div><br>
+                            </div>
+                            <div class="col-xs-4 center-block row">
+                                <img src="../klant/<?php print ($klant["customerID"]); ?>.jpg" class="avatar img-thumbnail" height="200" width="200"><br>
+                            </div>
+
+
+                            <div class="col-md-12" id="center">
                                 <h3 align="center">reparatie(s) van <?php print ($klant["first_name"] . " " . $klant["last_name"]); ?></h3>
                             </div>
                             <table  class="table table-striped table-bordered table-hover" id="dataTables-example">
