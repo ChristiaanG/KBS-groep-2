@@ -21,11 +21,12 @@ $pdo = NULL;
         <link href="../css/startmin.css" rel="stylesheet">
 
         <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <?php include 'nav.php'; ?>
 
-        <title>Klant verwijderen v0.1</title>
     </head>
     <body>
-        <div class="container">
+        <?php include 'sideklant.php'; ?>
+        <div id="page-wrapper" class="container">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3> klant verwijderd</h3>
