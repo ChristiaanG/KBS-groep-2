@@ -20,7 +20,7 @@ $stmt->execute(array($nummer));
 $klant = $stmt->fetch();
 $stmt2 = $pdo->prepare("select c.name as category,r.repairID,daterepair,d.serialnr,deviceinfo,description,chargerincluded from reparation as r
 join device as d on r.deviceID=d.deviceID
-join category as c on d.categoryID=c.categoryID where customerID=?");
+join category as c on d.categoryID=c.categoryID where active=1 and customerID=?");
 $stmt2->execute(array($nummer));
 $reparatie = $stmt2->fetchall();
 $pdo = NULL;

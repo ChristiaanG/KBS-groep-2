@@ -53,7 +53,9 @@ $pdo = NULL;
                                 <input type="hidden" name="nummer" value="<?php print( $_GET["nummer"]); ?>">
                             </div>
                             <div class="form-group col-xs-4 row">
-                                <img src="../klant/<?php print ($klant["customerID"]); ?>.jpg" class="avatar img-thumbnail" height="200" width="200">
+                                <div>
+                                    <img src="../klant/<?php print ($klant["customerID"]); ?>.jpg" class="avatar img-thumbnail" height="200" width="200"><br>
+                                </div>
 
                                 <label for="foto2" class="col-2 col-form-label">andere foto uploaden?</label>
                                 <div> <input type="file" id="foto2" class="form-horizontal" name="fileToUpload" id="fileToUpload" ></div><br>

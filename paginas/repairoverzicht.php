@@ -15,7 +15,7 @@ if (isset($_GET["toevoegen"])) {
 // daarna pas alle klanten uit de database selecteren zodat je de toegevoegde klant ook ziet
 $stmt = $pdo->prepare("select c.name as category,r.repairID,daterepair,d.serialnr,deviceinfo,description,chargerincluded from reparation as r
 join device as d on r.deviceID=d.deviceID
-join category as c on d.categoryID=c.categoryID");
+join category as c on d.categoryID=c.categoryID where r.active=1");
 $stmt->execute();
 $reparatie = $stmt->fetchAll();
 
@@ -38,6 +38,22 @@ $pdo = NULL;
     </head>
     <body>
         <?php include 'siderepair.php'; ?>
+        <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>weet uw het zeker?</h3>
+                    </div>
+                    <div class="modal-body">
+                        het verwijderen van een reperatie kan niet terug gedraaid worden
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">annuleer</button>
+                        <a class="btn btn-danger btn-ok">verwijder reperatie</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="page-wrapper">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -53,6 +69,7 @@ $pdo = NULL;
                                 <td>beschrijving</td>
                                 <td>datum toegevoegd</td>
                                 <td> </td>
+                                <td> </td>
 
                             </tr>
                         </thead>
@@ -67,6 +84,7 @@ $pdo = NULL;
                                 print("\n\t\t<td>" . $r["description"] . "</td>");
                                 print("\n\t\t<td>" . $r["daterepair"] . "</td>");
                                 print("<td><a href=\"repair.php?nummer=" . $r["repairID"] . "\"class=\"btn btn-primary\">ga naar reparatie</a></td>");
+                                print("<td><a href=\"#\" data-href=\"verwijderrepair.php?nummer=" . $r["repairID"] . "\" data-toggle=\"modal\" data-target=\"#confirm-delete\" class=\"btn btn-primary\">Verwijder reparatie</a></td>");
                                 print("\n\t</tr>");
                             }
                             ?>
@@ -87,6 +105,11 @@ $pdo = NULL;
                 $('#dataTables-example').DataTable({
                     responsive: true
                 });
+            });
+        </script>
+        <script>
+            $('#confirm-delete').on('show.bs.modal', function (e) {
+                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             });
         </script>
     </body>
