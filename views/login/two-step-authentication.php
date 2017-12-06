@@ -1,14 +1,7 @@
 <?php
 session_start();
 
-if(!isset($_SESSION["2fa_redirect"])) {
-    include_once "../../config/Config.php";
-
-    $config = config();
-
-    header("Location: " . $config["login"]);
-    die();
-}
+include_once "../../src/login/check/Check2faRedirect.php";
 ?>
 <!DOCTYPE html>
 <html>

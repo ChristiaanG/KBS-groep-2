@@ -15,7 +15,11 @@ function loginAction()
 
     $config = config();
 
-    if(!isset($_POST["username"]) || empty($_POST["username"])) {
+    if((!isset($_POST["username"]) || empty($_POST["username"])) && (!isset($_POST["password"]) || empty($_POST["password"]))) {
+        $_SESSION["loginfailed"] = "Vul een gebruikersnaam en wachtwoord in";
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        die();
+    } elseif(!isset($_POST["username"]) || empty($_POST["username"])) {
         $_SESSION["loginfailed"] = "U heeft geen gebruikersnaam ingevuld";
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         die();
@@ -23,9 +27,7 @@ function loginAction()
         $_SESSION["loginfailed"] = "U heeft geen wachtwoord ingevuld";
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         die();
-    }
-    else
-    {
+    } else {
         try {
             $username = $_POST["username"];
             $password = $_POST["password"];
@@ -73,7 +75,7 @@ function loginAction()
                 die();
             }
         } catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            echo "<div class='alert alert-danger'>Error: " . $e->getMessage() . "</div><br><a href='" . $config["login"] . "'>terug naar loginpagina</a>";
             die();
         }
     }

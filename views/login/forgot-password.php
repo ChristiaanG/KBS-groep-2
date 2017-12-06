@@ -7,6 +7,8 @@
  */
 
 session_start();
+
+include_once "../../src/login/check/CheckLoggedIn.php";
 ?>
 
 <!DOCTYPE html>

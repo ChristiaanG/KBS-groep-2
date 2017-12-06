@@ -10,7 +10,7 @@
         Er is een wachtwoord veranderen aanvraag gedaan voor het account:<br>
         <?= $result["username"] ?><br>
         Klik op de link hieronder om uw wachtwoord de veranderen:<br>
-        <a href="http://localhost/windesheim/KBS-groep-2/views/login/forgot-password-reset.php">http://localhost/windesheim/KBS-groep-2/views/login/forgot-password-reset.php</a>
+        <a href="http://localhost/windesheim/KBS-groep-2/views/login/forgot-password-reset.php?token=<?= $token ?>">http://localhost/windesheim/KBS-groep-2/views/login/forgot-password-reset</a>
     </div>
 </div>
 </body>

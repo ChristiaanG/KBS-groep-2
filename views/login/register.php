@@ -1,15 +1,7 @@
 <?php
 session_start();
 
-if(isset($_SESSION["loggedin"])) {
-    include_once "../../config/Config.php";
-
-    $config = config();
-
-    header("Location: " . $config["home"]);
-    die();
-}
-
+include_once "../../src/login/check/CheckLoggedIn.php";
 require_once '../../lib/securimage/securimage.php';
 
 $secureimage = new Securimage();

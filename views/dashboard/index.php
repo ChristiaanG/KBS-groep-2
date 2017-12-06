@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include_once "../../src/login/CheckLogin.php"
+include_once "../../src/login/check/CheckNotLoggedIn.php"
 ?>
 <!DOCTYPE html>
 <html lang="en">

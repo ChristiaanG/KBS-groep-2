@@ -54,8 +54,8 @@ body {
 }
 
 .loginButton {
-  /*float: right;*/
-  position: absolute;
+  float: right;
+  position: relative;
   right: 0;
 }
 

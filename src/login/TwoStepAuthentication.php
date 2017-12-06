@@ -66,7 +66,7 @@ function registerTwoStepAuthenticationAction()
                 header("Location: " . $config["home"]);
                 die();
             } catch(PDOException $e) {
-                echo "Error: " . $e->getMessage();
+                echo "<div class='alert alert-danger'>Error: " . $e->getMessage() . "</div><br><a href='" . $_SERVER['HTTP_REFERER'] . "'>terug naar twe-staps-verificatie pagina</a>";
                 die();
             }
         } else {

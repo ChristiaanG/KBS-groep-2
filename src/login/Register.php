@@ -29,15 +29,14 @@ function registerAction()
         die();
     }
 
-    $username = $_POST["username"];
-    $password = password_hash($_POST["password"], PASSWORD_BCRYPT);
-    $name = $_POST["name"];
-
-    $config = config();
-
     $image = new Securimage();
     if ($image->check($_POST['captcha_code']) == true) {
         try {
+            $username = $_POST["username"];
+            $password = password_hash($_POST["password"], PASSWORD_BCRYPT);
+            $name = $_POST["name"];
+            $config = config();
+
             $conn = getDbConnection();
             $stmt = $conn->prepare("INSERT INTO user (username, password, name) VALUES (?, ?, ?)");
             $result = $stmt->execute(array($username, $password, $name));
@@ -53,7 +52,7 @@ function registerAction()
                 die();
             }
         } catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            echo "<div class='alert alert-danger'>Error: " . $e->getMessage() . "</div><br><a href='" . $_SERVER['HTTP_REFERER'] . "'>terug naar registratiepagina</a>";
         }
     } else {
         $_SESSION["registerfailed"] = "U heeft de code verkeerk ingevuld.";

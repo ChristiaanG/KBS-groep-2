@@ -2,13 +2,13 @@
 /**
  * Created by PhpStorm.
  * User: Christiaan Goslinga
- * Date: 1-12-2017
- * Time: 11:18
+ * Date: 6-12-2017
+ * Time: 10:15
  */
 
-function checkLoginAction()
+function Check2faRedirectAction()
 {
-    if(!isset($_SESSION["loggedin"])) {
+    if(!isset($_SESSION["2fa_redirect"])) {
         include_once "../../config/Config.php";
 
         $config = config();
@@ -17,3 +17,5 @@ function checkLoginAction()
         die();
     }
 }
+
+Check2faRedirectAction();

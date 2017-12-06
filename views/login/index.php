@@ -1,14 +1,7 @@
 <?php
 session_start();
 
-if(isset($_SESSION["loggedin"])) {
-    include_once "../../config/Config.php";
-
-    $config = config();
-
-    header("Location: " . $config["home"]);
-    die();
-}
+include_once "../../src/login/check/CheckLoggedIn.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +35,7 @@ if(isset($_SESSION["loggedin"])) {
                 </div>
                 <div class="loginFormBody">
                     <label for="inputUsername">Gebruikersnaam</label>
-                    <input type="email" name="username" id="inputUsername" class="form-control" placeholder="Gebruikersnaam" autofocus="autofocus">
+                    <input type="email" name="username" id="inputUsername" class="form-control" placeholder="voorbeeld@domein.com" autofocus="autofocus">
                     <label for="inputPassword">Wachtwoord</label>
                     <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Wachtwoord">
                 </div>
