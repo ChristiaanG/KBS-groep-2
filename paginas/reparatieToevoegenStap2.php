@@ -7,7 +7,7 @@ $stmt = $pdo->prepare("SELECT * FROM customer WHERE customerID=?");
 $stmt->execute(array($_GET["nummer"]));
 $klant = $stmt->fetch();
 
-$stmt2 = $pdo->prepare("SELECT * FROM device d JOIN reparation r ON r.deviceID=d.deviceID WHERE customerID=?");
+$stmt2 = $pdo->prepare("SELECT DISTINCT d.deviceID, deviceInfo FROM device d JOIN reparation r ON r.deviceID=d.deviceID WHERE customerID=?");
 $stmt2->execute(array($_GET["nummer"]));
 $apparaat = $stmt2->fetchAll();
 
@@ -18,6 +18,10 @@ $categorie = $stmt3->fetchAll();
 $stmtMax = $pdo->prepare("SELECT MAX(deviceID)+1 FROM device");
 $stmtMax->execute();
 $maxDeviceID = $stmtMax->fetch();
+
+$cusdev = $pdo->prepare("SELECT * FROM customer_device");
+$cusdev->execute();
+$cd = $cusdev->fetchAll();
 
 
 if (isset($_GET["reparatieToevoegen"])) {
@@ -31,7 +35,7 @@ if (isset($_GET["reparatieToevoegen"])) {
             $stmt4->execute(array($_GET["category"], $_GET["deviceInfo"], $_GET["serialnr"]));
             $stmt5 = $pdo->prepare("INSERT INTO reparation(customerID, deviceID, description, chargerIncluded) VALUES (?, ?, ?, ?)");
             $stmt5->execute(array($_GET["nummer"], $maxDeviceID["MAX(deviceID)+1"], $_GET["repairDescription"], $_GET["chargerIncluded"]));
-            $stmt6 = $pdo->prepare("INSERT INTO customer_device(customerID, deviceID)");
+            $stmt6 = $pdo->prepare("INSERT INTO customer_device(Customer_customerID, Device_deviceID)");
             $stmt6->execute(array($_GET["nummer"], $maxDeviceID["MAX(deviceID)+1"]));
         }
     } elseif ($_GET["apparaat"] !== "select") {
@@ -73,7 +77,7 @@ $pdo = NULL;
                         <option value="select">Selecteer een apparaat</option>
                         <?php
                         foreach ($apparaat as $a) {
-                            print("<option value=\"" . $a["deviceID"] . "\" name=\"" . $a["deviceID"] . "\">" . $a["deviceInfo"] . "</option>");
+                            print("<option value=\"" . $a["d.deviceID"] . "\" name=\"" . $a["d.deviceID"] . "\">" . $a["deviceInfo"] . "</option>");
                         }
                         ?>
                     </select>
