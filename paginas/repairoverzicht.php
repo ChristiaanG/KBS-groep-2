@@ -5,7 +5,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
-$pdo = new PDO("mysql:host=localhost; dbname=mydb; port=3306", "root", "");
+$pdo = new PDO("mysql:host=localhost; dbname=mydb2; port=3306", "root", "");
 // Eerst toevoegen als daar op is geklikt
 if (isset($_GET["toevoegen"])) {
     // op toevoegen geklikt, nummer bestaat en nummer is niet leeg
@@ -49,7 +49,7 @@ $pdo = NULL;
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">annuleer</button>
-                        <a class="btn btn-danger btn-ok">verwijder reperatie</a>
+                        <a class="btn btn-primary btn-ok">verwijder reperatie</a>
                     </div>
                 </div>
             </div>
