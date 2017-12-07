@@ -54,8 +54,12 @@ $pdo = NULL;
         <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+        <?php include 'nav.php'; ?>
     </head>
     <body>
+        <?php include 'sideklant.php'; ?>
+
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 align="center">Reparatie toevoegen v0.1</h3>
