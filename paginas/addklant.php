@@ -7,40 +7,78 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+
         <?php include 'nav.php'; ?>
     </head>
     <body>
         <?php include 'sideklant.php'; ?>
         <div id="page-wrapper">
-            <table class="table table-striped table-bordered table-hover">
-                <tr>
-                    <td>ID</td>
-                    <td>voornaam</td>
-                    <td>achternaam</td>
-                    <td>adres</td>
-                    <td>woonplaats</td>
-                    <td>email</td>
-                    <td>telefoon nummer</td>
-                    <td>mobiel nummer</td>
-                    <td>profiel</td>
 
-                </tr>
-                <tr>
-                <form method="get" action="overzicht.php">
-                    <td><input type="hidden" name="test"></td>
-                    <td> <input type="text" name="voornaam" required></td>
-                    <td> <input type="text" name="achternaam" required></td>
-                    <td> <input type="text" name="adres" required></td>
-                    <td> <input type="text" name="woonplaats" required></td>
-                    <td> <input type="text" name="email" required></td>
-                    <td><input type="text" name="phonenr" required></td>
-                    <td> <input type="text" name="cellphoneNr" required></td>
-                    <td> <input type="submit" name="toevoegen" class="btn btn-primary" value="Toevoegen"></td>
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3>klant toevoegen</h3>
+                    </div>
+                    <div class="panel-body" >
 
-                </form>
-                </tr>
-            </table>
+
+
+
+
+
+                        <form  method="get" action="overzicht.php">
+                            <input type="hidden" name="test">
+                            <div class="form-group col-xs-4 row">
+                                <label for="voornaam" class="col-2 col-form-label">voornaam</label>
+                                <div>
+                                    <input class="form-control" type="text" name="voornaam" id="voornaam" required>
+                                </div>
+                                <label for="achternaam" class="col-2 col-form-label">achternaam</label>
+                                <div>
+                                    <input class="form-control" type="text" name="achternaam" id="achternaam" required>
+                                </div>
+
+                                <label for="email" class="col-2 col-form-label">email adres</label>
+                                <div>
+                                    <input class="form-control" type="text" name="email" id="email" required>
+                                </div>
+                                <label for="phonenr" class="col-2 col-form-label">telefoonnummer</label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" name="phonenr" id="phonenr" required>
+                                </div>
+                                <label for="cellphoneNr" class="col-2 col-form-label">telefoonnummer 2 <i>(optioneel)</i></label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" name="cellphoneNr" id="cellphoneNr">
+                                </div>
+                                <br>
+                                <input  type="submit" name="toevoegen" class="btn btn-primary" value="Toevoegen">
+                            </div>
+
+
+
+                            <div  class="form-group col-xs-4 row center-block">
+                                <label for="adres" class="col-2 col-form-label">adres</label>
+                                <div>
+                                    <input class="form-control" type="text" name="adres" id="adres" required>
+                                </div>
+                                <label for="woonplaats" class="col-2 col-form-label">woonplaats</label>
+                                <div>
+
+                                    <input class="form-control" type="text" name="woonplaats" id="woonplaats" required>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
         </div>
     </body>
 </html>

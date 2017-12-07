@@ -13,7 +13,7 @@ $pdo = NULL;
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>test reparatie overzicht v0.1</title>
+
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/metisMenu.min.css" rel="stylesheet">
         <link href="../css/startmin.css" rel="stylesheet">
@@ -24,7 +24,7 @@ $pdo = NULL;
 
     </head>
     <body>
-        <?php include 'sideklant.php'; ?>
+        <?php include 'siderepair.php'; ?>
         <div  id="page-wrapper">
             <div class="panel panel-primary">
                 <div class="panel-heading">

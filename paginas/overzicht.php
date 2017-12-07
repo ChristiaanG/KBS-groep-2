@@ -1,26 +1,19 @@
 <!DOCTYPE html>
-
 <?php
 $pdo = new PDO("mysql:host=localhost; dbname=mydb; port=3306", "root", "");
-// Eerst toevoegen als daar op is geklikt
 if (isset($_GET["toevoegen"])) {
-    // op toevoegen geklikt, nummer bestaat en nummer is niet leeg
-    $stmt = $pdo->prepare("INSERT INTO customer (first_name, last_name, address, city, email, phoneNr, cellphoneNr) VALUES(?,?,?,?,?,?)");
+    $stmt = $pdo->prepare("INSERT INTO customer (first_name, last_name, address, city, email, phoneNr, cellphoneNr) VALUES(?,?,?,?,?,?,?)");
     $stmt->execute(array($_GET["voornaam"], $_GET["achternaam"], $_GET["adres"], $_GET["woonplaats"], $_GET["email"], $_GET["phonenr"], $_GET["cellphoneNr"]));
 }
-// daarna pas alle klanten uit de database selecteren zodat je de toegevoegde klant ook ziet
-$stmt = $pdo->prepare("SELECT * FROM customer");
+$stmt = $pdo->prepare("SELECT * FROM customer where active=1");
 $stmt->execute();
 $klanten = $stmt->fetchAll();
-
-
 $pdo = NULL;
 ?>
 <html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Klantenoverzicht v0.1</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/metisMenu.min.css" rel="stylesheet">
         <link href="../css/startmin.css" rel="stylesheet">
@@ -29,35 +22,48 @@ $pdo = NULL;
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
         <?php include 'nav.php'; ?>
+
     </head>
     <body>
         <?php include 'sideklant.php'; ?>
+        <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>weet uw het zeker?</h3>
+                    </div>
+                    <div class="modal-body">
+                        het verwijderen van een klant kan niet terug gedraaid worden
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">annuleer</button>
+                        <a class="btn btn-danger btn-ok">verwijder klant</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="page-wrapper">
-
-            <!-- Navigation -->
-
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 align="center">Klantenoverzicht v0.1</h3>
+                    <h3 align="center">Klant overzicht</h3>
                 </div>
                 <div class="panel-body">
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
-                                <td>ID</td>
-                                <td>Naam</td>
+                                <td>klantnummer</td>
+                                <td>naam</td>
                                 <td>achternaam</td>
                                 <td>adres</td>
                                 <td>woonplaats</td>
                                 <td>email</td>
-                                <td>telefoon nummer</td>
-                                <td>mobiel nummer</td>
-                                <td>profiel</td>
+                                <td>telefoonnummer</td>
+                                <td>telefoonnummer 2</td>
+                                <td> </td>
 
-                                <td>verwijder</td>
+                                <td> </td>
                             </tr>
                         </thead>
-
                         <tbody>
                             <?php
                             foreach ($klanten as $klant) {
@@ -70,36 +76,34 @@ $pdo = NULL;
                                 print("\n\t\t<td>" . $klant["email"] . "</td>");
                                 print("\n\t\t<td>" . $klant["phoneNr"] . "</td>");
                                 print("\n\t\t<td>" . $klant["cellphoneNr"] . "</td>");
-                                print("<td><a href=\"klant.php?nummer=" . $klant["customerID"] . "\"class=\"btn btn-primary\">ga naar klant</a></td>");
-
-                                print("<td><a href=\"verwijder.php?nummer=" . $klant["customerID"] . "\"class=\"btn btn-primary\">Verwijder klant</a></td>");
+                                print("<td><a href=\"klant.php?nummer=" . $klant["customerID"] . "\"class=\"btn btn-primary\" >ga naar klant</a></td>");
+                                print("<td><a href=\"#\" data-href=\"verwijder.php?nummer=" . $klant["customerID"] . "\" data-toggle=\"modal\" data-target=\"#confirm-delete\" class=\"btn btn-primary\">Verwijder klant</a></td>");
                                 print("\n\t</tr>");
                             }
                             ?></tbody>
+                        <script src="../js/jquery.min.js"></script>
+                        <script src="../js/bootstrap.min.js"></script>
+                        <script src="../js/metisMenu.min.js"></script>
+                        <script src="../js/dataTables/jquery.dataTables.min.js"></script>
+                        <script src="../js/dataTables/dataTables.bootstrap.min.js"></script>
+                        <script src="../js/startmin.js"></script>
 
+                        <script>
+                            $(document).ready(function () {
+                                $('#dataTables-example').DataTable({
+                                    responsive: true
+                                });
+                            });
+
+                        </script>
+                        <script>
+                            $('#confirm-delete').on('show.bs.modal', function (e) {
+                                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+                            });
+                        </script>
                     </table>
-
                 </div>
-
             </div>
         </div>
-
-
-
-
-        <script src="../js/jquery.min.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
-        <script src="../js/metisMenu.min.js"></script>
-        <script src="../js/dataTables/jquery.dataTables.min.js"></script>
-        <script src="../js/dataTables/dataTables.bootstrap.min.js"></script>
-        <script src="../js/startmin.js"></script>
-
-        <script>
-            $(document).ready(function () {
-                $('#dataTables-example').DataTable({
-                    responsive: true
-                });
-            });
-        </script>
     </body>
 </html>

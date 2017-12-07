@@ -2,7 +2,7 @@
 <?php
 if (isset($_GET["nummer"]))
     $pdo = new PDO("mysql:host=localhost;dbname=mydb;port=3306", "root", "");
-$stmt = $pdo->prepare("delete from customer where customerID = ?");
+$stmt = $pdo->prepare("update customer set active=0 where customerID = ?");
 $stmt->execute(array($_GET["nummer"]));
 $pdo = NULL;
 ?>
@@ -22,7 +22,7 @@ $pdo = NULL;
 
         <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <?php include 'nav.php'; ?>
-        <title>Klant verwijderen v0.1</title>
+
     </head>
     <body>
         <?php include 'sideklant.php'; ?>

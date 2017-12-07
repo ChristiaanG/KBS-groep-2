@@ -25,7 +25,7 @@ $pdo = NULL;
         <link href="../css/startmin.css" rel="stylesheet">
 
         <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <title>repaireditor v0.1</title>
+
         <?php include 'nav.php'; ?>
     </head>
     <body>
