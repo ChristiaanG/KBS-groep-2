@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Christiaan Goslinga
  * Date: 16-11-2017
  * Time: 10:40
  */
-
 include_once "DatabaseConfig.php";
 
 function getDbConnection()
