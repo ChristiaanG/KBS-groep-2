@@ -49,7 +49,7 @@ $pdo = NULL;
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">annuleer</button>
-                        <a class="btn btn-danger btn-ok">verwijder reperatie</a>
+                        <a class="btn btn-primary btn-ok">verwijder reperatie</a>
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@ $pdo = NULL;
                                 print("\n\t\t<td>" . $r["description"] . "</td>");
                                 print("\n\t\t<td>" . $r["daterepair"] . "</td>");
                                 print("<td><a href=\"repair.php?nummer=" . $r["repairID"] . "\"class=\"btn btn-primary\">ga naar reparatie</a></td>");
-                                print("<td><a href=\"#\" data-href=\"verwijderrepair.php?nummer=" . $r["repairID"] . "\" data-toggle=\"modal\" data-target=\"#confirm-delete\" class=\"btn btn-primary\">Verwijder reperatie</a></td>");
+                                print("<td><a href=\"#\" data-href=\"verwijderrepair.php?nummer=" . $r["repairID"] . "\" data-toggle=\"modal\" data-target=\"#confirm-delete\" class=\"btn btn-primary\">Verwijder reparatie</a></td>");
                                 print("\n\t</tr>");
                             }
                             ?>

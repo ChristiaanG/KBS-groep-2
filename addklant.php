@@ -1,31 +1,27 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<?php
+$pdo = new PDO("mysql:host=localhost; dbname=mydb; port=3306", "root", "");
+$stmt = $pdo->prepare("SELECT max(customerID) FROM customer");
+$stmt->execute();
+$klanten = $stmt->fetch();
+$pdo = NULL;
+$nieuwnummer = $klanten["max(customerID)"] + 1;
+?>
 <html>
     <head>
         <meta charset="UTF-8">
-
         <?php include 'nav.php'; ?>
     </head>
     <body>
-        <?php include 'sideklant.php'; ?>
+        <?php
+        include 'sideklant.php';
+        ?>
         <div id="page-wrapper">
-
             <div class="col-lg-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3>klant toevoegen</h3>
                     </div>
                     <div class="panel-body" >
-
-
-
-
-
-
                         <form  method="get" action="overzicht.php">
                             <input type="hidden" name="test">
                             <div class="form-group col-xs-4 row">
@@ -53,9 +49,6 @@ and open the template in the editor.
                                 <br>
                                 <input  type="submit" name="toevoegen" class="btn btn-primary" value="Toevoegen">
                             </div>
-
-
-
                             <div  class="form-group col-xs-4 row center-block">
                                 <label for="adres" class="col-2 col-form-label">adres</label>
                                 <div>
@@ -67,16 +60,8 @@ and open the template in the editor.
                                     <input class="form-control" type="text" name="woonplaats" id="woonplaats" required>
                                 </div>
                             </div>
-
-
-
-
-
-
                         </form>
-
                     </div>
-
                 </div>
             </div>
         </div>

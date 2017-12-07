@@ -37,17 +37,18 @@ $pdo = NULL;
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">annuleer</button>
-                        <a class="btn btn-danger btn-ok">verwijder klant</a>
+                        <a class="btn btn-primary btn-ok">verwijder klant</a>
                     </div>
                 </div>
             </div>
         </div>
         <div id="page-wrapper">
-            <div class="panel panel-primary">
+            <div class="panel panel-primary ">
                 <div class="panel-heading">
                     <h3 align="center">Klant overzicht</h3>
                 </div>
                 <div class="panel-body">
+
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
@@ -56,9 +57,6 @@ $pdo = NULL;
                                 <td>achternaam</td>
                                 <td>adres</td>
                                 <td>woonplaats</td>
-                                <td>email</td>
-                                <td>telefoonnummer</td>
-                                <td>telefoonnummer 2</td>
                                 <td> </td>
 
                                 <td> </td>
@@ -73,9 +71,6 @@ $pdo = NULL;
                                 print("\n\t\t<td>" . $klant["last_name"] . "</td>");
                                 print("\n\t\t<td>" . $klant["address"] . "</td>");
                                 print("\n\t\t<td>" . $klant["city"] . "</td>");
-                                print("\n\t\t<td>" . $klant["email"] . "</td>");
-                                print("\n\t\t<td>" . $klant["phoneNr"] . "</td>");
-                                print("\n\t\t<td>" . $klant["cellphoneNr"] . "</td>");
                                 print("<td><a href=\"klant.php?nummer=" . $klant["customerID"] . "\"class=\"btn btn-primary\" >ga naar klant</a></td>");
                                 print("<td><a href=\"#\" data-href=\"verwijder.php?nummer=" . $klant["customerID"] . "\" data-toggle=\"modal\" data-target=\"#confirm-delete\" class=\"btn btn-primary\">Verwijder klant</a></td>");
                                 print("\n\t</tr>");
@@ -105,5 +100,6 @@ $pdo = NULL;
                 </div>
             </div>
         </div>
+
     </body>
 </html>

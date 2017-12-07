@@ -3,11 +3,30 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="repairoverzicht.php"><i class="fa fa-table fa-fw"></i>reparatie overzicht</a>
+                    <a href="#"><i class="fa fa-users fa-fw"></i> klanten<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="overzicht.php">klant overzicht</a>
+                        </li>
+                        <li>
+                            <a href="addklant.php">klant toevoegen</a>
+                        </li>
+                    </ul>
+
                 </li>
                 <li>
-                    <a href="addrepair.php"><i class="fa  fa-plus  fa-fw"></i>reparatie toevoegen</a>
+                    <a href="#"><i class="fa fa-wrench fa-fw"></i>reparaties<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="repairoverzicht.php">reparatie overzicht</a>
+                        </li>
+                        <li>
+                            <a href="addrepair.php">reparatie toevoegen</a>
+                        </li>
+                    </ul>
+
                 </li>
+
             </ul>
         </div>
         <!-- /.sidebar-collapse -->
