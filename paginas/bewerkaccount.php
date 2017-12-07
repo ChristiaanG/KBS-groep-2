@@ -35,10 +35,15 @@ $pdo = NULL;
                 </div>
                 <div class="panel-body">
                     <form method="post" action="mijnaccount.php">
-                        <input type="hidden" name="username" value="<?php print( $user["username"]); ?>"><br>
-                        Naam            :<input type="text" name="name" value="<?php print($user["name"]); ?>" required><br><br>
-                        <a href="bewerkpassword.php" class="btn btn-primary right">Password wijzigen</a>
+                        <div class="form-group col-xs-4 row">
                         <input type="hidden" name="username" value="<?php print( $user["username"]); ?>">
+                        <label for="name" class="col-2 col-form-label">Naam</label>
+                        <div>
+                            <input class="form-control" type="text" name="name" value="<?php print($user["name"]); ?>" required><br>
+                        </div>
+                        <a href="bewerkpassword.php" class="btn btn-primary right">Wachtwoord wijzigen</a>
+                        <input type="hidden" name="username" value="<?php print( $user["username"]); ?>">
+                        </div>
                     
                     <div>
                         <i>

@@ -11,13 +11,13 @@ include_once "../../config/Database.php";
 
 function loginAction()
 {
-    if(!isset($_GET["email"]) && !isset($_GET["password"])) {
-        header('Location: ' . $_GET["redirect"]);
+    if(!isset($_POST["email"]) && !isset($_POST["password"])) {
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
         die();
     } else {
         try {
-            $username = $_GET["username"];
-            $password = $_GET["password"];
+            $username = $_POST["username"];
+            $password = $_POST["password"];
             $conn = getDbConnection();
 
             $stmt = $conn->prepare("SELECT * FROM user WHERE username = ? AND password = ?");
@@ -36,8 +36,8 @@ function loginAction()
                     die();
                 }
 
-                $_GET["loggedin"] = true;
-                $_GET["username"] = $username;
+                $_POST["loggedin"] = true;
+                $_POST["username"] = $username;
                 header("Location: " . $config["home"]);
                 die();
             } elseif($result["approved"] == false) {
@@ -46,6 +46,7 @@ function loginAction()
                 header("Location: " . $_SERVER['HTTP_REFERER']);
                 die();
             } else {
+                print_r($_SERVER['HTTP_REFERER']);die;
                 $conn = null;
                 $_GET["loginfailed"] = "U heeft uw gebruikersnaam en/of wachtwoord fout ingevoerd";
                 header("Location: " . $_SERVER['HTTP_REFERER']);
@@ -70,8 +71,8 @@ function logoutAction()
     die();
 }
 
-if(isset($_GET['submit'])) {
+if(isset($_POST['submit'])) {
     loginAction();
-} elseif($_GET["logout"] = true) {
+} elseif($_POST["logout"] = true) {
     logoutAction();
 }

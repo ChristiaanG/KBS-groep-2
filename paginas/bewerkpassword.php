@@ -34,13 +34,23 @@ $pdo = NULL;
                     <h3>medewerker gegevens <?php print ($user["name"]); ?></h3>
                 </div>
                 <div class="panel-body">
+                    <div class="form-group col-xs-4 row">
                     <form method="post" action="mijnaccount.php">
-                        <input type="hidden" name="username" value="<?php print( $user["username"]); ?>"><br>
-                        Oude password   :<input type="text" name="oldpass" required><br>
-                        Nieuw Password  :<input type="password" name="password" pattern=".{4,20}" title="4-20 characters" required><br>
-                        Herhaal password:<input type="password" name="password2" required><br>
                         <input type="hidden" name="username" value="<?php print( $user["username"]); ?>">
-                    
+                          <label for="oldpass" class="col-2 col-form-label">Oude wachtwoord</label>
+                        <div>
+                            <input class="form-control" type="password" name="oldpass" required>
+                        </div>
+                          <label for="password" class="col-2 col-form-label">Nieuwe wachtwoord</label>
+                        <div>
+                            <input class="form-control" type="password" name="password" pattern=".{4,20}" title="4-20 characters" required>
+                        </div>
+                          <label for="password2" class="col-2 col-form-label">Herhaal wachtwoord</label>
+                        <div>
+                            <input class="form-control" type="password" name="password2" required>
+                        </div>
+                        <input type="hidden" name="username" value="<?php print( $user["username"]); ?>">
+                        </div>
                     <div>
                         <i>
                             <?php if(isset($_SESSION["validpass"])) {

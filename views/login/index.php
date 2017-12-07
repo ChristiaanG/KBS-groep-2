@@ -34,9 +34,9 @@ if(isset($_GET["loggedin"])) {
             }
         ?>
         <form class="form-signin" method="post" action="../../src/login/Login.php">
-        <h2 class="form-signin-heading">Login</h2>
+            <h2 class="form-signin-heading">Login</h2>
             <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" name="username" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+            <input type="text" name="username" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
             <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="submit">Login</button>
