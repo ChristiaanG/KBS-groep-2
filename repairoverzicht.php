@@ -49,7 +49,7 @@ $pdo = NULL;
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">annuleer</button>
-                        <a class="btn btn-danger btn-ok">verwijder reperatie</a>
+                        <a class="btn btn-primary btn-ok">verwijder reperatie</a>
                     </div>
                 </div>
             </div>
