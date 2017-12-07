@@ -1,36 +1,7 @@
 <?php
-/**
- * GoogleAuthenticator
- *
- * PHP version 5
- *
- * @package  Johnstyle\GoogleAuthenticator
- * @author   Jonathan Sahm <contact@johnstyle.fr>
- * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     https://github.com/johnstyle/google-authenticator
- */
+session_start();
 
-require_once "../../lib/base32/src/Base32.php";
-require_once "../../lib/google-authenticator/src/Johnstyle/GoogleAuthenticator/GoogleAuthenticator.php";
-require_once "../../lib/google-authenticator/src/Johnstyle/GoogleAuthenticator/GoogleAuthenticatorException.php";
-
-use Johnstyle\GoogleAuthenticator\GoogleAuthenticator;
-
-// /!\ For example ! Don't POST secret key !!
-$secretKey = isset($_POST['secretKey']) ? $_POST['secretKey'] : null;
-
-$gAuth = new GoogleAuthenticator($secretKey);
-
-$success = false;
-$step = isset($_POST['step']) ? (int) $_POST['step'] : 1;
-$code = isset($_POST['code']) ? $_POST['code'] : 0;
-
-if(0 !== $code && $gAuth->verifyCode($code)) {
-
-    $step++;
-    $success = true;
-}
-
+include_once "../../src/login/check/Check2faRedirect.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -54,41 +25,24 @@ if(0 !== $code && $gAuth->verifyCode($code)) {
 </head>
 <body>
 <div class="container">
-    <?php if(1 === $step): ?>
-        <h1>1 - Register application</h1>
-        <h2>a. Scan this QRCode with your smarphone</h2>
-        <p>
-            Use Google Authenticator for mobile
-            <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">Android</a>
-            or
-            <a href="https://itunes.apple.com/fr/app/google-authenticator/id388497605" target="_blank">iPhone</a>
-        </p>
-        <div class="qrcode"><img src="<?php echo $gAuth->getQRCodeUrl('MyApplicationName'); ?>" alt=""/></div>
-        <h2>b. Copy/paste vérification code</h2>
-        <form method="post">
-            <!-- /!\ For example ! Don't POST secret key !! -->
-            <input placeholder="secretKey" type="hidden" name="secretKey" value="<?php echo $gAuth->getSecretKey(); ?>"/>
-            <input placeholder="code" type="text" name="code" maxlength="6"/>
-            <button>Register</button>
-            <div style="clear:both"></div>
-        </form>
-    <?php else: ?>
-        <h1>2 - Use Google Authenticator for signin</h1>
-        <form method="post">
-            <!-- /!\ For example ! Don't POST secret key !! -->
-            <input placeholder="secretKey" type="hidden" name="secretKey" value="<?php echo $gAuth->getSecretKey(); ?>"/>
-            <input name="step" type="hidden" value="3"/>
-            <input placeholder="code" type="text" name="code" maxlength="6"/>
-            <button>Signin</button>
-            <div style="clear:both"></div>
-        </form>
-        <?php if(true == $success && 4 === $step): ?>
-            <div class="success">The code is correct</div>
-        <?php endif; ?>
-    <?php endif; ?>
-    <?php if(0 !== $code && false === $success): ?>
-        <div class="error">The code is incorrect</div>
-    <?php endif; ?>
+    <h1>2 - Use Google Authenticator for signin</h1>
+    <?php
+    if(isset($_SESSION["twofafailed"])) {
+        ?>
+        <div class="alert alert-danger">
+            <?php
+                echo $_SESSION["twofafailed"];
+                $_SESSION['twofafailed'] = NULL;
+            ?>
+        </div>
+        <?php
+    }
+    ?>
+    <form method="post" action="../../src/login/TwoStepAuthentication.php">
+        <input placeholder="code" type="text" name="2fa_code" maxlength="6" autofocus="autofocus"/>
+        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="submit">Verstuur</button>
+        <div style="clear:both"></div>
+    </form>
 </div>
 </body>
 </html>

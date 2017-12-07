@@ -10,26 +10,40 @@
  * @link     https://github.com/johnstyle/google-authenticator
  */
 
+session_start();
+
+include_once "../../src/login/check/Check2faRedirect.php";
+
 require_once "../../lib/base32/src/Base32.php";
 require_once "../../lib/google-authenticator/src/Johnstyle/GoogleAuthenticator/GoogleAuthenticator.php";
 require_once "../../lib/google-authenticator/src/Johnstyle/GoogleAuthenticator/GoogleAuthenticatorException.php";
 
 use Johnstyle\GoogleAuthenticator\GoogleAuthenticator;
 
-// /!\ For example ! Don't POST secret key !!
-$secretKey = isset($_POST['secretKey']) ? $_POST['secretKey'] : null;
+if (!isset($_SESSION['2fa_qr']) && !isset($_SESSION['2fa_secret'])) {
+    $gAuth = new GoogleAuthenticator();
 
-$gAuth = new GoogleAuthenticator($secretKey);
+    // Register application
+    $_SESSION["2fa_qr"] = $gAuth->getQRCodeUrl('Fixitallcomputers');
 
-$success = false;
-$step = isset($_POST['step']) ? (int) $_POST['step'] : 1;
-$code = isset($_POST['code']) ? $_POST['code'] : 0;
-
-if(0 !== $code && $gAuth->verifyCode($code)) {
-
-    $step++;
-    $success = true;
+    // Save secret Key
+    $_SESSION['2fa_secret'] = $gAuth->getSecretKey();
 }
+//
+//// /!\ For example ! Don't POST secret key !!
+//$secretKey = isset($_POST['secretKey']) ? $_POST['secretKey'] : null;
+//
+//$gAuth = new GoogleAuthenticator($secretKey);
+//
+//$success = false;
+//$step = isset($_POST['step']) ? (int) $_POST['step'] : 1;
+//$code = isset($_POST['code']) ? $_POST['code'] : 0;
+//
+//if(0 !== $code && $gAuth->verifyCode($code)) {
+//
+//    $step++;
+//    $success = true;
+//}
 
 ?>
 <!DOCTYPE html>
@@ -54,7 +68,7 @@ if(0 !== $code && $gAuth->verifyCode($code)) {
 </head>
 <body>
 <div class="container">
-    <?php if(1 === $step): ?>
+<!--    --><?php //if(1 === $step): ?>
         <h1>1 - Register application</h1>
         <h2>a. Scan this QRCode with your smarphone</h2>
         <p>
@@ -63,32 +77,26 @@ if(0 !== $code && $gAuth->verifyCode($code)) {
             or
             <a href="https://itunes.apple.com/fr/app/google-authenticator/id388497605" target="_blank">iPhone</a>
         </p>
-        <div class="qrcode"><img src="<?php echo $gAuth->getQRCodeUrl('MyApplicationName'); ?>" alt=""/></div>
+        <div class="qrcode"><img src="<?php echo $_SESSION["2fa_qr"]; ?>" alt=""/></div>
         <h2>b. Copy/paste vérification code</h2>
-        <form method="post">
-            <!-- /!\ For example ! Don't POST secret key !! -->
-            <input placeholder="secretKey" type="hidden" name="secretKey" value="<?php echo $gAuth->getSecretKey(); ?>"/>
-            <input placeholder="code" type="text" name="code" maxlength="6"/>
-            <button>Register</button>
+        <?php
+        if(isset($_SESSION["twofaregisterfailed"])) {
+            ?>
+            <div class="alert alert-danger">
+                <?php
+                    echo $_SESSION["twofaregisterfailed"];
+                    $_SESSION['twofaregisterfailed'] = NULL;
+                ?>
+            </div>
+            <?php
+        }
+        ?>
+        <form method="post" action="../../src/login/TwoStepAuthentication.php">
+            <input placeholder="Code" type="text" name="2fa_code" maxlength="6" autofocus="autofocus"/>
+            <button type="submit" name="register">Registreer</button>
             <div style="clear:both"></div>
         </form>
-    <?php else: ?>
-        <h1>2 - Use Google Authenticator for signin</h1>
-        <form method="post">
-            <!-- /!\ For example ! Don't POST secret key !! -->
-            <input placeholder="secretKey" type="hidden" name="secretKey" value="<?php echo $gAuth->getSecretKey(); ?>"/>
-            <input name="step" type="hidden" value="3"/>
-            <input placeholder="code" type="text" name="code" maxlength="6"/>
-            <button>Signin</button>
-            <div style="clear:both"></div>
-        </form>
-        <?php if(true == $success && 4 === $step): ?>
-            <div class="success">The code is correct</div>
-        <?php endif; ?>
-    <?php endif; ?>
-    <?php if(0 !== $code && false === $success): ?>
-        <div class="error">The code is incorrect</div>
-    <?php endif; ?>
+<!--    --><?php //endif; ?>
 </div>
 </body>
 </html>

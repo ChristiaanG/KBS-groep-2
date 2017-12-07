@@ -11,8 +11,21 @@ include_once "../../config/Database.php";
 
 function loginAction()
 {
-    if(!isset($_POST["email"]) && !isset($_POST["password"])) {
-        header('Location: ' . $_POST["redirect"]);
+    session_start();
+
+    $config = config();
+
+    if((!isset($_POST["username"]) || empty($_POST["username"])) && (!isset($_POST["password"]) || empty($_POST["password"]))) {
+        $_SESSION["loginfailed"] = "Vul een gebruikersnaam en wachtwoord in";
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        die();
+    } elseif(!isset($_POST["username"]) || empty($_POST["username"])) {
+        $_SESSION["loginfailed"] = "U heeft geen gebruikersnaam ingevuld";
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        die();
+    } elseif(!isset($_POST["password"]) || empty($_POST["password"])) {
+        $_SESSION["loginfailed"] = "U heeft geen wachtwoord ingevuld";
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
         die();
     } else {
         try {
@@ -20,28 +33,38 @@ function loginAction()
             $password = $_POST["password"];
             $conn = getDbConnection();
 
-            $stmt = $conn->prepare("SELECT * FROM user WHERE username = ? AND password = ?");
-            $stmt->execute(array($username, $password));
+            $stmt = $conn->prepare("SELECT * FROM user WHERE username = ?");
+            $stmt->execute(array($username));
             $result = $stmt->fetch();
 
-            session_start();
+            $passwordTrue = password_verify($password, $result["password"]);
 
-            $config = config();
-
-            if ($result["username"] == $username && $result["approved"] == true) {
+            if ($passwordTrue && $result["approved"] == true) {
                 $conn = null;
 
-                if($result["function"] == "admin" || $result["function"] == "medewerker" && $result["2fa_enabled"] == false) {
-                    header("Location: " . $config["2fa"]);
+                if(!isset($_COOKIE["2fa_set"]) || $_COOKIE["2fa_set"] != $username || $result["2fa_enabled"] == false) {
+                    if(($result["function"] == "admin" || $result["function"] == "medewerker") && $result["2fa_enabled"] == false) {
+                        $_SESSION["username"] = $username;
+                        $_SESSION["function"] = $result["function"];
+                        $_SESSION["2fa_redirect"] = true;
+                        header("Location: " . $config["2fa_re"]);
+                        die();
+                    } elseif($result["function"] == "admin" || $result["function"] == "medewerker" && $result["2fa_enabled"] == true && !isset($_SESSION["2fa_true"])) {
+                        $_SESSION["username"] = $username;
+                        $_SESSION["function"] = $result["function"];
+                        $_SESSION["2fa_secret"] = $result["2fa_secret"];
+                        $_SESSION["2fa_redirect"] = true;
+                        header("Location: " . $config["2fa"]);
+                        die();
+                    }
+                } else {
+                    $_SESSION["loggedin"] = true;
+                    $_SESSION["function"] = $result["function"];
+                    $_SESSION["username"] = $username;
+                    header("Location: " . $config["home"]);
                     die();
                 }
-
-                $_SESSION["loggedin"] = true;
-                $_SESSION["username"] = $username;
-                header("Location: " . $config["home"]);
-                die();
             } elseif($result["approved"] == false) {
-                $conn = null;
                 $_SESSION["loginfailed"] = "Uw account is nog niet geactiveerd door de administrator";
                 header("Location: " . $_SERVER['HTTP_REFERER']);
                 die();
@@ -52,7 +75,7 @@ function loginAction()
                 die();
             }
         } catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            echo "<div class='alert alert-danger'>Error: " . $e->getMessage() . "</div><br><a href='" . $config["login"] . "'>terug naar loginpagina</a>";
             die();
         }
     }
@@ -75,3 +98,4 @@ if(isset($_POST['submit'])) {
 } elseif($_GET["logout"] = true) {
     logoutAction();
 }
+die();

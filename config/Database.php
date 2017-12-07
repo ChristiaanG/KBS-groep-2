@@ -8,9 +8,9 @@
  */
 include_once "DatabaseConfig.php";
 
-function getDbConnection() {
-    $config = databaseconfig();
-    $conn = null;
+function getDbConnection()
+{
+    $config = databaseConfig();
 
     $servername = $config["host"];
     $username = $config["username"];
@@ -23,5 +23,4 @@ function getDbConnection() {
 
     return $conn;
 }
-
 ?>
