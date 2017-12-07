@@ -7,7 +7,7 @@
  */
 
 include_once "../../config/Database.php";
-include_once "../email/Gmail.php";
+include_once "../email/gmail.php";
 
 function forgotPasswordAction()
 {
