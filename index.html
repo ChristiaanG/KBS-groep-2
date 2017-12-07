@@ -1,3 +1,14 @@
+<?php
+
+$db ="mysql:host=localhost;dbname=mydb;port=3306";
+$user = "";
+$pass = "";
+$pdo = new PDO($db, $user, $pass);
+session_start();
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,15 +18,8 @@
 <!--window.location.href = "views/dashboard/index.html"-->
 <!--</script>-->
 <title>home</title>
-
 </head>
-<?php
 
-$db ="mysql:host=localhost;dbname=cursus;port=3306";
-$user = "root";
-$pass = "";
-$pdo = new PDO($db, $user, $pass);
-?>
 <ul>
     <li> <a href="">klant</a></li>
     <li> <a href="">reparaties</a></li>
