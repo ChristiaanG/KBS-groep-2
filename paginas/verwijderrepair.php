@@ -2,7 +2,7 @@
 <?php
 if (isset($_GET["nummer"]))
     $pdo = new PDO("mysql:host=localhost;dbname=mydb;port=3306", "root", "");
-$stmt = $pdo->prepare("update customer set active=0 where customerID = ?");
+$stmt = $pdo->prepare("update reparation set active=0 where repairID = ?");
 $stmt->execute(array($_GET["nummer"]));
 $pdo = NULL;
 ?>
@@ -25,17 +25,17 @@ $pdo = NULL;
 
     </head>
     <body>
-        <?php include 'sideklant.php'; ?>
+        <?php include 'siderepair.php'; ?>
         <div id="page-wrapper" class="container">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3> klant verwijderd</h3>
+                    <h3> reparatie verwijderd</h3>
                 </div>
                 <div class="panel-body">
-                    <?php print("Klant " . $_GET["nummer"] . " is verwijderd"); ?>
+                    <?php print("reparatie met het nummer " . $_GET["nummer"] . " is verwijderd"); ?>
                 </div>
                 <div class="panel-footer">
-                    <a href="overzicht.php">Terug naar het overzicht</a>
+                    <a href="repairoverzicht.php">Terug naar het overzicht</a>
                 </div>
             </div>
         </div>

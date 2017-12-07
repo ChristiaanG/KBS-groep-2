@@ -6,7 +6,7 @@
                     <a href="repairoverzicht.php"><i class="fa fa-table fa-fw"></i>reparatie overzicht</a>
                 </li>
                 <li>
-                    <a href="addrepair.php"><i class="fa  fa-plus  fa-fw"></i>reparatie toevoegem</a>
+                    <a href="addrepair.php"><i class="fa  fa-plus  fa-fw"></i>reparatie toevoegen</a>
                 </li>
             </ul>
         </div>
