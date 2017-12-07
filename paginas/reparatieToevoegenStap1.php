@@ -18,38 +18,41 @@ $pdo = NULL;
         <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+        <?php include 'nav.php'; ?>
     </head>
     <body>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 align="center">Reparatie toevoegen v0.1</h3>
-            </div>
-            <div class="panel-body">
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                    <thead>
-                        <tr>
-                            <td>Naam</td>
-                            <td>Adres</td>
-                            <td>Telefoon nummer</td>
-                        </tr>
-                    </thead>
+        <?php include 'sideklant.php'; ?>
+        <div id="page-wrapper">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 align="center">Reparatie toevoegen v0.1</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <td>Naam</td>
+                                <td>Adres</td>
+                                <td>Telefoon nummer</td>
+                            </tr>
+                        </thead>
 
-                    <tbody>
-                        <?php
-                        foreach ($klanten as $klant) {
-                            print("\n\t<tr>");
-                            print("\n\t\t<td><a href='reparatieToevoegenStap2.php?nummer=" . $klant["customerID"] . "'>" . $klant["first_name"] . " " . $klant["last_name"] . "</a></td>");
-                            print("\n\t\t<td>" . $klant["address"] . "</td>");
-                            print("\n\t\t<td>" . $klant["phoneNr"] . "</td>");
-                            print("\n\t</tr>");
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                        <tbody>
+                            <?php
+                            foreach ($klanten as $klant) {
+                                print("\n\t<tr>");
+                                print("\n\t\t<td><a href='reparatieToevoegenStap2.php?nummer=" . $klant["customerID"] . "'>" . $klant["first_name"] . " " . $klant["last_name"] . "</a></td>");
+                                print("\n\t\t<td>" . $klant["address"] . "</td>");
+                                print("\n\t\t<td>" . $klant["phoneNr"] . "</td>");
+                                print("\n\t</tr>");
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <?php
-        ?>
         <script src="../js/jquery.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
         <script src="../js/metisMenu.min.js"></script>

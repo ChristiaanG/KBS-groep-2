@@ -32,7 +32,7 @@ if (isset($_GET["reparatieToevoegen"])) {
             $stmt5 = $pdo->prepare("INSERT INTO reparation(customerID, deviceID, description, chargerIncluded) VALUES (?, ?, ?, ?)");
             $stmt5->execute(array($_GET["nummer"], $maxDeviceID["MAX(deviceID)+1"], $_GET["repairDescription"], $_GET["chargerIncluded"]));
             $stmt6 = $pdo->prepare("INSERT INTO customer_device(customerID, deviceID)");
-            $stmt6->execute(array($_GET["nummer"], $_GET["MAX(deviceID)+1"]));
+            $stmt6->execute(array($_GET["nummer"], $maxDeviceID["MAX(deviceID)+1"]));
         }
     } elseif ($_GET["apparaat"] !== "select") {
         $stmt7 = $pdo->prepare("INSERT INTO reparation(customerID, deviceID, description, chargerIncluded) VALUES (?,?,?,?)");
@@ -54,50 +54,55 @@ $pdo = NULL;
         <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+        <?php include 'nav.php'; ?>
     </head>
     <body>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 align="center">Reparatie toevoegen v0.1</h3>
-            </div>
-            <h4>Reparatie toevoegen voor <?php print($klant["first_name"] . " " . $klant["last_name"]); ?></h4><br>
-            <?php ?>
-            <h4>Apparaat selecteren:</h4>
+        <?php include 'sideklant.php'; ?>
+        <div id="page-wrapper">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 align="center">Reparatie toevoegen v0.1</h3>
+                </div>
+                <h4>Reparatie toevoegen voor <?php print($klant["first_name"] . " " . $klant["last_name"]); ?></h4><br>
+                <?php ?>
+                <h4>Apparaat selecteren:</h4>
 
-            <form action="reparatieToevoegenStap2.php" method="get">
-                <select id="apparaatSelect" name="apparaat" onchange="removeDeviceInfoForm()">
-                    <option value="select">Selecteer een apparaat</option>
-                    <?php
-                    foreach ($apparaat as $a) {
-                        print("<option value=\"" . $a["deviceID"] . "\" name=\"" . $a["deviceID"] . "\">" . $a["deviceInfo"] . "</option>");
-                    }
-                    ?>
-                </select>
-                <input type="hidden" name="nummer" value="<?php print( $_GET["nummer"]); ?>">
-                <br>
-                <div id="apparaatInvullen">
-                    <h4>Categorie van apparaat: </h4>
-                    <select name="category">
+                <form action="reparatieToevoegenStap2.php" method="get">
+                    <select id="apparaatSelect" name="apparaat" onchange="removeDeviceInfoForm()">
+                        <option value="select">Selecteer een apparaat</option>
                         <?php
-                        foreach ($categorie as $c) {
-                            print("<option value=\"" . $c["categoryID"] . "\" name=\"" . $c["categoryID"] . "\">" . $c["categoryID"] . ". " . $c["name"] . "</option>");
+                        foreach ($apparaat as $a) {
+                            print("<option value=\"" . $a["deviceID"] . "\" name=\"" . $a["deviceID"] . "\">" . $a["deviceInfo"] . "</option>");
                         }
                         ?>
-                    </select><br><br>
-                    Naam van apparaat: <input type="text" name="deviceInfo">
+                    </select>
+                    <input type="hidden" name="nummer" value="<?php print( $_GET["nummer"]); ?>">
                     <br>
-                    Serienummer: <input type="text" name="serialnr">
+                    <div id="apparaatInvullen">
+                        <h4>Categorie van apparaat: </h4>
+                        <select name="category">
+                            <?php
+                            foreach ($categorie as $c) {
+                                print("<option value=\"" . $c["categoryID"] . "\" name=\"" . $c["categoryID"] . "\">" . $c["categoryID"] . ". " . $c["name"] . "</option>");
+                            }
+                            ?>
+                        </select><br><br>
+                        Naam van apparaat: <input type="text" name="deviceInfo">
+                        <br>
+                        Serienummer: <input type="text" name="serialnr">
 
-                </div><br>
-                Info over reparatie: <br><textarea name="repairDescription" required></textarea><br><br>
+                    </div><br>
+                    Info over reparatie: <br><textarea name="repairDescription" required></textarea><br><br>
 
-                Oplader meegeleverd? <br><input type="radio" name="chargerIncluded" value="1" checked> Ja<br>
-                <input type="radio" name="chargerIncluded" value="0" > Nee<br><br>
+                    Oplader meegeleverd? <br><input type="radio" name="chargerIncluded" value="1" checked> Ja<br>
+                    <input type="radio" name="chargerIncluded" value="0" > Nee<br><br>
 
-                <input type="submit" name="reparatieToevoegen" class="btn btn-primary" value="Reparatie toevoegen">
-                <input type="hidden" name="nummer" value="<?php print( $_GET["nummer"]); ?>">
-            </form><br>
+                    <input type="submit" name="reparatieToevoegen" class="btn btn-primary" value="Reparatie toevoegen">
+                    <input type="hidden" name="nummer" value="<?php print( $_GET["nummer"]); ?>">
+                </form><br>
 
+            </div>
         </div>
 
         <script>
