@@ -32,7 +32,7 @@ if (isset($_GET["reparatieToevoegen"])) {
             $stmt5 = $pdo->prepare("INSERT INTO reparation(customerID, deviceID, description, chargerIncluded) VALUES (?, ?, ?, ?)");
             $stmt5->execute(array($_GET["nummer"], $maxDeviceID["MAX(deviceID)+1"], $_GET["repairDescription"], $_GET["chargerIncluded"]));
             $stmt6 = $pdo->prepare("INSERT INTO customer_device(customerID, deviceID)");
-            $stmt6->execute(array($_GET["nummer"], $_GET["MAX(deviceID)+1"]));
+            $stmt6->execute(array($_GET["nummer"], $maxDeviceID["MAX(deviceID)+1"]));
         }
     } elseif ($_GET["apparaat"] !== "select") {
         $stmt7 = $pdo->prepare("INSERT INTO reparation(customerID, deviceID, description, chargerIncluded) VALUES (?,?,?,?)");
