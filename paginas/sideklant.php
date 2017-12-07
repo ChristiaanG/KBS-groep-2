@@ -26,7 +26,18 @@
                     </ul>
 
                 </li>
+                <li>
+                    <a href="#"><i class="fa fa-user fa-fw"></i>account<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="mijnaccount.php">mijn account</a>
+                        </li>
+                        <li>
+                            <a href="bewerkaccount.php">bewerk account</a>
+                        </li>
+                    </ul>
 
+                </li>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

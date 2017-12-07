@@ -37,7 +37,7 @@ $pdo = NULL;
         <?php include 'nav.php'; ?>
     </head>
     <body>
-        <?php include 'siderepair.php'; ?>
+        <?php include 'sideklant.php'; ?>
         <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
