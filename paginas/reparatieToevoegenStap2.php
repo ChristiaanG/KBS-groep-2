@@ -40,9 +40,7 @@ if (isset($_GET["reparatieToevoegen"])) {
     }
 }
 
-if (isset($_GET["reparatieToevoegen"])) {
-    print($_GET["apparaat"]);
-}
+
 $pdo = NULL;
 ?>
 <html>
@@ -102,11 +100,6 @@ $pdo = NULL;
 
         </div>
 
-        <?php
-        if (isset($_GET["reparatieToevoegen"])) {
-            print($maxDeviceID["MAX(deviceID)+1"]);
-        }
-        ?>
         <script>
             function removeDeviceInfoForm() {
                 if (document.getElementById("apparaatSelect").value !== "select") {
