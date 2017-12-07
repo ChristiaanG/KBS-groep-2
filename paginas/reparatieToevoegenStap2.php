@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 
 <?php
-$pdo = new PDO("mysql:host=localhost; dbname=mydb; port=3306", "root", "");
+$pdo = new PDO("mysql:host=localhost; dbname=mydb2; port=3306", "root", "");
 
 $stmt = $pdo->prepare("SELECT * FROM customer WHERE customerID=?");
 $stmt->execute(array($_GET["nummer"]));
 $klant = $stmt->fetch();
 
-$stmt2 = $pdo->prepare("SELECT * FROM device d JOIN reparation r ON r.deviceID=d.deviceID WHERE customerID=?");
+$stmt2 = $pdo->prepare("SELECT DISTINCT d.deviceID, deviceInfo FROM device d JOIN reparation r ON r.deviceID=d.deviceID WHERE r.customerID=?");
 $stmt2->execute(array($_GET["nummer"]));
 $apparaat = $stmt2->fetchAll();
 
@@ -73,7 +73,7 @@ $pdo = NULL;
                         <option value="select">Selecteer een apparaat</option>
                         <?php
                         foreach ($apparaat as $a) {
-                            print("<option value=\"" . $a["deviceID"] . "\" name=\"" . $a["deviceID"] . "\">" . $a["deviceInfo"] . "</option>");
+                            print("<option value=\"" . $a["d.deviceID"] . "\" name=\"" . $a["d.deviceID"] . "\">" . $a["deviceInfo"] . "</option>");
                         }
                         ?>
                     </select>

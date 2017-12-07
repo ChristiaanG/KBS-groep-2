@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-$pdo = new PDO("mysql:host=localhost; dbname=mydb; port=3306", "root", "");
+$pdo = new PDO("mysql:host=localhost; dbname=mydb2; port=3306", "root", "");
 
 $stmt = $pdo->prepare("SELECT * FROM customer");
 $stmt->execute();
