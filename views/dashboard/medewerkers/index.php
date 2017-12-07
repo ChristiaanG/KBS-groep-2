@@ -132,7 +132,7 @@ if(!isset($_SESSION["loggedin"])) {
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href="../../src/login/Login.php?logout=true"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="../../../src/login/Login.php?logout=true"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
                 </ul>
             </li>

@@ -76,7 +76,7 @@ function approveUserAction()
         $stmt = $conn->prepare("UPDATE user SET approved = 1 WHERE username = ?");
         $stmt->execute(array($_POST["username"]));
 
-        return "<div class='alert alert-success'>" . $_POST['username'] . " heeft nu toegang tot het systeem. (herlaad de pagina om het resultaat te zien)</div>";
+        return "<div class='alert alert-success'>" . $_POST['username'] . " heeft nu toegang tot het systeem";
     } catch(PDOException $e) {
         return "<div class='alert alert-danger'>Error: " . $e->getMessage() . "</div>";
     }
@@ -90,7 +90,7 @@ function deleteUserAction()
         $stmt = $conn->prepare("DELETE FROM user WHERE username = ?");
         $stmt->execute(array($_POST["username"]));
 
-        return "<div class='alert alert-success'>" . $_POST['username'] . " is nu verwijderd uit het systeem. (herlaad de pagina om het resultaat te zien)</div>";
+        return "<div class='alert alert-success'>" . $_POST['username'] . " is nu verwijderd uit het systeem";
     } catch(PDOException $e) {
         return "<div class='alert alert-danger'>Error: " . $e->getMessage() . "</div>";
     }

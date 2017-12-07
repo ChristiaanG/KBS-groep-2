@@ -33,17 +33,25 @@ $secureimage = new Securimage();
         <?php
         }
     ?>
-    <form class="form-signin" method="post" action="../../src/login/Register.php">
-        <h2 class="form-signin-heading">Registreer</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" name="username" id="inputEmail" class="form-control" placeholder="Email address" autofocus="autofocus">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password">
-        <label for="inputName" class="sr-only">Name</label>
-        <input type="text" name="name" id="inputName" class="form-control" placeholder="Name" />
-        <?= $secureimage->getCaptchaHtml(); ?>
-        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="submit">Registreer</button>
+    <div class="loginForm">
+        <form class="form-signin" method="post" action="../../src/login/Register.php">
+            <div class="loginFormHeader">
+                <h2 class="form-signin-heading">Registreer</h2>
+            </div>
+            <div class="loginFormBody">
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input type="email" name="username" id="inputEmail" class="form-control" placeholder="Email address" autofocus="autofocus">
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password">
+                <label for="inputName" class="sr-only">Name</label>
+                <input type="text" name="name" id="inputName" class="form-control" placeholder="Name" />
+                <?= $secureimage->getCaptchaHtml(); ?>
+            </div>
+            <div class="loginFormFooter">
+                <button class="btn btn-lg btn-primary btn-signin" type="submit" name="submit">Registreer</button>
+            </div>
     </form>
+    </div>
 </div>
 </body>
 </html>

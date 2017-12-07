@@ -1,17 +1,19 @@
 /**
  * Created by Christiaan Goslinga on 29-11-2017.
  */
+$(document).ready(getUsers());
 
-$(document).ready(function() {
+function getUsers()
+{
     $.ajax({ url: window.location.protocol + "//" + window.location.host + "/windesheim/KBS-groep-2/src/users/User.php",
         data: {action: 'get'},
         type: 'post',
         success: function(result) {
             console.log(result);
-            $(".users").append(result);
+            $(".users").html(result);
         }
     });
-});
+}
 
 $(document).ready(function() {
     setTimeout(function() {
@@ -22,6 +24,7 @@ $(document).ready(function() {
                 type: 'post',
                 success: function(result) {
                     console.log(result);
+                    getUsers();
                     $(".message-body").html(result);
                 }
             });
@@ -34,6 +37,7 @@ $(document).ready(function() {
                 type: 'post',
                 success: function(result) {
                     console.log(result);
+                    getUsers();
                     $(".message-body").html(result);
                 }
             });
@@ -46,6 +50,7 @@ $(document).ready(function() {
                 type: 'post',
                 success: function(result) {
                     console.log(result);
+                    getUsers();
                     $(".message-body").html(result);
                 }
             });
