@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-$pdo = new PDO("mysql:host=localhost; dbname=mydb; port=3306", "root", "");
+$pdo = new PDO("mysql:host=localhost; dbname=mydb2; port=3306", "root", "");
 // Eerst toevoegen als daar op is geklikt
 // daarna pas alle klanten uit de database selecteren zodat je de toegevoegde klant ook ziet
 $stmt2 = $pdo->prepare("select * from reparation as r

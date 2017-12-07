@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-$pdo = new PDO("mysql:host=localhost; dbname=mydb; port=3306", "root", "");
+$pdo = new PDO("mysql:host=localhost; dbname=mydb2; port=3306", "root", "");
 if (isset($_GET["toevoegen"])) {
     $stmt = $pdo->prepare("INSERT INTO customer (first_name, last_name, address, city, email, phoneNr, cellphoneNr) VALUES(?,?,?,?,?,?,?)");
     $stmt->execute(array($_GET["voornaam"], $_GET["achternaam"], $_GET["adres"], $_GET["woonplaats"], $_GET["email"], $_GET["phonenr"], $_GET["cellphoneNr"]));
@@ -37,7 +37,7 @@ $pdo = NULL;
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">annuleer</button>
-                        <a class="btn btn-danger btn-ok">verwijder klant</a>
+                        <a class="btn btn-primary btn-ok">verwijder klant</a>
                     </div>
                 </div>
             </div>
@@ -48,58 +48,58 @@ $pdo = NULL;
                     <h3 align="center">Klant overzicht</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="col-md-12">
-                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                            <thead>
-                                <tr>
-                                    <td>klantnummer</td>
-                                    <td>naam</td>
-                                    <td>achternaam</td>
-                                    <td>adres</td>
-                                    <td>woonplaats</td>
-                                    <td> </td>
 
-                                    <td> </td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                foreach ($klanten as $klant) {
-                                    print("\n\t<tr>");
-                                    print("\n\t\t<td>" . $klant["customerID"] . "</td>");
-                                    print("\n\t\t<td>" . $klant["first_name"] . "</td>");
-                                    print("\n\t\t<td>" . $klant["last_name"] . "</td>");
-                                    print("\n\t\t<td>" . $klant["address"] . "</td>");
-                                    print("\n\t\t<td>" . $klant["city"] . "</td>");
-                                    print("<td><a href=\"klant.php?nummer=" . $klant["customerID"] . "\"class=\"btn btn-primary\" >ga naar klant</a></td>");
-                                    print("<td><a href=\"#\" data-href=\"verwijder.php?nummer=" . $klant["customerID"] . "\" data-toggle=\"modal\" data-target=\"#confirm-delete\" class=\"btn btn-primary\">Verwijder klant</a></td>");
-                                    print("\n\t</tr>");
-                                }
-                                ?></tbody>
-                            <script src="../js/jquery.min.js"></script>
-                            <script src="../js/bootstrap.min.js"></script>
-                            <script src="../js/metisMenu.min.js"></script>
-                            <script src="../js/dataTables/jquery.dataTables.min.js"></script>
-                            <script src="../js/dataTables/dataTables.bootstrap.min.js"></script>
-                            <script src="../js/startmin.js"></script>
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <td>klantnummer</td>
+                                <td>naam</td>
+                                <td>achternaam</td>
+                                <td>adres</td>
+                                <td>woonplaats</td>
+                                <td> </td>
 
-                            <script>
-                                $(document).ready(function () {
-                                    $('#dataTables-example').DataTable({
-                                        responsive: true
-                                    });
+                                <td> </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($klanten as $klant) {
+                                print("\n\t<tr>");
+                                print("\n\t\t<td>" . $klant["customerID"] . "</td>");
+                                print("\n\t\t<td>" . $klant["first_name"] . "</td>");
+                                print("\n\t\t<td>" . $klant["last_name"] . "</td>");
+                                print("\n\t\t<td>" . $klant["address"] . "</td>");
+                                print("\n\t\t<td>" . $klant["city"] . "</td>");
+                                print("<td><a href=\"klant.php?nummer=" . $klant["customerID"] . "\"class=\"btn btn-primary\" >ga naar klant</a></td>");
+                                print("<td><a href=\"#\" data-href=\"verwijder.php?nummer=" . $klant["customerID"] . "\" data-toggle=\"modal\" data-target=\"#confirm-delete\" class=\"btn btn-primary\">Verwijder klant</a></td>");
+                                print("\n\t</tr>");
+                            }
+                            ?></tbody>
+                        <script src="../js/jquery.min.js"></script>
+                        <script src="../js/bootstrap.min.js"></script>
+                        <script src="../js/metisMenu.min.js"></script>
+                        <script src="../js/dataTables/jquery.dataTables.min.js"></script>
+                        <script src="../js/dataTables/dataTables.bootstrap.min.js"></script>
+                        <script src="../js/startmin.js"></script>
+
+                        <script>
+                            $(document).ready(function () {
+                                $('#dataTables-example').DataTable({
+                                    responsive: true
                                 });
+                            });
 
-                            </script>
-                            <script>
-                                $('#confirm-delete').on('show.bs.modal', function (e) {
-                                    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-                                });
-                            </script>
-                        </table>
-                    </div>
+                        </script>
+                        <script>
+                            $('#confirm-delete').on('show.bs.modal', function (e) {
+                                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+                            });
+                        </script>
+                    </table>
                 </div>
             </div>
         </div>
+
     </body>
 </html>

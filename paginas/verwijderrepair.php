@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 if (isset($_GET["nummer"]))
-    $pdo = new PDO("mysql:host=localhost;dbname=mydb;port=3306", "root", "");
+    $pdo = new PDO("mysql:host=localhost;dbname=mydb2;port=3306", "root", "");
 $stmt = $pdo->prepare("update reparation set active=0 where repairID = ?");
 $stmt->execute(array($_GET["nummer"]));
 $pdo = NULL;

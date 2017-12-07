@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <?php
-$pdo = new PDO("mysql:host=localhost;dbname=mydb;port=3306", "root", "");
+$pdo = new PDO("mysql:host=localhost;dbname=mydb2;port=3306", "root", "");
 if (isset($_GET["nummer"])) {
     $nummer = $_GET["nummer"];
 }
