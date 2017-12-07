@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-        // put your code here
-        ?>
-    </body>
-</html>
+<?php
+
+//var_dump($_REQUEST);
+//
+//if (file_exists(__DIR__ . '/views/' . $_GET['path'] . '.php')) {
+//    include_once (__DIR__ . '/views/' . $_GET['path'] . '.php');
+//} else if (file_exists(__DIR__ . '/views/' . $_GET['path'] . 'index.php')) {
+//    include_once (__DIR__ . '/views/' . $_GET['path'] . 'index.php');
+//} else {
+//    // include 404
+//}
