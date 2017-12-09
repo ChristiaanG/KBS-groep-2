@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <?php
 $pdo = new PDO("mysql:host=localhost; dbname=mydb2; port=3306", "root", "");
-if (isset($_GET["toevoegen"])) {
-    $stmt = $pdo->prepare("INSERT INTO customer (first_name, last_name, address, city, email, phoneNr, cellphoneNr) VALUES(?,?,?,?,?,?,?)");
-    $stmt->execute(array($_GET["voornaam"], $_GET["achternaam"], $_GET["adres"], $_GET["woonplaats"], $_GET["email"], $_GET["phonenr"], $_GET["cellphoneNr"]));
+if (isset($_POST["toevoegen"])) {
+    $stmt = $pdo->prepare("INSERT INTO customer (first_name, last_name, address, city, email, phoneNr, cellphoneNr, description) VALUES(?,?,?,?,?,?,?,?)");
+    $stmt->execute(array($_POST["voornaam"], $_POST["achternaam"], $_POST["adres"], $_POST["woonplaats"], $_POST["email"], $_POST["phonenr"], $_POST["cellphoneNr"], $_POST["opmerking"]));
 }
+
+if (isset($_POST["foto"])) {
+
+    include 'uploadtest.php';
+}
+
 $stmt = $pdo->prepare("SELECT * FROM customer where active=1");
 $stmt->execute();
 $klanten = $stmt->fetchAll();

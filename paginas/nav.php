@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Klantenoverzicht v0.1</title>
+<title>project groep 2 ICTm1e</title>
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/metisMenu.min.css" rel="stylesheet">
 <link href="../css/startmin.css" rel="stylesheet">
