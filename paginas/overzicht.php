@@ -2,8 +2,8 @@
 <?php
 $pdo = new PDO("mysql:host=localhost; dbname=mydb2; port=3306", "root", "");
 if (isset($_POST["toevoegen"])) {
-    $stmt = $pdo->prepare("INSERT INTO customer (first_name, last_name, address, city, email, phoneNr, cellphoneNr, description) VALUES(?,?,?,?,?,?,?,?)");
-    $stmt->execute(array($_POST["voornaam"], $_POST["achternaam"], $_POST["adres"], $_POST["woonplaats"], $_POST["email"], $_POST["phonenr"], $_POST["cellphoneNr"], $_POST["opmerking"]));
+    $stmt = $pdo->prepare("INSERT INTO customer (comp_name, first_name, last_name, address, city, email, phoneNr, cellphoneNr, description) VALUES(?,?,?,?,?,?,?,?,?)");
+    $stmt->execute(array($_POST["compname"], $_POST["voornaam"], $_POST["achternaam"], $_POST["adres"], $_POST["woonplaats"], $_POST["email"], $_POST["phonenr"], $_POST["cellphoneNr"], $_POST["opmerking"]));
 }
 
 if (isset($_POST["foto"])) {
@@ -58,13 +58,12 @@ $pdo = NULL;
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
-
+                                <td>bedrijfsnaam</td>
                                 <td>naam</td>
                                 <td>achternaam</td>
                                 <td>adres</td>
                                 <td>woonplaats</td>
                                 <td> </td>
-
                                 <td> </td>
                             </tr>
                         </thead>
@@ -72,7 +71,7 @@ $pdo = NULL;
                             <?php
                             foreach ($klanten as $klant) {
                                 print("\n\t<tr>");
-
+                                print("\n\t\t<td>" . $klant["comp_name"] . "</td>");
                                 print("\n\t\t<td>" . $klant["first_name"] . "</td>");
                                 print("\n\t\t<td>" . $klant["last_name"] . "</td>");
                                 print("\n\t\t<td>" . $klant["address"] . "</td>");

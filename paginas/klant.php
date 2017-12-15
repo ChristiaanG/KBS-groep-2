@@ -10,8 +10,8 @@ if (isset($_POST["nummer"])) {
 }
 // eerst opslaan
 if (isset($_POST["voornaam"])) {
-    $stmt = $pdo->prepare("UPDATE customer SET first_name=?,  last_name=?, address=?, city=?, email=?, phoneNr=?, cellphoneNr=?,description=? WHERE customerID=?");
-    $stmt->execute(array($_POST["voornaam"], $_POST["achternaam"], $_POST["adres"], $_POST["city"], $_POST["email"], $_POST["phonenr"], $_POST["cellphoneNr"], $_POST["opmerking"], $_POST["customerid"]));
+    $stmt = $pdo->prepare("UPDATE customer SET comp_name=?, first_name=?,  last_name=?, address=?, city=?, email=?, phoneNr=?, cellphoneNr=?,description=? WHERE customerID=?");
+    $stmt->execute(array($_POST["compnaam"], $_POST["voornaam"], $_POST["achternaam"], $_POST["adres"], $_POST["city"], $_POST["email"], $_POST["phonenr"], $_POST["cellphoneNr"], $_POST["opmerking"], $_POST["customerid"]));
 }
 
 // daarna pas de klant uit de database selecteren zodat je de gewijzigde gegevens ziet
@@ -76,6 +76,8 @@ $pdo = NULL;
                             }
                             ?>
                             <div class="form-group col-xs-4 row">
+                                <label for="compnaam" class="col-2 col-form-label">bedrijfsnaam</label>
+                                <div id="compnaam" class="form-control" ><?php print($klant["comp_name"]); ?></div><br>
                                 <label for="voornaam" class="col-2 col-form-label">voornaam</label>
                                 <div id="voornaam" class="form-control" ><?php print($klant["first_name"]); ?></div><br>
                                 <label for="achternaam" class="col-2 col-form-label">achternaam</label>

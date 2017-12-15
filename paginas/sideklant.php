@@ -3,7 +3,19 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="index.php"><i class="fa  fa-tachometer fa-fw"></i>dashboard</a>
+                    <a href="#"><i class="fa fa-tachometer fa-fw"></i> dashboard<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="index.php">home</a>
+                        </li>
+                        <li>
+                            <a href="repairstats.php">reparatie stats</a>
+                        </li>
+                        <li>
+                            <a href="klantstats.php">klant stats</a>
+                        </li>
+                    </ul>
+
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-users fa-fw"></i> klanten<span class="fa arrow"></span></a>

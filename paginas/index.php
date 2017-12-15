@@ -129,13 +129,9 @@ $checkedrepairs = $stmt1->fetch();
                     </div>
                 </div>
             </div>
-            <?php include 'piechart.php'; ?>
+            <h1>statistieken over reparaties</h1>
             <?php include 'barchartmaand.php'; ?>
-            <?php include 'barchartklantwoonplaats.php'; ?>
-            <div id="piechart"></div>
             <div id="chart_div"></div>
-            <div id="chart_woonplaats"></div>
-
         </div>
     </body>
 </html>

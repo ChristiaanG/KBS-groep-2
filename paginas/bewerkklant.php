@@ -32,6 +32,8 @@ $pdo = NULL;
                         <form action="klant.php" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="nummer" value="<?php print( $_GET["nummer"]); ?>">
                             <input type="hidden" name="customerid" value="<?php print( $_GET["nummer"]); ?>">
+                            <label for="compnaam" class="col-2 col-form-label">bedrijfsnaam</label>
+                            <div><input type="text" id="compnaam" class="form-control" name="compnaam" value="<?php print($klant["comp_name"]); ?>"></div><br>
                             <label for="voornaam" class="col-2 col-form-label">voornaam</label>
                             <div><input type="text" id="voornaam" class="form-control" name="voornaam" value="<?php print($klant["first_name"]); ?>"></div><br>
                             <label for="achternaam" class="col-2 col-form-label">achternaam</label>
