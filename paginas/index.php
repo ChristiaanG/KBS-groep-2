@@ -23,9 +23,6 @@ $checkedrepairs = $stmt1->fetch();
         <meta charset="UTF-8">
         <?php
         include 'nav.php';
-        include("class/pData.class.php");
-        include("class/pDraw.class.php");
-        include("class/pImage.class.php");
         ?>
     </head>
     <body>
@@ -133,10 +130,11 @@ $checkedrepairs = $stmt1->fetch();
                 </div>
             </div>
             <?php include 'piechart.php'; ?>
-            <?php include 'barchart.php'; ?>
+            <?php include 'barchartmaand.php'; ?>
+            <?php include 'barchartklantwoonplaats.php'; ?>
             <div id="piechart"></div>
             <div id="chart_div"></div>
-
+            <div id="chart_woonplaats"></div>
 
         </div>
     </body>
