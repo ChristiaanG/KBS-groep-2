@@ -31,7 +31,7 @@ if (isset($_GET["reparatieToevoegen"])) {
             $stmt4->execute(array($_GET["category"], $_GET["deviceInfo"], $_GET["serialnr"]));
             $stmt5 = $pdo->prepare("INSERT INTO reparation(customerID, deviceID, description, chargerIncluded) VALUES (?, ?, ?, ?)");
             $stmt5->execute(array($_GET["nummer"], $maxDeviceID["MAX(deviceID)+1"], $_GET["repairDescription"], $_GET["chargerIncluded"]));
-            $stmt6 = $pdo->prepare("INSERT INTO customer_device(customerID, deviceID)");
+            $stmt6 = $pdo->prepare("INSERT INTO customer_device(customerID, deviceID) VALUES (?, ?)");
             $stmt6->execute(array($_GET["nummer"], $maxDeviceID["MAX(deviceID)+1"]));
         }
     } elseif ($_GET["apparaat"] !== "select") {
@@ -62,46 +62,65 @@ $pdo = NULL;
         <div id="page-wrapper">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 align="center">Reparatie toevoegen v0.1</h3>
+                    <h3>Reparatie toevoegen voor <?php print($klant["first_name"] . " " . $klant["last_name"]); ?></h3>
                 </div>
-                <h4>Reparatie toevoegen voor <?php print($klant["first_name"] . " " . $klant["last_name"]); ?></h4><br>
-                <?php ?>
-                <h4>Apparaat selecteren:</h4>
+                <div class="panel-body">
+                    <form action="reparatieToevoegenStap2.php" method="get">
+                        <div class="form-group col-xs-4 row">
+                            <label for="apparaatSelect" class="col-2 col-form-label">apparaat selecteren</label>
+                            <select id="apparaatSelect" name="apparaat" onchange="removeDeviceInfoForm()">
+                                <option value="select">Selecteer een apparaat</option>
+                                <?php
+                                foreach ($apparaat as $a) {
+                                    print("<option value=\"" . $a["d.deviceID"] . "\" name=\"" . $a["d.deviceID"] . "\">" . $a["deviceInfo"] . "</option>");
+                                }
+                                ?>
+                            </select>
+                            <input type="hidden" name="nummer" value="<?php print( $_GET["nummer"]); ?>">
+                        </div>
 
-                <form action="reparatieToevoegenStap2.php" method="get">
-                    <select id="apparaatSelect" name="apparaat" onchange="removeDeviceInfoForm()">
-                        <option value="select">Selecteer een apparaat</option>
-                        <?php
-                        foreach ($apparaat as $a) {
-                            print("<option value=\"" . $a["d.deviceID"] . "\" name=\"" . $a["d.deviceID"] . "\">" . $a["deviceInfo"] . "</option>");
-                        }
-                        ?>
-                    </select>
-                    <input type="hidden" name="nummer" value="<?php print( $_GET["nummer"]); ?>">
-                    <br>
-                    <div id="apparaatInvullen">
-                        <h4>Categorie van apparaat: </h4>
-                        <select name="category">
-                            <?php
-                            foreach ($categorie as $c) {
-                                print("<option value=\"" . $c["categoryID"] . "\" name=\"" . $c["categoryID"] . "\">" . $c["categoryID"] . ". " . $c["name"] . "</option>");
-                            }
-                            ?>
-                        </select><br><br>
-                        Naam van apparaat: <input type="text" name="deviceInfo">
-                        <br>
-                        Serienummer: <input type="text" name="serialnr">
+                        <div class="form-group col-xs-4 row center-block" >
+                            <label for="reparatiebeschrijving" class="col-2 col-form-label">reparatie beschrijving</label>
+                            <div><textarea rows="4" class="form-control" id="reparatiebeschrijving" name="repairDescription" required ></textarea></div>
 
-                    </div><br>
-                    Info over reparatie: <br><textarea name="repairDescription" required></textarea><br><br>
+                            <br>
+                            <label for="reparatielader" class="col-2 col-form-label">oplader meegeleverd?</label>
+                            <br>
+                            <input type="radio" id='reparatielader' name="chargerIncluded" value="1" checked> Ja<br>
+                            <input type="radio" name="chargerIncluded" value="0" > Nee
 
-                    Oplader meegeleverd? <br><input type="radio" name="chargerIncluded" value="1" checked> Ja<br>
-                    <input type="radio" name="chargerIncluded" value="0" > Nee<br><br>
 
+                            <input type="hidden" name="nummer" value="<?php print( $_GET["nummer"]); ?>">
+
+                        </div>
+                        <div class="form-group col-xs-4 row" >
+                            <div id="apparaatInvullen">
+                                <label for="apparaat" class="col-2 col-form-label">apparaat catagorie selecteren</label>
+                                <select id="apparaat" name="category">
+                                    <?php
+                                    foreach ($categorie as $c) {
+                                        print("<option value=\"" . $c["categoryID"] . "\" name=\"" . $c["categoryID"] . "\">" . $c["categoryID"] . ". " . $c["name"] . "</option>");
+                                    }
+                                    ?>
+                                </select><br><br>
+
+                                <label for="apparaatNaam" class="col-2 col-form-label">naam apparaat</label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" name="deviceInfo" id="apparaatNaam">
+                                </div>
+                                <br>
+                                <label for="apparaatSerie" class="col-2 col-form-label">serienummer apparaat</label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" name="serialnr" id="apparaatSerie">
+                                </div>
+                            </div><br>
+                        </div>
+                </div>
+                <div class="panel-footer ">
                     <input type="submit" name="reparatieToevoegen" class="btn btn-primary" value="Reparatie toevoegen">
-                    <input type="hidden" name="nummer" value="<?php print( $_GET["nummer"]); ?>">
-                </form><br>
+                    </form>
 
+                </div>
             </div>
         </div>
 
@@ -125,13 +144,5 @@ $pdo = NULL;
         <script src="../js/dataTables/jquery.dataTables.min.js"></script>
         <script src="../js/dataTables/dataTables.bootstrap.min.js"></script>
         <script src="../js/startmin.js"></script>
-
-        <script>
-            $(document).ready(function () {
-                $('#dataTables-example').DataTable({
-                    responsive: true
-                });
-            });
-        </script>
     </body>
 </html>

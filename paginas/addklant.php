@@ -37,17 +37,17 @@ $nieuwnummer = $klanten["max(customerID)"] + 1;
                                 <br>
                                 <label for="email" class="col-2 col-form-label">email adres</label>
                                 <div>
-                                    <input class="form-control" type="text" name="email" id="email" required>
+                                    <input class="form-control" type="email" name="email" id="email" required>
                                 </div>
                                 <br>
                                 <label for="phonenr" class="col-2 col-form-label">telefoonnummer</label>
                                 <div class="col-10">
-                                    <input class="form-control" type="text" name="phonenr" id="phonenr" required>
+                                    <input class="form-control" type="tel" name="phonenr" id="phonenr" required>
                                 </div>
                                 <br>
                                 <label for="cellphoneNr" class="col-2 col-form-label">telefoonnummer 2 <i>(optioneel)</i></label>
                                 <div class="col-10">
-                                    <input class="form-control" type="text" name="cellphoneNr" id="cellphoneNr">
+                                    <input class="form-control" type="tel" name="cellphoneNr" id="cellphoneNr">
                                 </div>
                                 <br>
                                 <input  type="submit" name="toevoegen" class="btn btn-primary" value="Toevoegen">

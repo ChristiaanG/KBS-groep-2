@@ -45,21 +45,36 @@ $pdo = NULL;
     </head>
     <body>
         <?php include 'sideklant.php'; ?>
+        <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>weet uw het zeker?</h3>
+                    </div>
+                    <div class="modal-body">
+                        het verwijderen van een reperatie kan niet terug gedraaid worden
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">annuleer</button>
+                        <a class="btn btn-primary btn-ok">verwijder reperatie</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="page-wrapper"
-
              <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3>de klantgegevens van <?php print ($klant["first_name"] . " " . $klant["last_name"]); ?></h3>
                         </div>
-                        <?php
-                        if (isset($_POST["foto"])) {
-
-                            include 'uploadtest.php';
-                        }
-                        ?>
                         <div class="panel-body">
+                            <?php
+                            if (isset($_POST["foto"])) {
+
+                                include 'uploadtest.php';
+                            }
+                            ?>
                             <div class="form-group col-xs-4 row">
                                 <label for="voornaam" class="col-2 col-form-label">voornaam</label>
                                 <div id="voornaam" class="form-control" ><?php print($klant["first_name"]); ?></div><br>
@@ -107,6 +122,7 @@ $pdo = NULL;
                                         <td>beschrijving</td>
                                         <td>datum toegevoegd</td>
                                         <td> </td>
+                                        <td> </td>
 
                                     </tr>
                                 </thead>
@@ -121,6 +137,7 @@ $pdo = NULL;
                                         print("\n\t\t<td>" . $r["description"] . "</td>");
                                         print("\n\t\t<td>" . $r["daterepair"] . "</td>");
                                         print("<td><a href=\"repair.php?nummer=" . $r["repairID"] . "\"class=\"btn btn-primary\">ga naar reparatie</a></td>");
+                                        print("<td><a href=\"#\" data-href=\"verwijderrepair.php?nummer=" . $r["repairID"] . "\" data-toggle=\"modal\" data-target=\"#confirm-delete\" class=\"btn btn-primary\">Verwijder reparatie</a></td>");
                                         print("\n\t</tr>");
                                     }
                                     ?>
@@ -149,6 +166,12 @@ $pdo = NULL;
                     $('#dataTables-example').DataTable({
                         responsive: true
                     });
+                });
+            </script>
+
+            <script>
+                $('#confirm-delete').on('show.bs.modal', function (e) {
+                    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
                 });
             </script>
         </div>

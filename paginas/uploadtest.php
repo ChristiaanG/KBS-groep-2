@@ -3,10 +3,12 @@
 <?php
 
 $info = pathinfo($_FILES['fileToUpload']['name']);
-$ext = $info['extension']; // hier checkt hij de extentie van de file
-$newname = $_POST["nummer"] . "." . $ext;
+if (isset($info)) {
+    $ext = $info['extension']; // hier checkt hij de extentie van de file
+    $newname = $_POST["nummer"] . "." . $ext;
 
-$target = '../klant/' . $newname;
+    $target = '../klant/' . $newname;
+}
 if ($ext != "jpg") {
     print ("<h3>het bestand dat uw heeft gekozen is geen .jpg foto.</h3><br>");
     print("<a href=\"bewerkklant.php?nummer=" . $_POST["nummer"] . "\"class=\"btn btn-primary\">terug naar bewerk klant</a>");

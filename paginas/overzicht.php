@@ -58,7 +58,7 @@ $pdo = NULL;
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
-                                <td>klantnummer</td>
+
                                 <td>naam</td>
                                 <td>achternaam</td>
                                 <td>adres</td>
@@ -72,7 +72,7 @@ $pdo = NULL;
                             <?php
                             foreach ($klanten as $klant) {
                                 print("\n\t<tr>");
-                                print("\n\t\t<td>" . $klant["customerID"] . "</td>");
+
                                 print("\n\t\t<td>" . $klant["first_name"] . "</td>");
                                 print("\n\t\t<td>" . $klant["last_name"] . "</td>");
                                 print("\n\t\t<td>" . $klant["address"] . "</td>");

@@ -25,7 +25,7 @@ $pdo = NULL;
 
     </head>
     <body>
-        <?php include 'siderepair.php'; ?>
+        <?php include 'sideklant.php'; ?>
         <div id="page-wrapper" class="container">
             <div class="panel panel-primary">
                 <div class="panel-heading">
