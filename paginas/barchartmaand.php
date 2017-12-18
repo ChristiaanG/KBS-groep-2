@@ -24,7 +24,7 @@ group by jaar,maand;");
                 ['maand', 'aantal reparaties', ],
 <?php
 foreach ($monthlyrepair as $barchart) {
-    print("['" . $barchart["maand"] . "de maand van " . $barchart["jaar"] . "'," . " " . $barchart["aantal"] . "],");
+    print("['" . $barchart["maand"] . "e maand van " . $barchart["jaar"] . "'," . " " . $barchart["aantal"] . "],");
 }
 ?>
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+[12:49, 18-12-2017] Steffan Verlaan: <!DOCTYPE html>
 
 <?php
 $pdo = new PDO("mysql:host=localhost; dbname=mydb2; port=3306", "root", "");
@@ -22,16 +22,12 @@ $maxDeviceID = $stmtMax->fetch();
 
 if (isset($_GET["reparatieToevoegen"])) {
     if ($_GET["apparaat"] == "select") {
-        if ($_GET["deviceInfo"] == "" || $_GET["serialnr"] == "") {
-            print("<div class='alert alert-danger'>
-    <strong>Vul a.u.b alles in</strong>
-  </div>");
-        } else {
+        if ($_GET["deviceInfo"] !== "" && $_GET["serialnr"] !== "") {
             $stmt4 = $pdo->prepare("INSERT INTO device (categoryID, deviceInfo, serialnr) VALUES (?, ?, ?)");
             $stmt4->execute(array($_GET["category"], $_GET["deviceInfo"], $_GET["serialnr"]));
             $stmt5 = $pdo->prepare("INSERT INTO reparation(customerID, deviceID, description, chargerIncluded) VALUES (?, ?, ?, ?)");
             $stmt5->execute(array($_GET["nummer"], $maxDeviceID["MAX(deviceID)+1"], $_GET["repairDescription"], $_GET["chargerIncluded"]));
-            $stmt6 = $pdo->prepare("INSERT INTO customer_device(customerID, deviceID) VALUES (?, ?)");
+            $stmt6 = $pdo->prepare("INSERT INTO customer_device(customerID, deviceID) VALUES(?, ?)");
             $stmt6->execute(array($_GET["nummer"], $maxDeviceID["MAX(deviceID)+1"]));
         }
     } elseif ($_GET["apparaat"] !== "select") {
@@ -39,7 +35,6 @@ if (isset($_GET["reparatieToevoegen"])) {
         $stmt7->execute(array($_GET["nummer"], $_GET["apparaat"], $_GET["repairDescription"], $_GET["chargerIncluded"]));
     }
 }
-
 
 $pdo = NULL;
 ?>
@@ -65,6 +60,15 @@ $pdo = NULL;
                     <h3>Reparatie toevoegen voor <?php print($klant["first_name"] . " " . $klant["last_name"]); ?></h3>
                 </div>
                 <div class="panel-body">
+                    <?php
+                    if (isset($_GET["reparatieToevoegen"])) {
+                        if ($_GET["apparaat"] == "select") {
+                            if ($_GET["deviceInfo"] == "" || $_GET["serialnr"] == "") {
+                                print("<div class='alert alert-danger'><strong>Vul a.u.b alles in</strong></div>");
+                            }
+                        }
+                    }
+                    ?>
                     <form action="reparatieToevoegenStap2.php" method="get">
                         <div class="form-group col-xs-4 row">
                             <label for="apparaatSelect" class="col-2 col-form-label">apparaat selecteren</label>
@@ -72,7 +76,7 @@ $pdo = NULL;
                                 <option value="select">Selecteer een apparaat</option>
                                 <?php
                                 foreach ($apparaat as $a) {
-                                    print("<option value=\"" . $a["d.deviceID"] . "\" name=\"" . $a["d.deviceID"] . "\">" . $a["deviceInfo"] . "</option>");
+                                    print("<option value=\"" . $a["deviceID"] . "\">" . $a["deviceInfo"] . "</option>");
                                 }
                                 ?>
                             </select>
@@ -95,11 +99,11 @@ $pdo = NULL;
                         </div>
                         <div class="form-group col-xs-4 row" >
                             <div id="apparaatInvullen">
-                                <label for="apparaat" class="col-2 col-form-label">apparaat catagorie selecteren</label>
+                                <label for="apparaat" class="col-2 col-form-label">apparaat categorie selecteren</label>
                                 <select id="apparaat" name="category">
                                     <?php
                                     foreach ($categorie as $c) {
-                                        print("<option value=\"" . $c["categoryID"] . "\" name=\"" . $c["categoryID"] . "\">" . $c["categoryID"] . ". " . $c["name"] . "</option>");
+                                        print("<option value=\"" . $c["categoryID"] . "\">" . $c["categoryID"] . ". " . $c["name"] . "</option>");
                                     }
                                     ?>
                                 </select><br><br>
@@ -144,5 +148,13 @@ $pdo = NULL;
         <script src="../js/dataTables/jquery.dataTables.min.js"></script>
         <script src="../js/dataTables/dataTables.bootstrap.min.js"></script>
         <script src="../js/startmin.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('#dataTables-example').DataTable({
+                    responsive: true
+                });
+            });
+        </script>
     </body>
 </html>
