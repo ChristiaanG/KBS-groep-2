@@ -15,29 +15,63 @@ function loginAction()
         header('Location: ' . $_POST["redirect"]);
         die();
     } else {
-        $config = config();
+        try {
+            $username = $_POST["username"];
+            $password = $_POST["password"];
+            $conn = getDbConnection();
 
-        $username = $_POST["username"];
-        $password = $_POST["password"];
+            $stmt = $conn->prepare("SELECT * FROM user WHERE username = ? AND password = ?");
+            $stmt->execute(array($username, $password));
+            $result = $stmt->fetch();
 
-        $con = getDbConnection();
+            session_start();
 
-        $sql = "SELECT username FROM user WHERE username = '" . $username . "' AND password = '" . $password . "'";
+            $config = config();
 
-        if (mysqli_query($con, $sql)) {
-            $_SESSION["loggedin"] = true;
-            $_SESSION["username"] = $username;
-            header("Location: " . $config["home"]);
-            die();
-        } else {
-            $_SESSION["loginfailed"] = "U heeft uw gebruikersnaam en/of wachtwoord fout ingevoerd";
-            header("Location: " . $_POST["redirect"]);
+            if ($result["username"] == $username && $result["approved"] == true) {
+                $conn = null;
+
+                if($result["function"] == "admin" || $result["function"] == "medewerker" && $result["2fa_enabled"] == false) {
+                    header("Location: " . $config["2fa"]);
+                    die();
+                }
+
+                $_SESSION["loggedin"] = true;
+                $_SESSION["username"] = $username;
+                header("Location: " . $config["home"]);
+                die();
+            } elseif($result["approved"] == false) {
+                $conn = null;
+                $_SESSION["loginfailed"] = "Uw account is nog niet geactiveerd door de administrator";
+                header("Location: " . $_SERVER['HTTP_REFERER']);
+                die();
+            } else {
+                $conn = null;
+                $_SESSION["loginfailed"] = "U heeft uw gebruikersnaam en/of wachtwoord fout ingevoerd";
+                header("Location: " . $_SERVER['HTTP_REFERER']);
+                die();
+            }
+        } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
             die();
         }
     }
 }
 
-if(isset($_POST['submit']))
+function logoutAction()
 {
+    session_start();
+    session_unset();
+    session_destroy();
+
+    $config = config();
+
+    header("Location: " . $config["login"]);
+    die();
+}
+
+if(isset($_POST['submit'])) {
     loginAction();
+} elseif($_GET["logout"] = true) {
+    logoutAction();
 }
