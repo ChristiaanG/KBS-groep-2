@@ -2,18 +2,21 @@
 
 <?php
 session_start();
+
+$_SESSION["username"] = "test@test.nl";
+
 $pdo = new PDO("mysql:host=localhost;dbname=mydb;port=3306", "root", "");
 
-$stmt = $pdo->prepare("SELECT * FROM user WHERE username= 'test@test.nl'");
+$stmt = $pdo->prepare("SELECT * FROM user WHERE username='" . $_SESSION["username"] . "'");
 $stmt->execute();
 $user = $stmt->fetch();
 
     $stmt2 = $pdo->prepare("SELECT c.name as category, d.serialnr, deviceinfo, repairID, description FROM reparation as r
 JOIN device as d on r.deviceID=d.deviceID
-JOIN category as c on d.categoryID=c.categoryID WHERE repairedBy = 'test@test.nl'");
+JOIN category as c on d.categoryID=c.categoryID WHERE repairedBy = '".$_SESSION["username"] . "'");
 $stmt2->execute();
 $reparation = $stmt2->fetchall();
-$stmt3 = $pdo->prepare("SELECT count(*) FROM reparation WHERE repairedBy='test@test.nl'");
+$stmt3 = $pdo->prepare("SELECT count(*) FROM reparation WHERE repairedBy='".$_SESSION["username"] . "'");
 $stmt3->execute();
 $totallrepairs = $stmt3->fetch();
 
@@ -30,7 +33,7 @@ if(isset($_POST["opslaanpass"])) {
         }
      else {
            $hasholdpass = password_hash($_POST["password"], PASSWORD_BCRYPT);
-    $stmt = $pdo->prepare("UPDATE `user` SET `password`=? WHERE `user`.`username`='test@test.nl'");
+    $stmt = $pdo->prepare("UPDATE `user` SET `password`=? WHERE `user`.`username`='".$_SESSION["username"] . "'");
     $stmt->execute(array($hasholdpass));
     unset($_POST["password2"]);
 }}} else {$_SESSION["validoldpass"] = "Oude password niet correct";
@@ -39,18 +42,18 @@ if(isset($_POST["opslaanpass"])) {
             
 }
 if (isset($_POST["opslaan"])) {
-    $stmt = $pdo->prepare("UPDATE `user` SET `name`=? WHERE `user`.`username`='test@test.nl'");
+    $stmt = $pdo->prepare("UPDATE `user` SET `name`=? WHERE `user`.`username`='".$_SESSION["username"] . "'");
     $stmt->execute(array($_POST["name"]));
 }
 
 
 
 // daarna pas de user uit de database selecteren zodat je de gewijzigde gegevens ziet
-$stmt = $pdo->prepare("SELECT * FROM user WHERE username= \"test@test.nl\"");
+$stmt = $pdo->prepare("SELECT * FROM user WHERE username='".$_SESSION["username"] . "'");
 $stmt->execute();
 $user = $stmt->fetch();
 $pdo = NULL;
-$_POST["username"] = "test@test.nl"
+$_POST["username"] = $_SESSION["username"]
 
 ?>
 

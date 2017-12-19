@@ -2,7 +2,7 @@
 <?php
 session_start();
 $pdo = new PDO("mysql:host=localhost;dbname=mydb;port=3306", "root", "");
-$stmt = $pdo->prepare("SELECT * FROM user WHERE username=\"test@test.nl\"");
+$stmt = $pdo->prepare("SELECT * FROM user WHERE username=".$_SESSION["username"]);
 $stmt->execute();
 $user = $stmt->fetch();
 
