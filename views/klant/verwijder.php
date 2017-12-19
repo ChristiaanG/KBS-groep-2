@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php
+session_start();
+
+include_once "../../src/login/check/CheckNotLoggedIn.php"
+?>
 <?php
 if (isset($_GET["nummer"]))
     include_once "../../config/Database.php";

@@ -1,14 +1,7 @@
 <?php
 session_start();
 
-if(isset($_SESSION["loggedin"])) {
-    include_once "../../config/Config.php";
-
-    $config = config();
-
-    header("Location: " . $config["home"]);
-    die();
-}
+include_once "../../src/login/check/CheckLoggedIn.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,25 +16,40 @@ if(isset($_SESSION["loggedin"])) {
 </head>
 <body>
     <div class="container">
-
         <?php
             if(isset($_SESSION["loginfailed"])) {
         ?>
             <div class="alert alert-danger">
-                <?php echo $_SESSION["loginfailed"]; ?>
+                <?php
+                    echo $_SESSION["loginfailed"];
+                    $_SESSION['loginfailed'] = NULL;
+                ?>
             </div>
         <?php
             }
         ?>
-        <form class="form-signin" method="post" action="../../src/login/Login.php">
-        <h2 class="form-signin-heading">Login</h2>
-            <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" name="username" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="submit">Login</button>
-        </form>
-
+        <div class="loginForm">
+            <form class="form-signin" method="post" action="../../src/login/Login.php">
+                <div class="loginFormHeader">
+                    Login
+                </div>
+                <div class="loginFormBody">
+                    <label for="inputUsername">Gebruikersnaam</label>
+                    <input type="email" name="username" id="inputUsername" class="form-control" placeholder="voorbeeld@domein.com" autofocus="autofocus">
+                    <label for="inputPassword">Wachtwoord</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Wachtwoord">
+                </div>
+                <div class="loginFormFooter">
+                    <div class="passwordForgot">
+                        <a href="forgot-password.php">Bent u uw wachtwoord vergeten?</a>
+                    </div>
+                    <div class="loginButton">
+                        <button class="btn btn-lg btn-primary btn-signin" type="submit" name="submit">Login</button>
+                    </div>
+                    <div style="clear: both;"></div>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>

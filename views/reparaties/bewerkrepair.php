@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php
+session_start();
+
+include_once "../../src/login/check/CheckNotLoggedIn.php"
+?><!DOCTYPE html>
 <?php
 include_once "../../config/Database.php";
 $pdo = getDbConnection();

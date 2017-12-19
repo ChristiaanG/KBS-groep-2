@@ -65,7 +65,7 @@ $pdo = NULL;
                                 </div>
                             </div>
                         </div>
-                        <a href="repairoverzicht.php">
+                        <a href="../reparaties/repairoverzicht.php">
                             <div class="panel-footer">
                                 <span class="pull-left">ga naar overzicht</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -88,7 +88,7 @@ $pdo = NULL;
                                 </div>
                             </div>
                         </div>
-                        <a href="repaircheckedoverzicht.php">
+                        <a href="../reparaties/repaircheckedoverzicht.php">
                             <div class="panel-footer">
                                 <span class="pull-left">ga naar overzicht</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -111,7 +111,7 @@ $pdo = NULL;
                                 </div>
                             </div>
                         </div>
-                        <a href="repairuncheckedoverzicht.php">
+                        <a href="../reparaties/repairuncheckedoverzicht.php">
                             <div class="panel-footer">
                                 <span class="pull-left">ga naar overzicht</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -130,11 +130,11 @@ $pdo = NULL;
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><?php print($unfinishedrepairs["count(*)"]); ?></div>
-                                    <div>openstaande reparaties</div>
+                                    <div>openstaande onbehandelde reparaties</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="repairidleoverzicht.php">
+                        <a href="../reparaties/repairidleoverzicht.php">
                             <div class="panel-footer">
                                 <span class="pull-left">ga naar overzicht</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

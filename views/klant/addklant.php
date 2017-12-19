@@ -1,4 +1,9 @@
 <?php
+session_start();
+
+include_once "../../src/login/check/CheckNotLoggedIn.php"
+?>
+<?php
 //hier wordt het hoogste klantnummer opgehaald en er word 1 bij opgeteld.
 // zodat ik deze als filename kan gebruiken voor de foto die eventueel wordt geupload.
 include_once "../../config/Database.php";

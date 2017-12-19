@@ -1,14 +1,10 @@
 <?php
 session_start();
 
-if(isset($_SESSION["loggedin"])) {
-    include_once "../../config/Config.php";
+include_once "../../src/login/check/CheckLoggedIn.php";
+require_once '../../lib/securimage/securimage.php';
 
-    $config = config();
-
-    header("Location: " . $config["home"]);
-    die();
-}
+$secureimage = new Securimage();
 ?>
 
 <!DOCTYPE html>
@@ -25,17 +21,39 @@ if(isset($_SESSION["loggedin"])) {
 </head>
 <body>
 <div class="container">
-
-    <form class="form-signin" method="post" action="../../src/login/Register.php">
-        <h2 class="form-signin-heading">Registreer</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" name="username" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-        <label for="inputName" class="sr-only">Name</label>
-        <input type="text" name="name" id="inputName" class="form-control" placeholder="Name" required" />
-        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="submit">Registreer</button>
+    <?php
+        if(isset($_SESSION["registerfailed"])) {
+    ?>
+        <div class="alert alert-danger">
+            <?php
+                echo $_SESSION["registerfailed"];
+                $_SESSION['registerfailed'] = NULL;
+            ?>
+        </div>
+        <?php
+        }
+    ?>
+    <div class="loginForm">
+        <form class="form-signin" method="post" action="../../src/login/Register.php">
+            <div class="loginFormHeader">
+                <h2 class="form-signin-heading">Registreer</h2>
+            </div>
+            <div class="loginFormBody">
+                <label for="inputEmail">Email addres</label>
+                <input type="email" name="username" id="inputEmail" class="form-control" value="<?= (isset($_SESSION['username']) ? $_SESSION['username'] : '') ?>" placeholder="Email address" autofocus="autofocus">
+                <label for="inputName">Naam</label>
+                <input type="text" name="name" id="inputName" class="form-control" value="<?= (isset($_SESSION['name']) ? $_SESSION['name'] : '') ?>" placeholder="Naam" />
+                <label for="inputPassword">Wachtwoord</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Wachtwoord">
+                <label for="inputPasswordRepeat">Wachtwoord herhalen</label>
+                <input type="password" name="passwordRepeat" id="inputPasswordRepeat" class="form-control" placeholder="Wachtwoord herhalen" autofocus="">
+                <?= $secureimage->getCaptchaHtml(); ?>
+            </div>
+            <div class="loginFormFooter">
+                <button class="btn btn-lg btn-primary btn-signin" type="submit" name="submit">Registreer</button>
+            </div>
     </form>
+    </div>
 </div>
 </body>
 </html>

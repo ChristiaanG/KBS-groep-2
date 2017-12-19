@@ -3,8 +3,8 @@
 session_start();
 include_once "../../config/Database.php";
 $pdo = getDbConnection();
-$stmt = $pdo->prepare("SELECT * FROM user WHERE username=\"test@test.nl\"");
-$stmt->execute();
+$stmt = $pdo->prepare("SELECT * FROM user WHERE username= ?");
+$stmt->execute(array($_SESSION["username"]));
 $user = $stmt->fetch();
 
 $pdo = NULL;

@@ -1,4 +1,17 @@
-<!DOCTYPE html>
+<?php
+session_start();
+
+echo $_SESSION["username"];
+
+if (!isset($_SESSION["loggedin"])) {
+    include_once "../../config/Config.php";
+
+    $config = config();
+
+    header("Location: " . $config["login"]);
+    die();
+}
+?><!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates

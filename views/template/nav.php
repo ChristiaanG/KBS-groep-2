@@ -22,13 +22,15 @@
     <ul class="nav navbar-nav navbar-left navbar-top-links">
         <li><a href="../klant/overzicht.php"><i class="fa fa-users  fa-fw"></i>klanten</a></li>
     </ul>
+    <?php if ($_SESSION["function"] == "admin") { ?>
+        <ul class="nav navbar-nav navbar-left navbar-top-links">
+            <li><a href="../medewerkers/index.php"><i class="fa fa-edit  fa-fw"></i>beheerpaneel</a></li>
 
-    <ul class="nav navbar-nav navbar-left navbar-top-links">
-        <li><a href="../dashboard/admin.php"><i class="fa fa-edit  fa-fw"></i>beheerpaneel</a></li>
-        <li class="divider"></li>
-    </ul>
+        </ul>
+    <?php } ?>
     <ul class="nav navbar-nav navbar-right navbar-top-links">
-        <li><a href="../dashboard/mijnaccount.php"><i class="fa fa-user  fa-fw"></i>Mijn Account</a></li>
+        <li><a href="../dashboard/mijnaccount.php"><i class="fa fa-user  fa-fw"></i><?php echo $_SESSION["username"] ?></a></li>
     </ul>
+
 </nav>
 

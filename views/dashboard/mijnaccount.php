@@ -5,17 +5,17 @@ session_start();
 include_once "../../config/Database.php";
 $pdo = getDbConnection();
 
-$stmt = $pdo->prepare("SELECT * FROM user WHERE username= 'test@test.nl'");
-$stmt->execute();
+$stmt = $pdo->prepare("SELECT * FROM user WHERE username= ?");
+$stmt->execute(array($_SESSION["username"]));
 $user = $stmt->fetch();
 
 $stmt2 = $pdo->prepare("SELECT c.name as category, d.serialnr, deviceinfo, repairID, description FROM reparation as r
 JOIN device as d on r.deviceID=d.deviceID
-JOIN category as c on d.categoryID=c.categoryID WHERE repairedBy = 'test@test.nl'");
-$stmt2->execute();
+JOIN category as c on d.categoryID=c.categoryID WHERE repairedBy = ?");
+$stmt2->execute(array($_SESSION["username"]));
 $reparation = $stmt2->fetchall();
-$stmt3 = $pdo->prepare("SELECT count(*) FROM reparation WHERE repairedBy='test@test.nl'");
-$stmt3->execute();
+$stmt3 = $pdo->prepare("SELECT count(*) FROM reparation WHERE repairedBy= ?");
+$stmt3->execute(array($_SESSION["username"]));
 $totallrepairs = $stmt3->fetch();
 
 
@@ -30,8 +30,8 @@ if (isset($_POST["opslaanpass"])) {
                 exit();
             } else {
                 $hasholdpass = password_hash($_POST["password"], PASSWORD_BCRYPT);
-                $stmt = $pdo->prepare("UPDATE `user` SET `password`=? WHERE `user`.`username`='test@test.nl'");
-                $stmt->execute(array($hasholdpass));
+                $stmt = $pdo->prepare("UPDATE `user` SET `password`=? WHERE `user`.`username`= ?");
+                $stmt->execute(array($hasholdpass, $_SESSION["username"]));
                 unset($_POST["password2"]);
             }
         }
@@ -42,18 +42,18 @@ if (isset($_POST["opslaanpass"])) {
     }
 }
 if (isset($_POST["opslaan"])) {
-    $stmt = $pdo->prepare("UPDATE `user` SET `name`=? WHERE `user`.`username`='test@test.nl'");
-    $stmt->execute(array($_POST["name"]));
+    $stmt = $pdo->prepare("UPDATE `user` SET `name`=? WHERE `user`.`username`= ?");
+    $stmt->execute(array($_POST["name"], $_SESSION["username"]));
 }
 
 
 
 // daarna pas de user uit de database selecteren zodat je de gewijzigde gegevens ziet
-$stmt = $pdo->prepare("SELECT * FROM user WHERE username= \"test@test.nl\"");
-$stmt->execute();
+$stmt = $pdo->prepare("SELECT * FROM user WHERE username= ?");
+$stmt->execute(array($_SESSION["username"]));
 $user = $stmt->fetch();
 $pdo = NULL;
-$_POST["username"] = "test@test.nl"
+$_POST["username"] = $_SESSION["username"]
 ?>
 
 <head>
@@ -102,7 +102,7 @@ $_POST["username"] = "test@test.nl"
                             </div>
                             <label for="role" class="col-2 col-form-label">Rol</label>
                             <div class="form-control" name="role">
-                                <?php print($user["role"]); ?><br>
+                                <?php print($user["function"]); ?><br>
                             </div>
                             <input type="hidden" name="username" value="<?php print($user["username"]); ?>">
                         </div>

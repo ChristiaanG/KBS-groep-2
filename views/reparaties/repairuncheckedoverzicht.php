@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php
+session_start();
+
+include_once "../../src/login/check/CheckNotLoggedIn.php"
+?><!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates

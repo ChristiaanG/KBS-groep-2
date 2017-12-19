@@ -1,5 +1,9 @@
 [12:49, 18-12-2017] Steffan Verlaan: <!DOCTYPE html>
+<?php
+session_start();
 
+include_once "../../src/login/check/CheckNotLoggedIn.php"
+?>
 <?php
 include_once "../../config/Database.php";
 $pdo = getDbConnection();

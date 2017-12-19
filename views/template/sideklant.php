@@ -17,18 +17,21 @@
                     </ul>
 
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-users fa-fw"></i> klanten<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="../klant/overzicht.php">klant overzicht</a>
-                        </li>
-                        <li>
-                            <a href="../klant/addklant.php">klant toevoegen</a>
-                        </li>
-                    </ul>
+                <?php if ($_SESSION["function"] == "admin" or $_SESSION["function"] == "medewerker") { ?>
+                    <li>
+                        <a href="#"><i class="fa fa-users fa-fw"></i> klanten<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="../klant/overzicht.php">klant overzicht</a>
+                            </li>
+                            <li>
+                                <a href="../klant/addklant.php">klant toevoegen</a>
+                            </li>
+                        </ul>
 
-                </li>
+                    </li>
+                <?php } ?>
+
                 <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i>reparaties<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -50,9 +53,20 @@
                         <li>
                             <a href="../dashboard/bewerkaccount.php">bewerk account</a>
                         </li>
+                        <li>
+                            <a href="../../src/login/login.php?logout=true">uitloggen</a>
+                        </li>
                     </ul>
 
                 </li>
+                <?php if ($_SESSION["function"] == "admin") { ?>
+                    <li>
+                        <a href="#"><i class="fa fa-user fa-fw"></i>beheer<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="../medewerkers/index.php">accountbeheer</a></li>
+                        </ul>
+                    </li>
+                <?php } ?>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

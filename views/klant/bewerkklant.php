@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <?php
+session_start();
+
+include_once "../../src/login/check/CheckNotLoggedIn.php"
+?>
+<?php
 include_once "../../config/Database.php";
 $pdo = getDbConnection();
 $stmt = $pdo->prepare("SELECT * FROM customer WHERE customerID=?");
