@@ -39,12 +39,14 @@ $secureimage = new Securimage();
                 <h2 class="form-signin-heading">Registreer</h2>
             </div>
             <div class="loginFormBody">
-                <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="email" name="username" id="inputEmail" class="form-control" placeholder="Email address" autofocus="autofocus">
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password">
-                <label for="inputName" class="sr-only">Name</label>
-                <input type="text" name="name" id="inputName" class="form-control" placeholder="Name" />
+                <label for="inputEmail">Email addres</label>
+                <input type="email" name="username" id="inputEmail" class="form-control" value="<?= (isset($_SESSION['username']) ? $_SESSION['username'] : '') ?>" placeholder="Email address" autofocus="autofocus">
+                <label for="inputName">Naam</label>
+                <input type="text" name="name" id="inputName" class="form-control" value="<?= (isset($_SESSION['name']) ? $_SESSION['name'] : '') ?>" placeholder="Naam" />
+                <label for="inputPassword">Wachtwoord</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Wachtwoord">
+                <label for="inputPasswordRepeat">Wachtwoord herhalen</label>
+                <input type="password" name="passwordRepeat" id="inputPasswordRepeat" class="form-control" placeholder="Wachtwoord herhalen" autofocus="">
                 <?= $secureimage->getCaptchaHtml(); ?>
             </div>
             <div class="loginFormFooter">

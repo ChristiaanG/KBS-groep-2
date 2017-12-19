@@ -12,16 +12,19 @@ function twoStepAuthenticationAction()
 {
     session_start();
 
+    //Check if the two factor authentication has been filled in
     if(isset($_POST["2fa_code"])) {
         $code = $_POST["2fa_code"];
+
         $gAuth = new GoogleAuthenticator($_SESSION["2fa_secret"]);
 
+        //Check if the filled in two factor authentication code is correct
         if($gAuth->verifyCode($code)) {
             try {
                 $config = config();
-                $_SESSION["2fa_true"] = true;
                 $_SESSION["loggedin"] = true;
 
+                //Set cookie so that the current user does not have to register again with two factor authentication for 30 days
                 setcookie("2fa_set", $_SESSION["username"], time() + (86400 * 30), "/");
 
                 header("Location: " . $config["home"]);
@@ -46,21 +49,25 @@ function registerTwoStepAuthenticationAction()
 {
     session_start();
 
+    //Check if the two factor authentication has been filled in
     if(isset($_POST["2fa_code"])) {
         $code = $_POST["2fa_code"];
         $gAuth = new GoogleAuthenticator($_SESSION["2fa_secret"]);
 
+        //Check if the filled in two factor authentication code is correct
         if($gAuth->verifyCode($code)) {
             try {
                 $config = config();
 
                 $conn = getDbConnection();
+
+                //Set two factor authentication to true and save the secret for the current user
                 $stmt = $conn->prepare("UPDATE user SET 2fa_enabled = 1, 2fa_secret = ? WHERE username = ?");
                 $stmt->execute(array($_SESSION["2fa_secret"], $_SESSION["username"]));
 
-                $_SESSION["2fa_true"] = true;
                 $_SESSION["loggedin"] = true;
 
+                //Set cookie so that the current user does not have to register again with two factor authentication for 30 days
                 setcookie("2fa_set", $_SESSION["username"], time() + (86400 * 30), "/");
 
                 header("Location: " . $config["home"]);

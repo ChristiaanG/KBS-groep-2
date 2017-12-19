@@ -9,9 +9,9 @@
 function config()
 {
     return array(
-        "home" => "http://localhost/windesheim/KBS-groep-2/views/dashboard/index.php",
-        "login" => "http://localhost/windesheim/KBS-groep-2/views/login/index.php",
-        "2fa_re" => "http://localhost/windesheim/KBS-groep-2/views/login/register-two-step-authentication.php",
-        "2fa" => "http://localhost/windesheim/KBS-groep-2/views/login/two-step-authentication.php",
+        "home" => (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] . "/views/dashboard/index",
+        "login" => (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] . "/views/login/index",
+        "2fa_re" => (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] . "views/login/register-two-step-authentication",
+        "2fa" => (isset($_SERVER['HTTPS']) ? "https://" : "htt://p") . $_SERVER["HTTP_HOST"] . "views/login/two-step-authentication",
     );
 }

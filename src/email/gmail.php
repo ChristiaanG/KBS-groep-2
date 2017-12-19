@@ -20,8 +20,6 @@ function getGmailConfigAction()
     //Create a new PHPMailer instance
     $mail = new PHPMailer;
 
-//    $mail->setLanguage('nl');
-
     //Tell PHPMailer to use SMTP
     $mail->isSMTP();
 
