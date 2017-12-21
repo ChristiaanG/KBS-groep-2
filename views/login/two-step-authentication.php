@@ -25,7 +25,7 @@ include_once "../../src/login/check/Check2faRedirect.php";
 </head>
 <body>
 <div class="container">
-    <h1>2 - Use Google Authenticator for signin</h1>
+    <h1>Google Authenticator login</h1>
     <?php
     if(isset($_SESSION["twofafailed"])) {
         ?>

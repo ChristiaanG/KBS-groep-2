@@ -69,16 +69,16 @@ if (!isset($_SESSION['2fa_qr']) && !isset($_SESSION['2fa_secret'])) {
 <body>
 <div class="container">
 <!--    --><?php //if(1 === $step): ?>
-        <h1>1 - Register application</h1>
-        <h2>a. Scan this QRCode with your smarphone</h2>
+        <h1>Registreer applicatie</h1>
+        <h2>a. Scan de QRCode met uw smarphone</h2>
         <p>
-            Use Google Authenticator for mobile
+            Gebruike de Google Authenticator app voor smartphones
             <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">Android</a>
             or
             <a href="https://itunes.apple.com/fr/app/google-authenticator/id388497605" target="_blank">iPhone</a>
         </p>
         <div class="qrcode"><img src="<?php echo $_SESSION["2fa_qr"]; ?>" alt=""/></div>
-        <h2>b. Copy/paste vérification code</h2>
+        <h2>b. Kopieer/plak verificatie code</h2>
         <?php echo $_SESSION["2fa_secret"]; ?>
         <?php
         if(isset($_SESSION["twofaregisterfailed"])) {

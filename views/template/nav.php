@@ -24,7 +24,7 @@
     </ul>
     <?php if ($_SESSION["function"] == "admin") { ?>
         <ul class="nav navbar-nav navbar-left navbar-top-links">
-            <li><a href="../medewerkers/index.php"><i class="fa fa-edit  fa-fw"></i>beheerpaneel</a></li>
+            <li><a href="../dashboard/medewerkers/index.php"><i class="fa fa-edit  fa-fw"></i>beheerpaneel</a></li>
 
         </ul>
     <?php } ?>

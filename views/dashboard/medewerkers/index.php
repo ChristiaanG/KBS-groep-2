@@ -21,11 +21,11 @@ if (!isset($_SESSION["loggedin"])) {
 
         <title>Startmin - Bootstrap Admin Theme</title>
 
-        <?php include '../template/cssinc.php'; ?>
+        <?php include '../../template/cssinc.php'; ?>
     </head>
     <body>
-        <?php include '../template/nav.php'; ?>
-        <?php include '../template/sideklant.php'; ?>
+        <?php include '../../template/nav.php'; ?>
+        <?php include '../../template/sideklant.php'; ?>
         <div id="wrapper">
 
             <!-- Navigation -->
@@ -78,6 +78,6 @@ if (!isset($_SESSION["loggedin"])) {
 
         </div>
         <!-- /#wrapper -->
-        <?php include '../template/jsinc.php'; ?>
+        <?php include '../../template/jsinc.php'; ?>
     </body>
 </html>

@@ -63,7 +63,7 @@
                     <li>
                         <a href="#"><i class="fa fa-user fa-fw"></i>beheer<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="../medewerkers/index.php">accountbeheer</a></li>
+                            <li><a href="../dashboard/medewerkers/index.php">accountbeheer</a></li>
                         </ul>
                     </li>
                 <?php } ?>
