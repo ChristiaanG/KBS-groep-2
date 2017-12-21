@@ -11,8 +11,7 @@ if (!isset($_SESSION["loggedin"])) {
     header("Location: " . $config["login"]);
     die();
 }
-?>
-<?php
+
 include_once "../../config/Database.php";
 $pdo = getDbConnection();
 
@@ -33,15 +32,14 @@ $stmt1->execute();
 $checkedrepairs = $stmt1->fetch();
 $pdo = NULL;
 ?>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <?php include '../template/nav.php'; ?>
         <?php include '../template/cssinc.php'; ?>
-        <?php include '../template/jsinc.php'; ?>
-
     </head>
     <body>
+        <?php include '../template/nav.php'; ?>
         <?php include '../template/sideklant.php'; ?>
         <div id="page-wrapper">
             <div class="row">
@@ -149,5 +147,6 @@ $pdo = NULL;
             <?php include '../dashboard/barchartmaand.php'; ?>
             <div id="chart_div"></div>
         </div>
+        <?php include '../template/jsinc.php'; ?>
     </body>
 </html>

@@ -19,7 +19,7 @@ function getUserAction()
     try {
         $conn = getDbConnection();
 
-        $stmt = $conn->prepare("SELECT username, name, function, approved FROM user");
+        $stmt = $conn->prepare("SELECT username, name, function, approved FROM user where deleted != 1");
         $stmt->execute();
         $databaseResult = $stmt->fetchAll();
 
@@ -87,7 +87,7 @@ function deleteUserAction()
     try {
         $conn = getDbConnection();
 
-        $stmt = $conn->prepare("DELETE FROM user WHERE username = ?");
+        $stmt = $conn->prepare("UPDATE user SET deleted = 1 WHERE username = ?");
         $stmt->execute(array($_POST["username"]));
 
         return "<div class='alert alert-success'>" . $_POST['username'] . " is nu verwijderd uit het systeem";

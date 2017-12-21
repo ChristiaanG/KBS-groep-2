@@ -21,12 +21,10 @@ if (!isset($_SESSION["loggedin"])) {
 
         <title>Startmin - Bootstrap Admin Theme</title>
 
-        <?php include '../template/nav.php'; ?>
         <?php include '../template/cssinc.php'; ?>
-        <?php include '../template/jsinc.php'; ?>
-
     </head>
     <body>
+        <?php include '../template/nav.php'; ?>
         <?php include '../template/sideklant.php'; ?>
         <div id="wrapper">
 
@@ -80,25 +78,6 @@ if (!isset($_SESSION["loggedin"])) {
 
         </div>
         <!-- /#wrapper -->
-
-        <!-- jQuery -->
-        <!--<script src="../../../resources/js/jquery.min.js"></script>-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="../../../resources/js/bootstrap.min.js"></script>
-
-        <!-- Metis Menu Plugin JavaScript -->
-        <script src="../../../resources/js/metisMenu.min.js"></script>
-
-        <!-- Morris Charts JavaScript -->
-        <script src="../../../resources/js/raphael.min.js"></script>
-        <script src="../../../resources/js/morris.min.js"></script>
-        <script src="../../../resources/js/morris-data.js"></script>
-
-        <!-- Custom Theme JavaScript -->
-        <script src="../../../resources/js/startmin.js"></script>
-
-        <script src="../../../resources/js/admin.js"></script>
+        <?php include '../template/jsinc.php'; ?>
     </body>
 </html>

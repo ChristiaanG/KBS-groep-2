@@ -39,8 +39,8 @@ $secureimage = new Securimage();
                 <h2 class="form-signin-heading">Registreer</h2>
             </div>
             <div class="loginFormBody">
-                <label for="inputEmail">Email addres</label>
-                <input type="email" name="username" id="inputEmail" class="form-control" value="<?= (isset($_SESSION['username']) ? $_SESSION['username'] : '') ?>" placeholder="Email address" autofocus="autofocus">
+                <label for="inputEmail">Emailadres</label>
+                <input type="email" name="username" id="inputEmail" class="form-control" value="<?= (isset($_SESSION['username']) ? $_SESSION['username'] : '') ?>" placeholder="Emailadres" autofocus="autofocus">
                 <label for="inputName">Naam</label>
                 <input type="text" name="name" id="inputName" class="form-control" value="<?= (isset($_SESSION['name']) ? $_SESSION['name'] : '') ?>" placeholder="Naam" />
                 <label for="inputPassword">Wachtwoord</label>

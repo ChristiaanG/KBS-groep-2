@@ -34,9 +34,11 @@ function loginAction()
             $password = $_POST["password"];
             $conn = getDbConnection();
 
-            $stmt = $conn->prepare("SELECT * FROM user WHERE username = ?");
+            $stmt = $conn->prepare("SELECT * FROM user WHERE username = ? deleted != 1");
             $stmt->execute(array($username));
             $result = $stmt->fetch();
+
+            var_dump($result); die();
 
             //Check if account has been locked because of to many failed login attempts
             if($result["is_locked"] == true) {
