@@ -1,14 +1,21 @@
 <?php
 session_start();
 
-include_once "../../src/login/check/CheckNotLoggedIn.php"
+include_once "../../src/login/check/CheckNotLoggedIn.php";
+if (isset($_SESSION["function"])) {
+    if ($_SESSION["function"] == "stagiair") {
+        header("Location: ../dashboard/index.php");
+        die();
+    }
+}
 ?>
 <?php
-if (isset($_GET["nummer"]))
+if (isset($_GET["nummer"])) {
     include_once "../../config/Database.php";
-$pdo = getDbConnection();
-$stmt = $pdo->prepare("update customer set active=0 where customerID = ?");
-$stmt->execute(array($_GET["nummer"]));
+    $pdo = getDbConnection();
+    $stmt = $pdo->prepare("update customer set active=0 where customerID = ?");
+    $stmt->execute(array(filter_input(INPUT_GET, "nummer")));
+}
 $pdo = NULL;
 ?>
 <html>
@@ -39,7 +46,7 @@ $pdo = NULL;
                     <h3> klant verwijderd</h3>
                 </div>
                 <div class="panel-body">
-                    <?php print("Klant " . $_GET["nummer"] . " is verwijderd"); ?>
+                    <?php print("Klant " . filter_input(INPUT_GET, "nummer") . " is verwijderd"); ?>
                 </div>
                 <div class="panel-footer">
                     <a href="overzicht.php">Terug naar het overzicht</a>

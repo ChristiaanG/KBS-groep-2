@@ -19,9 +19,11 @@
     <ul class="nav navbar-nav navbar-left navbar-top-links">
         <li><a href="../reparaties/repairoverzicht.php"><i class="fa  fa-wrench  fa-fw"></i>reparaties</a></li>
     </ul>
-    <ul class="nav navbar-nav navbar-left navbar-top-links">
-        <li><a href="../klant/overzicht.php"><i class="fa fa-users  fa-fw"></i>klanten</a></li>
-    </ul>
+    <?php if ($_SESSION["function"] == "admin" or $_SESSION["function"] == "medewerker") { ?>
+        <ul class="nav navbar-nav navbar-left navbar-top-links">
+            <li><a href="../klant/overzicht.php"><i class="fa fa-users  fa-fw"></i>klanten</a></li>
+        </ul>
+    <?php } ?>
     <?php if ($_SESSION["function"] == "admin") { ?>
         <ul class="nav navbar-nav navbar-left navbar-top-links">
             <li><a href="../medewerkers/index.php"><i class="fa fa-edit  fa-fw"></i>beheerpaneel</a></li>
@@ -29,7 +31,7 @@
         </ul>
     <?php } ?>
     <ul class="nav navbar-nav navbar-right navbar-top-links">
-        <li><a href="../dashboard/mijnaccount.php"><i class="fa fa-user  fa-fw"></i><?php echo $_SESSION["username"] ?></a></li>
+        <li><a href="../account/mijnaccount.php"><i class="fa fa-user  fa-fw"></i><?php echo $_SESSION["username"] ?></a></li>
     </ul>
 
 </nav>

@@ -1,15 +1,12 @@
 <?php
 session_start();
 
-echo $_SESSION["username"];
-
-if (!isset($_SESSION["loggedin"])) {
-    include_once "../../config/Config.php";
-
-    $config = config();
-
-    header("Location: " . $config["login"]);
-    die();
+include_once "../../src/login/check/CheckNotLoggedIn.php";
+if (isset($_SESSION["functie"])) {
+    if ($_SESSION["functie"] == "stagiair") {
+        header("Location: ../dashboard/index.php");
+        die();
+    }
 }
 ?>
 <!DOCTYPE html>

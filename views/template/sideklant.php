@@ -8,12 +8,14 @@
                         <li>
                             <a href="../dashboard/index.php">home</a>
                         </li>
-                        <li>
-                            <a href="../dashboard/repairstats.php">reparatie stats</a>
-                        </li>
-                        <li>
-                            <a href="../dashboard/klantstats.php">klant stats</a>
-                        </li>
+                        <?php if ($_SESSION["function"] == "admin" or $_SESSION["function"] == "medewerker") { ?>
+                            <li>
+                                <a href="../dashboard/repairstats.php">reparatie stats</a>
+                            </li>
+                            <li>
+                                <a href="../dashboard/klantstats.php">klant stats</a>
+                            </li>
+                        <?php } ?>
                     </ul>
 
                 </li>
@@ -38,9 +40,11 @@
                         <li>
                             <a href="../reparaties/repairoverzicht.php">reparatie overzicht</a>
                         </li>
-                        <li>
-                            <a href="../reparaties/reparatieToevoegenStap1.php">reparatie toevoegen</a>
-                        </li>
+                        <?php if ($_SESSION["function"] == "admin" or $_SESSION["function"] == "medewerker") { ?>
+                            <li>
+                                <a href="../reparaties/reparatieToevoegenStap1.php">reparatie toevoegen</a>
+                            </li>
+                        <?php } ?>
                     </ul>
 
                 </li>
@@ -48,10 +52,13 @@
                     <a href="#"><i class="fa fa-user fa-fw"></i>account<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="../dashboard/mijnaccount.php">mijn account</a>
+                            <a href="../account/mijnaccount.php">mijn account</a>
                         </li>
                         <li>
-                            <a href="../dashboard/bewerkaccount.php">bewerk account</a>
+                            <a href="../account/bewerkaccount.php">bewerk account</a>
+                        </li>
+                        <li>
+                            <a href="../account/bewerkpassword.php">bewerk password</a>
                         </li>
                         <li>
                             <a href="../../src/login/login.php?logout=true">uitloggen</a>
@@ -59,14 +66,16 @@
                     </ul>
 
                 </li>
-                <?php if ($_SESSION["function"] == "admin") { ?>
+                <?php if ($_SESSION["function"] == "admin") : ?>
                     <li>
                         <a href="#"><i class="fa fa-user fa-fw"></i>beheer<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="../medewerkers/index.php">accountbeheer</a></li>
+                            <li><a href="../medewerkers/index.php">account activatie</a></li>
+                            <li><a href="../medewerkers/functie.php">functie beheer</a></li>
+                            <li><a href="../medewerkers/apparaatcategorie.php">catagorieën toevoegen</a></li>
                         </ul>
                     </li>
-                <?php } ?>
+                <?php endif; ?>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
-
+    <?php
+    include_once "../../src/login/check/CheckNotLoggedIn.php";
+    if (isset($_SESSION["function"])) {
+        if ($_SESSION["function"] == "stagiair") {
+            header("Location: ../dashboard/index.php");
+            die();
+        }
+    }
+    ?>
     <?php
     include_once "../../config/Database.php";
     $pdo = getDbConnection();

@@ -145,9 +145,12 @@ $pdo = NULL;
                     </div>
                 </div>
             </div>
+
+
             <h1>statistieken over reparaties</h1>
             <?php include '../dashboard/barchartmaand.php'; ?>
             <div id="chart_div"></div>
+
         </div>
     </body>
 </html>
