@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <title>project groep 2 ICTm1e</title>
-<link rel="icon" href="../../klant/favicon.ico.jpg" type="image/ico">
+<link rel="icon" href="../../resources/img/klant/favicon.ico.jpg" type="image/ico">
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-header">
@@ -13,17 +13,6 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-    <ul class="nav navbar-nav navbar-left navbar-top-links">
-        <li><a href="../dashboard/index.php"><i class="fa   fa-tachometer  fa-fw"></i>dashboard</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-left navbar-top-links">
-        <li><a href="../reparaties/repairoverzicht.php"><i class="fa  fa-wrench  fa-fw"></i>reparaties</a></li>
-    </ul>
-    <?php if ($_SESSION["function"] == "admin" or $_SESSION["function"] == "medewerker") { ?>
-        <ul class="nav navbar-nav navbar-left navbar-top-links">
-            <li><a href="../klant/overzicht.php"><i class="fa fa-users  fa-fw"></i>klanten</a></li>
-        </ul>
-    <?php } ?>
     <ul class=" nav navbar-nav navbar-right navbar-top-links">
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">

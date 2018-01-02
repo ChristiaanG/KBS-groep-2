@@ -79,6 +79,6 @@ if (!isset($_SESSION["loggedin"])) {
         </div>
         <!-- /#wrapper -->
         <?php include '../../template/jsinc.php'; ?>
-        <script src="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/resources/js/admin.js" ?>"></script>
+        <script src="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/resources/js/admin.js"></script>
     </body>
 </html>
