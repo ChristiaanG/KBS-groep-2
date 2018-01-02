@@ -101,31 +101,31 @@ function loginAction()
                 } else {
                     if($result != false) {
                         //Set number of failed login attempts for the specific account if account exists
-                        $first_login_attempt = 1;
-
                         $stmt = $conn->prepare("SELECT * FROM login_attempt WHERE username = ?");
                         $stmt->execute(array($username));
-                        $result = $stmt->fetch();
+                        $loginAttemptResult = $stmt->fetch();
 
-                        if(!$result) {
-                            $login_time = date("Y-m-d H:i:s");
+                        //If it's first failed login attempt on the account then insert new record else update current record
+                        if(!$loginAttemptResult) {
+                            $firstLoginAttempt = 1;
+                            $loginTime = date("Y-m-d H:i:s");
 
                             $stmt = $conn->prepare("INSERT INTO login_attempt VALUES (?, ?, ?)");
-                            $stmt->execute(array($username, $first_login_attempt, $login_time));
+                            $stmt->execute(array($username, $firstLoginAttempt, $loginTime));
                         } else {
-                            $result["attempt"]++;
+                            $currentLoginAttempts = $loginAttemptResult["attempt"]++;
 
-                            if($result["attempt"] == 1) {
-                                $login_time = date("Y-m-d H:i:s");
+                            if($currentLoginAttempts == 1) {
+                                $loginTime = date("Y-m-d H:i:s");
 
                                 $stmt = $conn->prepare("UPDATE login_attempt SET attempt = ?, time = ? WHERE username = ?");
-                                $stmt->execute(array($result["attempt"], $login_time, $username));
+                                $stmt->execute(array($currentLoginAttempts, $loginTime, $username));
                             } else {
                                 $stmt = $conn->prepare("UPDATE login_attempt SET attempt = ? WHERE username = ?");
-                                $stmt->execute(array($result["attempt"], $username));
+                                $stmt->execute(array($currentLoginAttempts, $username));
                             }
 
-                            if($result["attempt"] >= 5) {
+                            if($loginAttemptResult["attempt"] >= 5) {
                                 $stmt = $conn->prepare("UPDATE user SET is_locked = 1 WHERE username = ?");
                                 $stmt->execute(array($username));
                             }

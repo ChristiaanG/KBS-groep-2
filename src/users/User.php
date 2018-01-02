@@ -113,15 +113,3 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
             break;
     }
 }
-
-//$result .= "<tr>";
-//$result .= "<td>" . $array["username"] . "</td>";
-//$result .= "<td>" . $array["name"] . "</td>";
-//$result .= "<td>";
-//$result .= "<select>";
-//$result .= "<option value='stagair' " . ($array['function'] == 'stagair')?'selected':'' . ">Stagair</option>";
-//$result .= "<option value='medewerker' " . ($array['function'] == 'medewerker')?'selected':'' . ">Stagair</option>";
-//$result .= "<option value='admin' " . ($array['function'] == 'admin')?'selected=selected':'' . ">Stagair</option>";
-//$result .= "<select>";
-//$result .= "</td>";
-//$result .= "</tr>";
