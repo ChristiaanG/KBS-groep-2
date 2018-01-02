@@ -85,7 +85,13 @@ $pdo = NULL;
                                 print("\n\t\t<td>" . $r["description"] . "</td>");
                                 print("\n\t\t<td>" . $r["daterepair"] . "</td>");
                                 print("<td><a href=\"repair.php?nummer=" . $r["repairID"] . "\"class=\"btn btn-primary\">ga naar reparatie</a></td>");
-                                print("<td><a href=\"#\" data-href=\"verwijderrepair.php?nummer=" . $r["repairID"] . "\" data-toggle=\"modal\" data-target=\"#confirm-delete\" class=\"btn btn-primary\">Verwijder reparatie</a></td>");
+                                if (isset($_SESSION["function"])) {
+                                    if ($_SESSION["function"] == "medewerker" or $_SESSION["function"] == "admin") {
+                                        print("<td><a href=\"#\" data-href=\"verwijderrepair.php?nummer=" . $r["repairID"] . "\" data-toggle=\"modal\" data-target=\"#confirm-delete\" class=\"btn btn-primary\">Verwijder reparatie</a></td>");
+                                    } else {
+                                        print("<td></td>");
+                                    }
+                                }
                                 print("\n\t</tr>");
                             }
                             ?>

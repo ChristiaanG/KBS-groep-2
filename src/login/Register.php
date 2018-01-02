@@ -81,12 +81,7 @@ function registerAction()
                     die();
                 }
             } catch(PDOException $e) {
-                if($e->getCode() == 23000) {
-                    $_SESSION["registerfailed"] = "Het emailadres dat u heeft opgegeven bestaat al. Kies een ander emailadres.";
-                    header("Location: " . $_SERVER['HTTP_REFERER']);
-                } else {
-                    echo "<div class='alert alert-danger'>Error: " . $e->getMessage() . "</div><br><a href='" . $_SERVER['HTTP_REFERER'] . "'>terug naar registratiepagina</a>";
-                }
+                echo "<div class='alert alert-danger'>Error: " . $e->getMessage() . "</div><br><a href='" . $_SERVER['HTTP_REFERER'] . "'>terug naar registratiepagina</a>";
             }
         } else {
             $_SESSION["registerfailed"] = "U heeft de code verkeerk ingevuld.";

@@ -2,21 +2,27 @@
 <?php
 session_start();
 
-include_once "../../src/login/check/CheckNotLoggedIn.php"
+include_once "../../src/login/check/CheckNotLoggedIn.php";
+if (isset($_SESSION["function"])) {
+    if ($_SESSION["function"] == "stagiair") {
+        header("Location: ../dashboard/index.php");
+        die();
+    }
+}
 ?>
 <?php
 include_once "../../config/Database.php";
 $pdo = getDbConnection();
 if (isset($_GET["nummer"])) {
-    $nummer = $_GET["nummer"];
+    $nummer = filter_input(INPUT_GET, "nummer");
 }
 if (isset($_POST["nummer"])) {
-    $nummer = $_POST["nummer"];
+    $nummer = filter_input(INPUT_POST, "nummer");
 }
 // eerst opslaan
-if (isset($_POST["voornaam"])) {
+if (isset($_POST["submit"])) {
     $stmt = $pdo->prepare("UPDATE customer SET comp_name=?, first_name=?,  last_name=?, address=?, city=?, email=?, phoneNr=?, cellphoneNr=?,description=? WHERE customerID=?");
-    $stmt->execute(array($_POST["compnaam"], $_POST["voornaam"], $_POST["achternaam"], $_POST["adres"], $_POST["city"], $_POST["email"], $_POST["phonenr"], $_POST["cellphoneNr"], $_POST["opmerking"], $_POST["customerid"]));
+    $stmt->execute(array(filter_input(INPUT_POST, "compname"), filter_input(INPUT_POST, "voornaam"), filter_input(INPUT_POST, "achternaam"), filter_input(INPUT_POST, "adres"), filter_input(INPUT_POST, "city"), filter_input(INPUT_POST, "email"), filter_input(INPUT_POST, "phonenr"), filter_input(INPUT_POST, "cellphoneNr"), filter_input(INPUT_POST, "opmerking"), filter_input(INPUT_POST, "customerid")));
 }
 
 // daarna pas de klant uit de database selecteren zodat je de gewijzigde gegevens ziet
@@ -144,6 +150,8 @@ $pdo = NULL;
                         </div>
                         <div class="panel-footer">
                             <?php print("<a href=\"bewerkklant.php?nummer=" . $klant["customerID"] . "\"class=\"btn btn-primary\">bewerk klant</a>"); ?>
+
+                            <a href="../reparaties/reparatieToevoegenStap2.php?nummer=<?php print $nummer ?>" class="btn btn-primary"> reparatie toevoegen</a>
                         </div>
                     </div>
                 </div>

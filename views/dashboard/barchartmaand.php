@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-
+    <?php
+    include_once "../../src/login/check/CheckNotLoggedIn.php";
+    ?>
     <?php
     include_once "../../config/Database.php";
     $pdo = getDbConnection();

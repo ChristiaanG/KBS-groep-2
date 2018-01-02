@@ -1,5 +1,14 @@
 <html>
     <?php
+    include_once "../../src/login/check/CheckNotLoggedIn.php";
+    if (isset($_SESSION["functie"])) {
+        if ($_SESSION["functie"] == "stagiair") {
+            header("Location: ../dashboard/index.php");
+            die();
+        }
+    }
+    ?>
+    <?php
     include_once "../../config/Database.php";
     $pdo = getDbConnection();
     $stmtpie = $pdo->prepare("SELECT count(*) as aantal, c.name FROM reparation as r join `device` as d on r.deviceID=d.deviceID join category as c on d.categoryID=c.categoryID where active=1 group by c.categoryID");
