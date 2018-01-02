@@ -1,7 +1,13 @@
 <?php
 session_start();
 
-include_once "../../src/login/check/CheckNotLoggedIn.php"
+include_once "../../src/login/check/CheckNotLoggedIn.php";
+if (isset($_SESSION["function"])) {
+    if ($_SESSION["function"] == "stagiair") {
+        header("Location: ../dashboard/index.php");
+        die();
+    }
+}
 ?>
 <?php
 //hier wordt het hoogste klantnummer opgehaald en er word 1 bij opgeteld.

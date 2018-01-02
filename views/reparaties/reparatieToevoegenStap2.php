@@ -1,4 +1,5 @@
-[12:49, 18-12-2017] Steffan Verlaan: <!DOCTYPE html>
+<!DOCTYPE html>
+
 <?php
 session_start();
 
@@ -9,11 +10,11 @@ include_once "../../config/Database.php";
 $pdo = getDbConnection();
 
 $stmt = $pdo->prepare("SELECT * FROM customer WHERE customerID=?");
-$stmt->execute(array($_GET["nummer"]));
+$stmt->execute(array(filter_input(INPUT_GET, "nummer")));
 $klant = $stmt->fetch();
 
 $stmt2 = $pdo->prepare("SELECT DISTINCT d.deviceID, deviceInfo FROM device d JOIN reparation r ON r.deviceID=d.deviceID WHERE r.customerID=?");
-$stmt2->execute(array($_GET["nummer"]));
+$stmt2->execute(array(filter_input(INPUT_GET, "nummer")));
 $apparaat = $stmt2->fetchAll();
 
 $stmt3 = $pdo->prepare("SELECT * FROM category");
@@ -24,22 +25,12 @@ $stmtMax = $pdo->prepare("SELECT MAX(deviceID)+1 FROM device");
 $stmtMax->execute();
 $maxDeviceID = $stmtMax->fetch();
 
+$stmttMax = $pdo->prepare("SELECT MAX(repairID)+1 FROM reparation");
+$stmttMax->execute();
+$maxRepairID = $stmttMax->fetch();
 
-if (isset($_GET["reparatieToevoegen"])) {
-    if ($_GET["apparaat"] == "select") {
-        if ($_GET["deviceInfo"] !== "" && $_GET["serialnr"] !== "") {
-            $stmt4 = $pdo->prepare("INSERT INTO device (categoryID, deviceInfo, serialnr) VALUES (?, ?, ?)");
-            $stmt4->execute(array($_GET["category"], $_GET["deviceInfo"], $_GET["serialnr"]));
-            $stmt5 = $pdo->prepare("INSERT INTO reparation(customerID, deviceID, description, chargerIncluded) VALUES (?, ?, ?, ?)");
-            $stmt5->execute(array($_GET["nummer"], $maxDeviceID["MAX(deviceID)+1"], $_GET["repairDescription"], $_GET["chargerIncluded"]));
-            $stmt6 = $pdo->prepare("INSERT INTO customer_device(customerID, deviceID) VALUES(?, ?)");
-            $stmt6->execute(array($_GET["nummer"], $maxDeviceID["MAX(deviceID)+1"]));
-        }
-    } elseif ($_GET["apparaat"] !== "select") {
-        $stmt7 = $pdo->prepare("INSERT INTO reparation(customerID, deviceID, description, chargerIncluded) VALUES (?,?,?,?)");
-        $stmt7->execute(array($_GET["nummer"], $_GET["apparaat"], $_GET["repairDescription"], $_GET["chargerIncluded"]));
-    }
-}
+
+
 
 $pdo = NULL;
 ?>
@@ -60,19 +51,10 @@ $pdo = NULL;
                 <div class="panel-heading">
                     <h3>Reparatie toevoegen voor <?php print($klant["first_name"] . " " . $klant["last_name"]); ?></h3>
                 </div>
-                <div class="panel-body">
-                    <?php
-                    if (isset($_GET["reparatieToevoegen"])) {
-                        if ($_GET["apparaat"] == "select") {
-                            if ($_GET["deviceInfo"] == "" || $_GET["serialnr"] == "") {
-                                print("<div class='alert alert-danger'><strong>Vul a.u.b alles in</strong></div>");
-                            }
-                        }
-                    }
-                    ?>
-                    <form action="reparatieToevoegenStap2.php" method="get">
+                <form action="repair.php" method="post" name="reparatieForm" onsubmit="return formValidation()">
+                    <div class="panel-body">
                         <div class="form-group col-xs-4 row">
-                            <label for="apparaatSelect" class="col-2 col-form-label">apparaat selecteren</label>
+                            <label for="apparaatSelect" class="col-2 col-form-label">Apparaat selecteren</label>
                             <select id="apparaatSelect" name="apparaat" onchange="removeDeviceInfoForm()">
                                 <option value="select">Selecteer een apparaat</option>
                                 <?php
@@ -81,26 +63,25 @@ $pdo = NULL;
                                 }
                                 ?>
                             </select>
-                            <input type="hidden" name="nummer" value="<?php print( $_GET["nummer"]); ?>">
+                            <input type="hidden" name="nummer" value="<?php print(filter_input(INPUT_GET, "nummer")); ?>">
+                            <input type="hidden" name="repair" value="<?php print($maxRepairID["MAX(repairID)+1"]); ?>">
                         </div>
 
                         <div class="form-group col-xs-4 row center-block" >
-                            <label for="reparatiebeschrijving" class="col-2 col-form-label">reparatie beschrijving</label>
+                            <label for="reparatiebeschrijving" class="col-2 col-form-label">Reparatie beschrijving</label>
                             <div><textarea rows="4" class="form-control" id="reparatiebeschrijving" name="repairDescription" required ></textarea></div>
 
                             <br>
-                            <label for="reparatielader" class="col-2 col-form-label">oplader meegeleverd?</label>
+                            <label for="reparatielader" class="col-2 col-form-label">Oplader meegeleverd?</label>
                             <br>
                             <input type="radio" id='reparatielader' name="chargerIncluded" value="1" checked> Ja<br>
                             <input type="radio" name="chargerIncluded" value="0" > Nee
 
 
-                            <input type="hidden" name="nummer" value="<?php print( $_GET["nummer"]); ?>">
-
                         </div>
                         <div class="form-group col-xs-4 row" >
                             <div id="apparaatInvullen">
-                                <label for="apparaat" class="col-2 col-form-label">apparaat categorie selecteren</label>
+                                <label for="apparaat" class="col-2 col-form-label">Apparaat categorie </label>
                                 <select id="apparaat" name="category">
                                     <?php
                                     foreach ($categorie as $c) {
@@ -109,23 +90,22 @@ $pdo = NULL;
                                     ?>
                                 </select><br><br>
 
-                                <label for="apparaatNaam" class="col-2 col-form-label">naam apparaat</label>
+                                <label for="apparaatNaam" class="col-2 col-form-label">Naam apparaat</label>
                                 <div class="col-10">
                                     <input class="form-control" type="text" name="deviceInfo" id="apparaatNaam">
                                 </div>
                                 <br>
-                                <label for="apparaatSerie" class="col-2 col-form-label">serienummer apparaat</label>
+                                <label for="apparaatSerie" class="col-2 col-form-label">Serienummer </label>
                                 <div class="col-10">
                                     <input class="form-control" type="text" name="serialnr" id="apparaatSerie">
                                 </div>
                             </div><br>
                         </div>
-                </div>
-                <div class="panel-footer ">
-                    <input type="submit" name="reparatieToevoegen" class="btn btn-primary" value="Reparatie toevoegen">
-                    </form>
-
-                </div>
+                    </div>
+                    <div class="panel-footer ">
+                        <input type="submit" name="reparatieToevoegen" class="btn btn-primary" value="Reparatie toevoegen">
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -138,12 +118,17 @@ $pdo = NULL;
                 }
             }
 
-            if (document.getElementById("apparaatSelect").value === "select") {
-
+            function formValidation() {
+                var x = document.forms["reparatieForm"]["deviceInfo"].value;
+                var y = document.forms["reparatieForm"]["serialnr"].value;
+                if (document.getElementById("apparaatSelect").value === "select") {
+                    if (x === "" || y === "") {
+                        alert("Vul a.u.b. alles in.");
+                        return false;
+                    }
+                }
             }
-
         </script>
-
 
         <script>
             $(document).ready(function () {

@@ -1,7 +1,13 @@
 <?php
 session_start();
 
-include_once "../../src/login/check/CheckNotLoggedIn.php"
+include_once "../../src/login/check/CheckNotLoggedIn.php";
+if (isset($_SESSION["function"])) {
+    if ($_SESSION["function"] == "stagiair") {
+        header("Location: ../dashboard/index.php");
+        die();
+    }
+}
 ?>
 
 <?php
@@ -9,12 +15,14 @@ include_once "../../config/Database.php";
 $pdo = getDbConnection();
 if (isset($_POST["toevoegen"])) {
     $stmt = $pdo->prepare("INSERT INTO customer (comp_name, first_name, last_name, address, city, email, phoneNr, cellphoneNr, description) VALUES(?,?,?,?,?,?,?,?,?)");
-    $stmt->execute(array($_POST["compname"], $_POST["voornaam"], $_POST["achternaam"], $_POST["adres"], $_POST["woonplaats"], $_POST["email"], $_POST["phonenr"], $_POST["cellphoneNr"], $_POST["opmerking"]));
+    $stmt->execute(array(filter_input(INPUT_POST, "compname"), filter_input(INPUT_POST, "voornaam"), filter_input(INPUT_POST, "achternaam"), filter_input(INPUT_POST, "adres"), filter_input(INPUT_POST, "woonplaats"), filter_input(INPUT_POST, "email"), filter_input(INPUT_POST, "phonenr"), filter_input(INPUT_POST, "cellphoneNr"), filter_input(INPUT_POST, "opmerking")));
+    header("Location: klant.php?nummer=" . filter_input(INPUT_POST, "nummer"));
+    die();
 }
 
 if (isset($_POST["foto"])) {
 
-    include '../dashboard/uploadtest.php';
+    include 'uploadtest.php';
 }
 
 $stmt = $pdo->prepare("SELECT * FROM customer where active=1");
