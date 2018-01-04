@@ -43,7 +43,7 @@ if (!isset($_SESSION["loggedin"])) {
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                DataTables Advanced Tables
+                                Medewerkers beheer paneel
                             </div>
                             <!-- /.panel-heading -->
                             <div class="message-body">
@@ -80,5 +80,6 @@ if (!isset($_SESSION["loggedin"])) {
         <script src="../../resources/js/admin.js"></script>
         <!-- /#wrapper -->
         <?php include '../../template/jsinc.php'; ?>
+        <script src="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/resources/js/admin.js"></script>
     </body>
 </html>

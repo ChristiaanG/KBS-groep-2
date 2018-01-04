@@ -6,14 +6,14 @@
                     <a href="#"><i class="fa fa-tachometer fa-fw"></i> dashboard<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="../dashboard/index.php">home</a>
+                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/dashboard/index.php">home</a>
                         </li>
                         <?php if ($_SESSION["function"] == "admin" or $_SESSION["function"] == "medewerker") { ?>
                             <li>
-                                <a href="../dashboard/repairstats.php">reparatie stats</a>
+                                <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/dashboard/repairstats.php">reparatie stats</a>
                             </li>
                             <li>
-                                <a href="../dashboard/klantstats.php">klant stats</a>
+                                <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/dashboard/klantstats.php">klant stats</a>
                             </li>
                         <?php } ?>
                     </ul>
@@ -24,10 +24,10 @@
                         <a href="#"><i class="fa fa-users fa-fw"></i> klanten<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="../klant/overzicht.php">klant overzicht</a>
+                                <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/klant/overzicht.php">klant overzicht</a>
                             </li>
                             <li>
-                                <a href="../klant/addklant.php">klant toevoegen</a>
+                                <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/klant/addklant.php">klant toevoegen</a>
                             </li>
                         </ul>
 
@@ -38,11 +38,11 @@
                     <a href="#"><i class="fa fa-wrench fa-fw"></i>reparaties<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="../reparaties/repairoverzicht.php">reparatie overzicht</a>
+                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/reparaties/repairoverzicht.php">reparatie overzicht</a>
                         </li>
                         <?php if ($_SESSION["function"] == "admin" or $_SESSION["function"] == "medewerker") { ?>
                             <li>
-                                <a href="../reparaties/reparatieToevoegenStap1.php">reparatie toevoegen</a>
+                                <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/reparaties/reparatieToevoegenStap1.php">reparatie toevoegen</a>
                             </li>
                         <?php } ?>
                     </ul>
@@ -52,16 +52,16 @@
                     <a href="#"><i class="fa fa-user fa-fw"></i>account<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="../account/mijnaccount.php">mijn account</a>
+                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/account/mijnaccount.php">mijn account</a>
                         </li>
                         <li>
-                            <a href="../account/bewerkaccount.php">bewerk account</a>
+                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/account/bewerkaccount.php">bewerk account</a>
                         </li>
                         <li>
-                            <a href="../account/bewerkpassword.php">bewerk password</a>
+                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/account/bewerkpassword.php">bewerk password</a>
                         </li>
                         <li>
-                            <a href="../../src/login/login.php?logout=true">uitloggen</a>
+                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/src/login/login.php?logout=true">uitloggen</a>
                         </li>
                     </ul>
 
@@ -70,9 +70,9 @@
                     <li>
                         <a href="#"><i class="fa fa-user fa-fw"></i>beheer<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="../medewerkers/index.php">account activatie</a></li>
+                            <li><a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/medewerkers/index.php">account activatie</a></li>
 
-                            <li><a href="../medewerkers/apparaatcategorie.php">catagorieën toevoegen</a></li>
+                            <li><a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/medewerkers/apparaatcategorie.php">catagorieën toevoegen</a></li>
                         </ul>
                     </li>
                 <?php endif; ?>
