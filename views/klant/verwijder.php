@@ -3,7 +3,7 @@ session_start();
 
 include_once "../../src/login/check/CheckNotLoggedIn.php";
 if (isset($_SESSION["function"])) {
-    if ($_SESSION["function"] == "stagiair") {
+    if ($_SESSION["function"] != "admin" and $_SESSION["function"] != "medewerker") {
         header("Location: ../dashboard/index.php");
         die();
     }

@@ -77,6 +77,7 @@ if (!isset($_SESSION["loggedin"])) {
             <!-- /#page-wrapper -->
 
         </div>
+        <script src="../../resources/js/admin.js"></script>
         <!-- /#wrapper -->
         <?php include '../../template/jsinc.php'; ?>
     </body>

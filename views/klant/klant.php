@@ -4,7 +4,7 @@ session_start();
 
 include_once "../../src/login/check/CheckNotLoggedIn.php";
 if (isset($_SESSION["function"])) {
-    if ($_SESSION["function"] == "stagiair") {
+    if ($_SESSION["function"] != "admin" and $_SESSION["function"] != "medewerker") {
         header("Location: ../dashboard/index.php");
         die();
     }
@@ -54,7 +54,7 @@ $pdo = NULL;
                         <h3>weet uw het zeker?</h3>
                     </div>
                     <div class="modal-body">
-                        het verwijderen van een reperatie kan niet terug gedraaid worden
+                        het verwijderen van een reparatie kan niet teruggedraaid worden
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">annuleer</button>

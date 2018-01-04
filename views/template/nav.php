@@ -4,7 +4,7 @@
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-header">
-        <a class="navbar-brand" href="index.php">Fixitallcomputers</a>
+        <a class="navbar-brand" href="../dashboard/index.php">Fixitallcomputers</a>
     </div>
 
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
