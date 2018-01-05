@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION["loggedin"])) {
-    include_once "../../../config/Config.php";
+    include_once "../../config/Config.php";
 
     $config = config();
 
@@ -19,7 +19,7 @@ if (!isset($_SESSION["loggedin"])) {
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Startmin - Bootstrap Admin Theme</title>
+        <title>Beheer medewerkers</title>
 
         <?php include '../template/cssinc.php'; ?>
     </head>
@@ -27,10 +27,6 @@ if (!isset($_SESSION["loggedin"])) {
         <?php include '../template/nav.php'; ?>
         <?php include '../template/sideklant.php'; ?>
         <div id="wrapper">
-
-            <!-- Navigation -->
-
-
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
@@ -43,7 +39,7 @@ if (!isset($_SESSION["loggedin"])) {
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                DataTables Advanced Tables
+                                Medewerkers beheer paneel
                             </div>
                             <!-- /.panel-heading -->
                             <div class="message-body">
@@ -79,5 +75,6 @@ if (!isset($_SESSION["loggedin"])) {
         </div>
         <!-- /#wrapper -->
         <?php include '../template/jsinc.php'; ?>
+        <script src="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/resources/js/admin.js"></script>
     </body>
 </html>

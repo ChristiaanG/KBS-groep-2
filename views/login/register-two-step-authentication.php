@@ -29,21 +29,6 @@ if (!isset($_SESSION['2fa_qr']) && !isset($_SESSION['2fa_secret'])) {
     // Save secret Key
     $_SESSION['2fa_secret'] = $gAuth->getSecretKey();
 }
-//
-//// /!\ For example ! Don't POST secret key !!
-//$secretKey = isset($_POST['secretKey']) ? $_POST['secretKey'] : null;
-//
-//$gAuth = new GoogleAuthenticator($secretKey);
-//
-//$success = false;
-//$step = isset($_POST['step']) ? (int) $_POST['step'] : 1;
-//$code = isset($_POST['code']) ? $_POST['code'] : 0;
-//
-//if(0 !== $code && $gAuth->verifyCode($code)) {
-//
-//    $step++;
-//    $success = true;
-//}
 
 ?>
 <!DOCTYPE html>
@@ -51,53 +36,38 @@ if (!isset($_SESSION['2fa_qr']) && !isset($_SESSION['2fa_secret'])) {
 <head>
     <title>Google Authenticator</title>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <style type="text/css">
-        *{margin:0;padding:0}
-        body{color:#FEFEFE;background:#4A4E4F;font-family:'Open Sans', sans-serif;font-size:16px;line-height:2}
-        h1{color:#F15841;font-size:30px}
-        h2{color:#30B257;font-size:20px}
-        a{color:#9DA08D}
-        .container{width:80%;margin:100px auto;text-align:center}
-        .qrcode{padding:10px;background:#fff;width:200px;height:200px;margin:20px auto;line-height:0;box-shadow:0 0 10px rgba(0,0,0,0.75)}
-        form{width:250px;margin:20px auto}
-        input{border:1px solid #000;font-size:20px;padding:5px 10px;text-align:center;width:128px;float:left}
-        button{font-size:20px;padding:5px 0;float:right;width:100px;border:0;background:#000000;color:#fff;cursor:pointer}
-        .error{background:#F15841;color:#fff;margin:20px auto;padding:5px;text-align:center;width:240px}
-        .success{background:#30B257;color:#fff;margin:20px auto;padding:5px;text-align:center;width:240px}
-    </style>
+    <link href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/resources/css/google-authenticator.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="container">
-<!--    --><?php //if(1 === $step): ?>
-        <h1>Registreer applicatie</h1>
-        <h2>a. Scan de QRCode met uw smarphone</h2>
-        <p>
-            Gebruike de Google Authenticator app voor smartphones
-            <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">Android</a>
-            or
-            <a href="https://itunes.apple.com/fr/app/google-authenticator/id388497605" target="_blank">iPhone</a>
-        </p>
-        <div class="qrcode"><img src="<?php echo $_SESSION["2fa_qr"]; ?>" alt=""/></div>
-        <h2>b. Kopieer/plak verificatie code</h2>
-        <?php echo $_SESSION["2fa_secret"]; ?>
-        <?php
-        if(isset($_SESSION["twofaregisterfailed"])) {
-            ?>
-            <div class="alert alert-danger">
-                <?php
-                    echo $_SESSION["twofaregisterfailed"];
-                    $_SESSION['twofaregisterfailed'] = NULL;
-                ?>
-            </div>
-            <?php
-        }
+    <h1>Registreer applicatie</h1>
+    <h2>a. Scan de QRCode met uw smarphone</h2>
+    <p>
+        Gebruike de Google Authenticator app voor smartphones
+        <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">Android</a>
+        of
+        <a href="https://itunes.apple.com/fr/app/google-authenticator/id388497605" target="_blank">iPhone</a>
+    </p>
+    <div class="qrcode"><img src="<?php echo $_SESSION["2fa_qr"]; ?>" alt=""/></div>
+    <h2>b. Kopieer/plak verificatie code</h2>
+    <?php echo $_SESSION["2fa_secret"]; ?>
+    <?php
+    if(isset($_SESSION["twofaregisterfailed"])) {
         ?>
-        <form method="post" action="../../src/login/TwoStepAuthentication.php">
-            <input placeholder="Code" type="text" name="2fa_code" maxlength="6" autofocus="autofocus"/>
-            <button type="submit" name="register">Registreer</button>
-            <div style="clear:both"></div>
-        </form>
-<!--    --><?php //endif; ?>
+        <div class="alert alert-danger">
+            <?php
+                echo $_SESSION["twofaregisterfailed"];
+                $_SESSION['twofaregisterfailed'] = NULL;
+            ?>
+        </div>
+        <?php
+    }
+    ?>
+    <form method="post" action="../../src/login/TwoStepAuthentication.php">
+        <input placeholder="Code" type="text" name="2fa_code" maxlength="6" autofocus="autofocus"/>
+        <button type="submit" name="register">Registreer</button>
+        <div style="clear:both"></div>
+    </form>
 </div>
 </body>
 </html>

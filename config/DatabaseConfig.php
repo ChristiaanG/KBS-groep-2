@@ -11,7 +11,7 @@ function databaseConfig() {
         "host" => "localhost",
         "username" => "root",
         "password" => "",
-        "dbname" => "kbs",
+        "dbname" => "mydb2",
         "port" => 3306,
     );
 }
