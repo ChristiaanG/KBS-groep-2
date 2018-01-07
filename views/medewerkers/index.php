@@ -28,18 +28,12 @@ if (!isset($_SESSION["loggedin"])) {
         <?php include '../template/sideklant.php'; ?>
         <div id="wrapper">
             <div id="page-wrapper">
+
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Medewerkers</h1>
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /.row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
+                        <div class="panel panel-primary">
                             <div class="panel-heading">
-                                Medewerkers beheer paneel
+                                <h3>Medewerkers beheer paneel</h3>
                             </div>
                             <!-- /.panel-heading -->
                             <div class="message-body">

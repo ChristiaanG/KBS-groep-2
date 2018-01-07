@@ -16,7 +16,7 @@ if (isset($info)) {
     $ext = $info['extension']; // hier checkt hij de extentie van de file
     $newname = $_POST["nummer"] . "." . $ext;
 
-    $target = '../../klant/' . $newname;
+    $target = '../../resources/img/klant/' . $newname;
 }
 if ($ext != "jpg") {
     print ("<h3>het bestand dat uw heeft gekozen is geen .jpg foto.</h3><br>");

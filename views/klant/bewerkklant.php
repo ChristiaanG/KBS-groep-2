@@ -71,7 +71,7 @@ $pdo = NULL;
                             </div>
                             <div class="form-group col-xs-4 row">
                                 <div>
-                                    <img src="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/resources/img/<?php print ($klant["customerID"]); ?>.jpg" class="avatar img-thumbnail" height="200" width="200"><br>
+                                    <img src="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/resources/img/klant/<?php print ($klant["customerID"]); ?>.jpg" class="avatar img-thumbnail" height="200" width="200"><br>
                                 </div>
 
                                 <label for="foto2" class="col-2 col-form-label">andere foto uploaden?</label>

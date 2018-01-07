@@ -110,8 +110,8 @@ $pdo = NULL;
                                     <textarea rows="3" class="form-control" id="opmerking" name="opmerking" ><?php print($klant["description"]); ?></textarea></div><br>
                             </div>
                             <div class="col-xs-4 center-block row">
-                                <img src="<?php print ($klant["customerID"]); ?>.jpg" class="avatar img-thumbnail" height="200" width="200"><br>
-                            </div><?php print ($klant["customerID"]); ?>.jpg" class="avatar img-thumbnail" height="200" width="200"><br>
+                                <img src="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/resources/img/klant/<?php print ($klant["customerID"]); ?>.jpg" class="avatar img-thumbnail" height="200" width="200"><br>
+                            </div>
                             </div>
 
 
