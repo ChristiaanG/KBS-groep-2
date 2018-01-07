@@ -89,7 +89,9 @@ $customerDevice = $custdev->fetch();
                     </div>
                     <div class="form-group col-xs-4 row center-block">
                         <label for="beschrijving" class="col-2 col-form-label">Beschrijving</label>
-                        <div id="beschrijving" class="form-control" ><?php print($repair["description"]); ?></div><br>
+						<div>
+                                    <textarea rows="3" class="form-control" id="beschrijving"  ><?php print($repair["description"]); ?></textarea></div><br>
+                        
 
                         <label for="laderMeegeleverd" class="col-2 col-form-label">Lader meegeleverd</label>
                         <div id="typeApparaat" class="form-control" ><?php

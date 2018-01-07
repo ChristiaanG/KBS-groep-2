@@ -3,17 +3,17 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="#"><i class="fa fa-tachometer fa-fw"></i> dashboard<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-tachometer fa-fw"></i> Dashboard<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/dashboard/index.php">home</a>
+                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/dashboard/index.php">Home</a>
                         </li>
                         <?php if ($_SESSION["function"] == "admin" or $_SESSION["function"] == "medewerker") { ?>
                             <li>
-                                <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/dashboard/repairstats.php">reparatie stats</a>
+                                <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/dashboard/repairstats.php">Reparatie stats</a>
                             </li>
                             <li>
-                                <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/dashboard/klantstats.php">klant stats</a>
+                                <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/dashboard/klantstats.php">Klant stats</a>
                             </li>
                         <?php } ?>
                     </ul>
@@ -21,13 +21,13 @@
                 </li>
                 <?php if ($_SESSION["function"] == "admin" or $_SESSION["function"] == "medewerker") { ?>
                     <li>
-                        <a href="#"><i class="fa fa-users fa-fw"></i> klanten<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-users fa-fw"></i> Klanten<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/klant/overzicht.php">klant overzicht</a>
+                                <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/klant/overzicht.php">Klant overzicht</a>
                             </li>
                             <li>
-                                <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/klant/addklant.php">klant toevoegen</a>
+                                <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/klant/addklant.php">Klant toevoegen</a>
                             </li>
                         </ul>
 
@@ -35,7 +35,7 @@
                 <?php } ?>
 
                 <li>
-                    <a href="#"><i class="fa fa-wrench fa-fw"></i>reparaties<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-wrench fa-fw"></i>Reparaties<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/reparaties/repairoverzicht.php">Reparatie overzicht</a>
@@ -49,7 +49,7 @@
 
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-user fa-fw"></i>account<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-user fa-fw"></i>Account<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/account/mijnaccount.php">Mijn account</a>
@@ -68,7 +68,7 @@
                 </li>
                 <?php if ($_SESSION["function"] == "admin") : ?>
                     <li>
-                        <a href="#"><i class="fa fa-user fa-fw"></i>beheer<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-user fa-fw"></i>Beheer<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/medewerkers/index.php">Account beheer</a></li>
 
