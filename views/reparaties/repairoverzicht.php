@@ -45,11 +45,11 @@ $pdo = NULL;
                         <h3>weet uw het zeker?</h3>
                     </div>
                     <div class="modal-body">
-                        het verwijderen van een reperatie kan niet terug gedraaid worden
+                        Het verwijderen van een reperatie kan niet terug gedraaid worden
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">annuleer</button>
-                        <a class="btn btn-primary btn-ok">verwijder reperatie</a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
+                        <a class="btn btn-primary btn-ok">Verwijder reperatie</a>
                     </div>
                 </div>
             </div>
@@ -57,17 +57,17 @@ $pdo = NULL;
         <div id="page-wrapper">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 align="center">overzicht van alle reparaties</h3>
+                    <h3 align="center">Overzicht van alle reparaties</h3>
                 </div>
                 <div class="panel-body">
                     <table  class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
-                                <td>categorie</td>
-                                <td>apparaatinfo</td>
-                                <td>serienummer</td>
-                                <td>beschrijving</td>
-                                <td>datum toegevoegd</td>
+                                <td>Categorie</td>
+                                <td>Apparaatinfo</td>
+                                <td>Serienummer</td>
+                                <td>Beschrijving</td>
+                                <td>Datum toegevoegd</td>
                                 <td> </td>
                                 <td> </td>
 
@@ -83,7 +83,7 @@ $pdo = NULL;
                                 print("\n\t\t<td>" . $r["serialnr"] . "</td>");
                                 print("\n\t\t<td>" . $r["description"] . "</td>");
                                 print("\n\t\t<td>" . $r["daterepair"] . "</td>");
-                                print("<td><a href=\"repair.php?nummer=" . $r["repairID"] . "\"class=\"btn btn-primary\">ga naar reparatie</a></td>");
+                                print("<td><a href=\"repair.php?nummer=" . $r["repairID"] . "\"class=\"btn btn-primary\">Ga naar reparatie</a></td>");
                                 if (isset($_SESSION["function"])) {
                                     if ($_SESSION["function"] == "medewerker" or $_SESSION["function"] == "admin") {
                                         print("<td><a href=\"#\" data-href=\"verwijderrepair.php?nummer=" . $r["repairID"] . "\" data-toggle=\"modal\" data-target=\"#confirm-delete\" class=\"btn btn-primary\">Verwijder reparatie</a></td>");

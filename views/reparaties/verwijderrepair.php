@@ -26,10 +26,10 @@ $pdo = NULL;
         <div id="page-wrapper" class="container">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3> reparatie verwijderd</h3>
+                    <h3> Reparatie verwijderd</h3>
                 </div>
                 <div class="panel-body">
-                    <?php print("reparatie met het nummer " . $_GET["nummer"] . " is verwijderd"); ?>
+                    <?php print("Reparatie met het nummer " . $_GET["nummer"] . " is verwijderd"); ?>
                 </div>
                 <div class="panel-footer">
                     <a href="repairoverzicht.php">Terug naar het overzicht</a>

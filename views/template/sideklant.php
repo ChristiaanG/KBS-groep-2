@@ -38,11 +38,11 @@
                     <a href="#"><i class="fa fa-wrench fa-fw"></i>reparaties<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/reparaties/repairoverzicht.php">reparatie overzicht</a>
+                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/reparaties/repairoverzicht.php">Reparatie overzicht</a>
                         </li>
                         <?php if ($_SESSION["function"] == "admin" or $_SESSION["function"] == "medewerker") { ?>
                             <li>
-                                <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/reparaties/reparatieToevoegenStap1.php">reparatie toevoegen</a>
+                                <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/reparaties/reparatieToevoegenStap1.php">Reparatie toevoegen</a>
                             </li>
                         <?php } ?>
                     </ul>
@@ -52,16 +52,16 @@
                     <a href="#"><i class="fa fa-user fa-fw"></i>account<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/account/mijnaccount.php">mijn account</a>
+                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/account/mijnaccount.php">Mijn account</a>
                         </li>
                         <li>
-                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/account/bewerkaccount.php">bewerk account</a>
+                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/account/bewerkaccount.php">Bewerk account</a>
                         </li>
                         <li>
-                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/account/bewerkpassword.php">bewerk password</a>
+                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/account/bewerkpassword.php">Bewerk password</a>
                         </li>
                         <li>
-                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/src/login/login.php?logout=true">uitloggen</a>
+                            <a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/src/login/login.php?logout=true">Uitloggen</a>
                         </li>
                     </ul>
 
@@ -70,9 +70,9 @@
                     <li>
                         <a href="#"><i class="fa fa-user fa-fw"></i>beheer<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/medewerkers/index.php">account beheer</a></li>
+                            <li><a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/medewerkers/index.php">Account beheer</a></li>
 
-                            <li><a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/medewerkers/apparaatcategorie.php">catagorieën toevoegen</a></li>
+                            <li><a href="<?= (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER["HTTP_HOST"] ?>/views/medewerkers/apparaatcategorie.php">Categorieën toevoegen</a></li>
                         </ul>
                     </li>
                 <?php endif; ?>

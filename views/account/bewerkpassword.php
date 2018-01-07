@@ -31,7 +31,7 @@ $pdo = NULL;
         <div id="page-wrapper">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3>medewerker gegevens <?php print ($user["name"]); ?></h3>
+                    <h3>Medewerker gegevens <?php print ($user["name"]); ?></h3>
                 </div>
                 <div class="panel-body">
                     <div class="form-group col-xs-4 row">

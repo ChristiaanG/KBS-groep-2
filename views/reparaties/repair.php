@@ -103,8 +103,8 @@ $customerDevice = $custdev->fetch();
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <?php print("<a href=\"bewerkrepair.php?nummer=" . $repair["repairID"] . "\"class=\"btn btn-primary\">bewerken</a>"); ?> <?php if ($_SESSION["function"] == "admin" or $_SESSION["function"] == "medewerker") {
-                        print("<a href=\"../klant/klant.php?nummer=" . $repair["customerID"] . "\"class=\"btn btn-primary\">ga naar klant</a>");
+                    <?php print("<a href=\"bewerkrepair.php?nummer=" . $repair["repairID"] . "\"class=\"btn btn-primary\">Bewerken</a>"); ?> <?php if ($_SESSION["function"] == "admin" or $_SESSION["function"] == "medewerker") {
+                        print("<a href=\"../klant/klant.php?nummer=" . $repair["customerID"] . "\"class=\"btn btn-primary\">Ga naar klant</a>");
                     } ?>
                 </div>
             </div>

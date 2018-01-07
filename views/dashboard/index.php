@@ -46,7 +46,7 @@ $pdo = NULL;
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">dashboard</h1>
+                    <h1 class="page-header">Dashboard</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -61,13 +61,13 @@ $pdo = NULL;
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><?php print($totalrepairs["count(*)"]); ?></div>
-                                    <div>totaal overzicht reparaties</div>
+                                    <div>Totaal overzicht reparaties</div>
                                 </div>
                             </div>
                         </div>
                         <a href="../reparaties/repairoverzicht.php">
                             <div class="panel-footer">
-                                <span class="pull-left">ga naar overzicht</span>
+                                <span class="pull-left">Ga naar overzicht</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 
                                 <div class="clearfix"></div>
@@ -84,13 +84,13 @@ $pdo = NULL;
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><?php print($checkedrepairs["count(*)"]); ?></div>
-                                    <div>totaal afgeronde reparaties</div>
+                                    <div>Totaal afgeronde reparaties</div>
                                 </div>
                             </div>
                         </div>
                         <a href="../reparaties/repaircheckedoverzicht.php">
                             <div class="panel-footer">
-                                <span class="pull-left">ga naar overzicht</span>
+                                <span class="pull-left">Ga naar overzicht</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 
                                 <div class="clearfix"></div>
@@ -107,13 +107,13 @@ $pdo = NULL;
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><?php print($finishedrepairs["count(*)"]); ?></div>
-                                    <div>ongecontroleerde reparaties</div>
+                                    <div>Ongecontroleerde reparaties</div>
                                 </div>
                             </div>
                         </div>
                         <a href="../reparaties/repairuncheckedoverzicht.php">
                             <div class="panel-footer">
-                                <span class="pull-left">ga naar overzicht</span>
+                                <span class="pull-left">Ga naar overzicht</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 
                                 <div class="clearfix"></div>
@@ -130,13 +130,13 @@ $pdo = NULL;
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge"><?php print($unfinishedrepairs["count(*)"]); ?></div>
-                                    <div>openstaande onbehandelde reparaties</div>
+                                    <div>Openstaande onbehandelde reparaties</div>
                                 </div>
                             </div>
                         </div>
                         <a href="../reparaties/repairidleoverzicht.php">
                             <div class="panel-footer">
-                                <span class="pull-left">ga naar overzicht</span>
+                                <span class="pull-left">Ga naar overzicht</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 
                                 <div class="clearfix"></div>
@@ -147,7 +147,7 @@ $pdo = NULL;
             </div>
 
 
-            <h1>statistieken over reparaties</h1>
+            <h1>Statistieken over reparaties</h1>
             <?php include '../dashboard/barchartmaand.php'; ?>
             <div id="chart_div"></div>
 

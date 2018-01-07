@@ -28,7 +28,7 @@ and open the template in the editor.
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">statistieken over klanten</h1>
+                    <h1 class="page-header">Statistieken over klanten</h1>
                 </div>
 
             </div>

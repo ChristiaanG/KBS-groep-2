@@ -29,7 +29,7 @@ $pdo = NULL;
         <div id="page-wrapper">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 align="center">kies een klant</h3>
+                    <h3 align="center">Kies een klant</h3>
                 </div>
                 <div class="panel-body">
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">

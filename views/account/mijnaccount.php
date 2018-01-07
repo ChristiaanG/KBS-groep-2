@@ -77,7 +77,7 @@ $_POST["username"] = $_SESSION["username"]
             <div class="col-lg-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3>gegevens van <?php print ($user["name"]); ?> v0.1</h3>
+                        <h3>Gegevens van <?php print ($user["name"]); ?> v0.1</h3>
                     </div>
                     <div class="panel-body">
                         <div class="form-group col-xs-4 row">
@@ -113,7 +113,7 @@ $_POST["username"] = $_SESSION["username"]
                                 </div>
                                 <div class="test">
                                     <span class="value"><?php print($totallrepairs[0]); ?></span>
-                                    <label class="text-muted">Reparatie <?php
+                                    <label class="text-muted">Reparatie<?php
                                         if ($totallrepairs[0] != 1) {
                                             print("s");
                                         }
@@ -128,20 +128,20 @@ $_POST["username"] = $_SESSION["username"]
                             </div>
                         </div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                         <div id="center">
-                            <h3>Reparatie <?php
+                            <h3>Reparatie<?php
                                 if ($totallrepairs[0] != 1) {
-                                    print("s");
+                                    print("'s");
                                 }
-                                ?>door <?php print ($user["name"]); ?></h3>
+                                ?> door <?php print ($user["name"]); ?></h3>
                         </div>
                         <table  class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
-                                    <td>categorie</td>
-                                    <td>apparaatinfo</td>
-                                    <td>serienummer</td>
-                                    <td>beschrijving</td>
-                                    <td>open</td>
+                                    <td>Categorie</td>
+                                    <td>Apparaatinfo</td>
+                                    <td>Serienummer</td>
+                                    <td>Beschrijving</td>
+                                    <td>Open</td>
 
                                 </tr>
                             </thead>
@@ -154,7 +154,7 @@ $_POST["username"] = $_SESSION["username"]
                                     print("\n\t\t<td>" . $reparation["deviceinfo"] . "</td>");
                                     print("\n\t\t<td>" . $reparation["serialnr"] . "</td>");
                                     print("\n\t\t<td>" . $reparation["description"] . "</td>");
-                                    print("<td><a href=\"repair.php?nummer=" . $reparation["repairID"] . "\"class=\"btn btn-primary\">ga naar reparatie</a></td>");
+                                    print("<td><a href=\"repair.php?nummer=" . $reparation["repairID"] . "\"class=\"btn btn-primary\">Ga naar reparatie</a></td>");
                                     print("\n\t</tr>");
                                 }
                                 ?>
